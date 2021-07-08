@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 12:52:06 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/07/08 14:23:24 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:08:50 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,13 @@ template<
              
              typedef const  T *  pointer;
 
-            
-
             class Iterator
             {
-                public:
-                    Iterator(const Vector<T> *vector, int nIndex);
-                    const T &operator*() const;
-                    Iterator &operator++();
-                    bool operator!=(const Iterator &other) const;
-
-                private:
-                    const Vector<T> *m_pVector;
-                    int m_nIndex = -1;
+                using value_type = T;
+                using difference_type = std::ptrdiff_t;
+                using pointer = T*;
+                using reference  = T&;
+                using iterator_category = std::random_access_iterator_tag;
             };
 
-            
-            
-
- 
 };
