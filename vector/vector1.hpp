@@ -6,12 +6,13 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 12:52:06 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/07/08 15:08:50 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/05 18:37:49 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <memory>
+#include <iterator>
 
 template<
     class T,
@@ -31,13 +32,43 @@ template<
              
              typedef const  T *  pointer;
 
-            class Iterator
+
+
+
+            size_type  size()
             {
-                using value_type = T;
-                using difference_type = std::ptrdiff_t;
-                using pointer = T*;
-                using reference  = T&;
-                using iterator_category = std::random_access_iterator_tag;
-            };
+                return this->_size;
+            }
+            size_type capacity()
+            {
+                return this->capacity;
+            }
+
+            bool empty()
+            {
+                if (this->size() == 0)
+                    return  true;
+                return false;
+            } 
+
+            vector(int size)
+            {
+                _vec = _myallocator.allocate(size);
+                this->_capacity = size;
+                this->_size = 0;
+                
+            }
+
+            iterator begin()
+            {
+                return iterator(_vec);
+            }
+
+            private :
+                T *_vec;
+                size_type  _size;
+                size_type _capacity;
+                Allocator<T> _myallocator;
+                iterator *iter;
 
 };
