@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterator.hpp                                       :+:      :+:    :+:   */
+/*   randomAccessIterator.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 18:32:15 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/05 18:45:07 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/05 18:48:02 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         using iterator_category = std::random_access_iterator_tag;
 
 
-    Iterator(T* ptr)
+    randomAccessIterator(T* ptr)
     {
         this->_ptr = ptr;
     }
