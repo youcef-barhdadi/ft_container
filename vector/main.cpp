@@ -6,28 +6,37 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 13:26:02 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/07/08 14:29:43 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/06 21:03:07 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 # include <iostream>
 # include <stack>
-# include <vector>
-// # include "vector1.hpp"
+# include "vector1.hpp"
 
 // using namespace std;
 
 int main(int argc, char **argv)
 {
-        int cc  = 1337;
-    std::vector<int>::iterator c ;
+        // int cc  = ÷1337;
+    vector<int> c(5);
+    c.push_back(1337);
+    c.push_back(1337);
+    c.push_back(42);
+    c.push_back(53);
+    // c.pop_back();
+
+
+    vector<int>::iterator cc = c.begin();
+    vector<int>::iterator ccc = c.end();
 
 
 
+ c.print_all() ;
 
-    std::cout << *c  << std::endl;
 
+    std::cout << *ccc << std::endl;
 
 
     return (0);

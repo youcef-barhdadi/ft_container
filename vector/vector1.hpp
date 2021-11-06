@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 12:52:06 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/05 19:01:45 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/06 21:02:39 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ template<
 
              typedef T *  pointer;
              
-             typedef const  T *  pointer;
+             typedef const  T *  const_pointer;
+            typedef Allocator Allocator_type;
 
+            typedef  randomAccessIterator<T> iterator;
 
 
 
@@ -60,22 +62,23 @@ template<
                 
             }
 
-            randomAccessIterator begin()
+            
+            iterator begin()
             {
                 return iterator(_vec);
             }
 
-            randomAccessIterator end()
+           iterator end()
             {
-                return randomAccessIterator(_vec[this->size() - 1]);
+                return iterator(&_vec[this->size() - 1]);
             }
             
 
 
             T at(size_type n)
             {
-                if (size > n)
-                    throw ex;
+                if (this->size() > n)
+                    throw "ex";
                 return this->_vec[n];
             }
 
@@ -112,7 +115,7 @@ template<
 
             void push_back(const value_type &val)
             {
-               this->_push(this->size() - 1, val);
+               this->_push(this->size() , val);
             }
 
             void pop_back()
@@ -120,26 +123,56 @@ template<
                 this->_size --;
             }
 
-            iterator insert (iterator position, const value_type& val)
+            randomAccessIterator<T> insert (randomAccessIterator<T> position, const value_type& val)
             {
                 // 
+            }
+
+
+
+
+            void    print_all()
+            {
+                std::cout << "=============" << std::endl;
+                for(int i = 0; i < this->size() ; i++)
+                {
+                    std::cout << this->_vec[i] << std::endl;
+                }
+                std::cout << "/=============/" << std::endl;
+
             }
 
             private :
                 T *_vec;
                 size_type  _size;
                 size_type _capacity;
-                Allocator<T> _myallocator;
-                randomAccessIterator *iter;
+                Allocator_type _myallocator;
+                randomAccessIterator<T> *iter;
 
                 void _push(size_type n, const value_type &val)
                 {
-                        if (this->size() +1 > this->capacity())
+
+                        if (n == this->size())
+                        {
+                            this->_vec[n] = val;
+                            this->_size++;
+                            return ;
+                        }
+
+                        if (this->size() +1 > this->_capacity)
                         {
                             // call allocate
                         }
-                    this->_vec[n] = val;
-                    this->size++;
+                        
+                        for (size_type i = n; i < this->size() ; i++)
+                        {
+                            value_type t = this->_vec[i + 1];
+                            this->_vec[i +1] = this->_vec[i];
+                            this->_vec [i + 1] = t;
+                            
+                        }
+                        this->_vec[n] = val;
+                        this->_size++;
                 }
 
 };

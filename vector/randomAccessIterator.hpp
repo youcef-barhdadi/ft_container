@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 18:32:15 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/05 18:48:02 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/06 21:00:00 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,23 @@ template <class T>
 class randomAccessIterator  : public std::iterator<std::random_access_iterator_tag, T>
 {
     public :
-        using value_type = T;
-        using difference_type = std::ptrdiff_t;
-        using pointer = T*;
-        using reference  = T&;
-        using iterator_category = std::random_access_iterator_tag;
+        typedef   T    value_type ;
+        typedef  std::ptrdiff_t  difference_type ;
+        typedef T*  pointer ;
+        typedef  T&  reference ;
+        // typedef std::iterator_category std::random_access_iterator_tag;
 
 
     randomAccessIterator(T* ptr)
     {
         this->_ptr = ptr;
     }
+
+    T& operator* ()
+    {
+        return *_ptr;
+    }
+
 
     
         
