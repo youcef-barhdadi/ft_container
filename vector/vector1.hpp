@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 12:52:06 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/06 21:02:39 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/08 11:00:00 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ template<
             {
                 return this->_size;
             }
+
+            
+
             size_type capacity()
             {
-                return this->capacity;
+                return this->_capacity;
             }
 
             bool empty()
@@ -59,10 +62,38 @@ template<
                 _vec = _myallocator.allocate(size);
                 this->_capacity = size;
                 this->_size = 0;
+
+            }
+
+            void resize( size_type count, T value = T() )
+            {
+             
+        
+                T *vec = _myallocator.allocate(count);
+                for (size_type i =0; i < this->size() ; i++ )
+                {
+                    vec[i] = this->_vec[i];
+                }
+                for (size_t i =  this->size() ; i < count; i++)
+                {
+                    vec[i] = value;
+                }
                 
+                _myallocator.deallocate(this->_vec, this->_capacity);
+                this->_capacity = count;
+                this->_vec = vec;
             }
 
             
+            void    reserver(size_type n)
+            {
+                if (n >  this->capacity() )
+                {
+                    resize(this->capacity() * 2);
+                }
+            }
+
+
             iterator begin()
             {
                 return iterator(_vec);
@@ -123,10 +154,14 @@ template<
                 this->_size --;
             }
 
-            randomAccessIterator<T> insert (randomAccessIterator<T> position, const value_type& val)
-            {
-                // 
-            }
+            // randomAccessIterator<T> insert (randomAccessIterator<T> position, const value_type& val)
+            // {
+            //     T *p = &(* position);
+
+            //     std::cout<<  "======>" << *p << std::endl;
+
+            //     // for ()
+            // }
 
 
 
@@ -151,19 +186,13 @@ template<
 
                 void _push(size_type n, const value_type &val)
                 {
-
+                        reserver(this->size() + 1);
                         if (n == this->size())
                         {
                             this->_vec[n] = val;
                             this->_size++;
                             return ;
                         }
-
-                        if (this->size() +1 > this->_capacity)
-                        {
-                            // call allocate
-                        }
-                        
                         for (size_type i = n; i < this->size() ; i++)
                         {
                             value_type t = this->_vec[i + 1];
@@ -174,5 +203,4 @@ template<
                         this->_vec[n] = val;
                         this->_size++;
                 }
-
 };
