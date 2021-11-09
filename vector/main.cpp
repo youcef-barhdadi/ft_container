@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 13:26:02 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/08 11:00:16 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:34:29 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,7 @@ int main(int argc, char **argv)
     // c.pop_back();
 
 
-    vector<int>::iterator cc = c.begin();
-    vector<int>::iterator ccc = c.end();
-
-    // c.resize(15);
-    std::cout << c.capacity()  << "***" << std::endl;
-
-
-
-//  c.insert(cc, 5) ;
-
-
-    std::cout << *ccc << std::endl;
-
+  
 
     return (0);
 

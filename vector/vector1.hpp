@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 12:52:06 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/08 11:00:00 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:35:48 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,14 +154,12 @@ template<
                 this->_size --;
             }
 
-            // randomAccessIterator<T> insert (randomAccessIterator<T> position, const value_type& val)
-            // {
-            //     T *p = &(* position);
-
-            //     std::cout<<  "======>" << *p << std::endl;
-
-            //     // for ()
-            // }
+            randomAccessIterator<T> insert (randomAccessIterator<T> position, const value_type& val)
+            {
+                // for ÷
+                return iterator(0);
+                
+            }
 
 
 
@@ -175,6 +173,21 @@ template<
                 }
                 std::cout << "/=============/" << std::endl;
 
+            }
+
+
+
+            void    clear()
+            {
+                 _myallocator.deallocate(this->_vec, this->_capacity);
+                 this->_capacity = 0;
+                 this->_size = 0;
+            }
+
+            size_type max_size() const 
+            {
+                // need implemntaion
+                return 1337;
             }
 
             private :
