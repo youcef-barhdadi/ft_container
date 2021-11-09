@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 13:26:02 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/09 17:34:29 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:20:25 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ int main(int argc, char **argv)
     c.push_back(53);
     // c.pop_back();
 
+    vector<int>::iterator cc = c.begin();
+    c.insert(cc, 1337);
+    c.print_all();
+
+    
+    
 
   
 

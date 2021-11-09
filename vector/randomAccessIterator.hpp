@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 18:32:15 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/09 17:33:57 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:26:37 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,26 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         // typedef std::iterator_category std::random_access_iterator_tag;
 
 
+
+    randomAccessIterator()
+    {
+    
+    }
+
+
+    
     randomAccessIterator(T* ptr)
     {
         this->_ptr = ptr;
     }
 
-    randomAccessIterator(randomAccessIterator &iter)
-    {
-        this->_ptr = *this;
-    }
+    // randomAccessIterator(randomAccessIterator &iter)
+    // {
+    //     this->_ptr = *this;
+    // }
+
+    
+
 
     T& operator* ()
     {
@@ -46,8 +57,15 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
     {
         T old(*this);
         ++*this;
-        return old;    
+        return old;   
     }
+
+    randomAccessIterator operator=(randomAccessIterator &r)
+    {
+        r._ptr = this->_ptr;
+        return r;    
+    }
+    
     
 
     randomAccessIterator &operator++(int)
@@ -56,17 +74,26 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         return  *this;
     }
 
-    bool operator==(randomAccessIterator &r)
+    bool operator==(randomAccessIterator &a, randomAccessIterator &b )
     {
-        if (*this == *r)
-            return true;
-        return false;
-    }
-    bool operator!=(randomAccessIterator &r)
-    {
-        if (*this == *r)
+    if (*a != *b)
             return false;
         return true;
+    }
+    bool operator!=(randomAccessIterator &a, randomAccessIterator &b )
+    {
+        if (*a == *b)
+            return false;
+        return true;
+    }
+
+
+
+
+    randomAccessIterator operator + (int c)
+    {
+        randomAccessIterator res(this->_ptr + c);
+        return res;
     }
     
            

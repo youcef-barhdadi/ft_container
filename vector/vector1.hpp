@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 12:52:06 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/09 17:35:48 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:25:30 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ template<
 
             iterator begin()
             {
-                return iterator(_vec);
+                return iterator(this->_vec);
             }
 
            iterator end()
@@ -156,8 +156,21 @@ template<
 
             randomAccessIterator<T> insert (randomAccessIterator<T> position, const value_type& val)
             {
-                // for ÷
-                return iterator(0);
+
+                T old = *position;
+
+                *position = val;
+
+                
+                
+                for (iterator c = position+1; !(c == this->end()) ; ++c)
+                {
+                 
+                    old = *c;
+                    *c = old;
+                    
+                }
+                return iterator(position);
                 
             }
 
