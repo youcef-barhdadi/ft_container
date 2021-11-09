@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 12:52:06 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/09 19:25:30 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:45:52 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ template<
 
                 
                 
-                for (iterator c = position+1; !(c == this->end()) ; ++c)
+                for (iterator c = position+1; (c != this->end()) ; ++c)
                 {
                  
                     old = *c;

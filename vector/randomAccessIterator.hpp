@@ -6,7 +6,7 @@
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 18:32:15 by ybarhdad          #+#    #+#             */
-/*   Updated: 2021/11/09 19:26:37 by ybarhdad         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:48:05 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         return  *this;
     }
 
-    bool operator==(randomAccessIterator &a, randomAccessIterator &b )
+    bool operator==(randomAccessIterator &a )
     {
-    if (*a != *b)
+    if (*this != *a)
             return false;
         return true;
     }
-    bool operator!=(randomAccessIterator &a, randomAccessIterator &b )
+    bool operator!=(randomAccessIterator &a  )
     {
-        if (*a == *b)
+        if (*this == *a)
             return false;
         return true;
     }
