@@ -10,8 +10,8 @@ template<
 {
 
         public :
-        
+
 
         private :
 
-}
+};
