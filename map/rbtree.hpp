@@ -75,6 +75,7 @@ template<
                             _node = new node<T>(value);
                             if (this->root == nullptr)
                             {
+                                _node->color = 0;
                                 this->root = _node;
                             }
                             return _node;
@@ -93,7 +94,7 @@ template<
 
         void rebalnced()
         {
-            
+
         }
             
 
