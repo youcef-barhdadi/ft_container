@@ -1,6 +1,13 @@
 
 # include  <functional>
 #include <iostream>
+
+
+enum Color {
+    Red =1,
+    Black = 2
+};
+
 template<
     class T
 > 
@@ -11,14 +18,14 @@ class  node {
            node *right;
           node *parent;
         T value;
-        int color;
+        Color color;
 
             node (T value)
             {
                 this->left = nullptr;
                 this->right = nullptr;
                 this->value = value;
-                this->color = 1;
+                this->color = Red;
             }
   
 } ;
@@ -67,6 +74,22 @@ template<
             // int color;
             // T value;
 
+
+
+            void left_rotaion(node<T> *node)
+            {
+
+                node<T> *n = node->left;
+
+                n->left = node;
+
+
+                node->right = node->left->left;
+
+                node = n;
+
+            }
+
             node<T>  *_insert(node<T> *_node ,T value)
             {
                     // std::cout << "Hello world" << std::endl;
@@ -75,7 +98,7 @@ template<
                             _node = new node<T>(value);
                             if (this->root == nullptr)
                             {
-                                _node->color = 0;
+                                _node->color = Black;
                                 this->root = _node;
                             }
                             return _node;
@@ -89,13 +112,8 @@ template<
                     }
                     
                     return _node;
-            } 
+        } 
 
-
-        void rebalnced()
-        {
-
-        }
             
 
     
