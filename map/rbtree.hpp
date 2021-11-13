@@ -93,14 +93,8 @@ template<
             void right_rotation(node<T> *node)
             {
                 node<T> *B = node->left;
-
-            
-
                 t->left = node;
-
                 node->right = B;
-
-    
 
             }
 
