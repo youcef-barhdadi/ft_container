@@ -90,6 +90,20 @@ template<
 
             }
 
+            void right_rotation(node<T> *node)
+            {
+                node<T> *B = node->left;
+
+            
+
+                t->left = node;
+
+                node->right = B;
+
+    
+
+            }
+
             node<T>  *_insert(node<T> *_node ,T value)
             {
                     // std::cout << "Hello world" << std::endl;
