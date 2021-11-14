@@ -20,6 +20,8 @@ class  node {
         T value;
         Color color;
 
+        bool isRight;
+
             node (T value)
             {
                 this->left = nullptr;
@@ -106,17 +108,34 @@ template<
 
             // }
 
+
+
+
+            void correct(node<T> *n)
+            {
+             
+                return ;
+            }
             void check(node<T> *n)
             {
-                  if (n == this->root)
+                // std::cout << nullptr == NULL << std::endl;
+                  if ( n == this->root )
                   {
+                    //   std::cout << "end" << std::endl;
                       return ;
                   }
-                  if ( n->parent != nullptr &&  n->parent->color == Red)
-                  {
-                        std::cout <<  "ff" << std::endl; 
-                  }
+                //   if ( n->parent != nullptr &&  n->parent->color == Red )
+                //   {
+                //         // std::cout <<  "ff" << std::endl; 
+                //   }
+                
+                if (n->color == Red && (n->parent->color == Red))
+                        correct(n);
+                check(n->parent);
+                
             }
+
+
 
             node<T>  *_insert(node<T> *_node ,T value)
             {
@@ -128,6 +147,7 @@ template<
                             {
                                 _node->color = Black;
                                 this->root = _node;
+                                _node->parent = nullptr;
                             }
                             return _node;
                     }
@@ -138,7 +158,8 @@ template<
                         if (_node->left  == nullptr)
                         {
                             _node->left = temp;
-                            temp->parent = _node->left;
+                            temp->parent = _node;
+                            temp->isRight = false;
                             check(temp);
                         }
                         else {
@@ -146,8 +167,20 @@ template<
                         }
                     }
                     else {
-                        _node->right = _insert(_node->right, value);
-                        _node->right->parent = _node->right;
+                        node<T> *temp = _insert(_node->right, value);
+                        if (_node->right == nullptr)
+                        {
+                            _node->right = temp;
+                            temp->isRight = true;
+                            temp->parent = _node;
+                            check(temp);
+
+                        }
+                        else {
+                            _node->right = temp;
+                        }
+                        // temp->parent = _node->right;
+
                     }
                     
                     return _node;
