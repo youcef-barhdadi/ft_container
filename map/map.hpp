@@ -1,6 +1,6 @@
 
 # include  <functional>
-
+#include "rbtree.hpp"
 template<
     class Key,
     class T,
@@ -10,7 +10,9 @@ template<
 {
 
         public :
-           typedef T  value_type;
+
+            typedef  T mapped_type;
+           typedef std::pair<const Key, T>   value_type   ;
             //  typedef Allocator allocator_type  ;
              typedef size_t size_type  ;
 
@@ -21,15 +23,19 @@ template<
              typedef T *  pointer;
              
              typedef const  T *  const_pointer;
-            typedef Allocator Allocator_type;
+       
 
-            typedef  randomAccessIterator<T> iterator;
+            map()
+            {
+                std::cout << "created " << std::endl;
+            }
 
 
 
-
-
-
+            void insert (const value_type& val)
+            {
+                    std::cout <<  val.second << std::endl;
+            }
 
             //Capacity 
 
@@ -42,6 +48,6 @@ template<
                 return 1;
             }
         private :
-
+            RBtree <std::pair<const Key,T> > *tree;
 
 };

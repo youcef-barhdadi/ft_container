@@ -1,4 +1,5 @@
 
+#pragma
 # include  <functional>
 #include <iostream>
 
