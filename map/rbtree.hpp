@@ -114,9 +114,11 @@ template<
                     if (_node->value >= value)
                     {
                        _node->left =   _insert(_node->left, value);
+                       _node->left->parent = _node->left;
                     }
                     else {
                         _node->right = _insert(_node->right, value);
+                        _node->right->parent = _node->right;
                     }
                     
                     return _node;
