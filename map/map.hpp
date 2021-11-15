@@ -41,11 +41,11 @@ template<
 
 
             bool empty()  const {
-                return false;
+                return tree->size() == 0;
             }
             size_type size() const
             {
-                return 1;
+                return  tree->size();
             }
         private :
             RBtree <std::pair<const Key,T> > *tree;

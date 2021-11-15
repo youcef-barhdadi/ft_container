@@ -67,6 +67,13 @@ template<
                 _print(this->root);
             }
 
+            size_t size()
+            {
+                if (this->root == nullptr)
+                    return  0;
+                return 1;
+            }
+
 
         private :
 
@@ -110,10 +117,81 @@ template<
             // }
 
 
+            void rotrate(node<T> *n)
+            {
+                if (n->isRight == false)
+                {
+                    if (n->parent->isRight == false)
+                    {
+                            rightRotate(n->parent->parent);
+                    n->color =RED;
+                    n->parent->parent Black;
+                    if (n->parent->right != nullptr)
+                            n->parent->right->color = Red;
+                            return ;
+                    }
+                         rightleftRotate(n->parent->parent);
+                        n->color =  Black;
+                        n->right->color = Red;
+                        n->left->color = Red;
+                    return ;
+                }
 
+
+                if (n->parent->isRight == true)
+                {
+                        leftRotate(n->parent->parent);
+                        n->color = Red;
+                        n->parent->color = Black;
+                        if (n->parent->left != nullptr)
+                            n->parent->left->color = Red;
+                        return ;
+
+                }
+                leftRightRotate(n->parent->parent);
+                n->color = Black;
+                n->right->color = Red;
+                n-> left->color = Red;
+           
+                 
+            }
 
             void correct(node<T> *n)
             {
+                if (n == this->root)
+                {
+                   if (n->color == Red)
+                        n->color = Black;
+
+                    return ;
+                }
+
+
+                if (n->parent->isRight == false)
+                {
+                        if (n->parent->parent->right == nullptr || n->parent->parent->right->color == Black)
+                        {
+                            rotrate();
+                            return ;
+                        }
+                        // here red
+                        if (n->parent->parent->right != nullptr)
+                                n->parent->parent->right->color = Black;
+                        n->parent->parent->color = Red;
+                        n->parent->color = Black;
+                    return ;
+                }
+
+                if (n->parent->parent->left ==  nullptr || n->parent->parent->right->color == Black)
+                {
+                    rotrate();
+                    return ;
+
+                }
+                if (n->parent->parent->left != nullptr)
+                        n->parent->parent->left = Black;
+                n->parent->parent->color =Red;
+                n->parent->color = Black;
              
                 return ;
             }
