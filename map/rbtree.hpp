@@ -65,7 +65,7 @@ template<
                 }
 
                 _print(n->left);
-                std::cout << "[" << n->value  <<  " , is root " << (n == this->root) << ( n->isRight ? " is right" : " is left ") <<  "]" << std::endl;
+                std::cout << "[" << n->value  <<  " , is root " << (n == this->root) << ( n->isRight ? " is right" : " is left ")  << " " <<  (n->color == Black ? "black" : "red")  <<  "]" << std::endl;
                 _print(n->right);
             }
             void print()
@@ -116,7 +116,7 @@ template<
                     }
                     else {
                         temp->isRight = false;
-                        temp->parent->right = temp;
+                        temp->parent->left = temp;
                     }
                 }
                 temp->right = n;
@@ -266,6 +266,7 @@ template<
             {
                   if ( n == this->root )
                   {
+                      correct(n);
                       return ;
                   }
    
