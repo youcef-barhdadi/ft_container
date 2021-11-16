@@ -46,7 +46,12 @@ template<
 
             void insert(T value)
             {
-                _insert(this->root, value);
+                node<T> *t =    _insert(this->root, value);
+                if (this->last != nullptr)
+                {
+                    check(this->last);
+                    last = nullptr;
+                }
             }
 
 
@@ -58,8 +63,9 @@ template<
                 {
                     return ;
                 }
+
                 _print(n->left);
-                std::cout << "[" << n->value <<  "]" << std::endl;
+                std::cout << "[" << n->value  <<  " , is root " << (n == this->root) << ( n->isRight ? " is right" : " is left ") <<  "]" << std::endl;
                 _print(n->right);
             }
             void print()
@@ -73,62 +79,117 @@ template<
                     return  0;
                 return 1;
             }
+            node<T>  *root;
+            
 
 
         private :
+                node<T> *last;
+           
 
-            node<T>  *root;
-            // RBtree *parent;
-            // RBtree *left;
-            // RBtree *right;
-            // int color;
-            // T value;
+            void rightRotate(node<T> *n)
+            {
+                std::cout <<  n->value <<"right rotate"  << std::endl;
+                if (n == nullptr)
+                        return ;
+
+                node<T> *temp = n->left;
+
+                n->left =  temp->right;
+
+                if (n->left != nullptr)
+                {
+                    n->left->isRight = false;
+                    n->left->parent = n;
+                } 
+                if (n->parent == nullptr)
+                {
+                    this->root = temp;
+                    temp->parent = nullptr;
+                }
+                else {
+                    temp->parent = n->parent;
+                    if (n->isRight == true)
+                    {
+                        temp->isRight = true;
+                        temp->parent->right = temp;
+                    }
+                    else {
+                        temp->isRight = false;
+                        temp->parent->right = temp;
+                    }
+                }
+                temp->right = n;
+                n->isRight = true;
+                n->parent = temp;
+            }
 
 
+            void leftRoutate(node<T> *n)
+            {                                
+                std::cout << "=====left rotate"  <<  n->right->value << std::endl;
+                if (n == nullptr)
+                    return ;                    
+                node<T> *temp = n->right;
+                if (temp == nullptr)
+                    return ;
+                n->right = temp->left;
+      
+                if (n->right != nullptr)
+                {
+                    n->right->parent = n;
+                    n->right->isRight = true;
+                }
+                if (n->parent == nullptr)
+                {
+                    this->root = temp;
+                    temp->parent = nullptr;
+                }
+                else {
+                    temp->parent = n->parent;
+                    if (n->isRight == false)
+                    {
+                        temp->isRight = false;
+                        temp->parent->left =temp;
+                    }else {
+                         temp->isRight = true;
+                        temp->parent->right = temp;
+                    }
+                }
+                temp->left = n;
+                n->isRight  = false;
+                n->parent = temp;
+            }
 
-            // void left_rotaion(node<T> *node)
-            // {
 
-            //     node<T> *n = node->left;
+            void leftRightRotate(node<T> *n)
+            {
+                std::cout << "left right rotate" << std::endl;
+                if (n == nullptr)
+                    return ;
+                leftRoutate(n->parent);
 
-            //     n->left = node;
-
-
-            //     node->right = node->left->left;
-
-            //     node = n;
-
-            // }
-
-            // void leftRight(node<T> *n)
-            // {
-            //     left_rotaion(n->left);
-            //     right_rotation(n);
-
-
-            // }
-
-            // void right_rotation(node<T> *_node)
-            // {
-            //     node<T> *B = _node->left;
-            //     t->left = node;
-            //     _node->right = B;
-
-            // }
-
+                rightRotate(n);
+            }
+         void    rightleftRotate (node<T> *n)
+            {
+                std::cout << "right left rotate" << std::endl;
+                rightRotate(n->parent);
+                leftRoutate(n);
+            }
 
             void rotrate(node<T> *n)
             {
                 if (n->isRight == false)
                 {
                     if (n->parent->isRight == false)
-                    {
-                            rightRotate(n->parent->parent);
-                    n->color =RED;
-                    n->parent->parent Black;
-                    if (n->parent->right != nullptr)
-                            n->parent->right->color = Red;
-                            return ;
+                    {              
+                        rightRotate(n->parent->parent);
+                        n->color =Red;
+                        n->parent->color = Black;
+                        if (n->parent->right != nullptr)
+                                n->parent->right->color = Red;
+                        return ;
                     }
                          rightleftRotate(n->parent->parent);
                         n->color =  Black;
@@ -136,28 +197,31 @@ template<
                         n->left->color = Red;
                     return ;
                 }
-
-
                 if (n->parent->isRight == true)
                 {
-                        leftRotate(n->parent->parent);
+                        leftRoutate(n->parent->parent);
+                                        std::cout << "here" << (this->root->left->right) << std::endl;
+
                         n->color = Red;
                         n->parent->color = Black;
                         if (n->parent->left != nullptr)
                             n->parent->left->color = Red;
                         return ;
-
                 }
                 leftRightRotate(n->parent->parent);
+                
                 n->color = Black;
-                n->right->color = Red;
-                n-> left->color = Red;
-           
+                if (n->right !=nullptr)
+                    n->right->color = Red;
+                if (n->left != nullptr)
+                    n-> left->color = Red;
                  
             }
 
             void correct(node<T> *n)
             {
+                if (n == nullptr)
+                    return ;
                 if (n == this->root)
                 {
                    if (n->color == Red)
@@ -165,13 +229,16 @@ template<
 
                     return ;
                 }
+                            //  std::cout <<"dd"<< std::endl;
 
 
                 if (n->parent->isRight == false)
                 {
-                        if (n->parent->parent->right == nullptr || n->parent->parent->right->color == Black)
+                        if (( n->parent->parent &&  n->parent->parent->right == nullptr) || (n->parent->parent && n->parent->parent->right->color == Black))
                         {
-                            rotrate();
+                            rotrate(n);
+                                                        //  std::cout << n->parent->parent << std::endl;
+
                             return ;
                         }
                         // here red
@@ -184,32 +251,34 @@ template<
 
                 if (n->parent->parent->left ==  nullptr || n->parent->parent->right->color == Black)
                 {
-                    rotrate();
+                    rotrate(n);
                     return ;
 
                 }
                 if (n->parent->parent->left != nullptr)
-                        n->parent->parent->left = Black;
+                        n->parent->parent->left->color = Black;
                 n->parent->parent->color =Red;
                 n->parent->color = Black;
-             
+
                 return ;
             }
             void check(node<T> *n)
             {
-                // std::cout << nullptr == NULL << std::endl;
                   if ( n == this->root )
                   {
-                    //   std::cout << "end" << std::endl;
                       return ;
                   }
-                //   if ( n->parent != nullptr &&  n->parent->color == Red )
-                //   {
-                //         // std::cout <<  "ff" << std::endl; 
-                //   }
+   
                 
                 if (n->color == Red && (n->parent->color == Red))
+                {
+                    if (n->parent->parent != nullptr)
+                    {
                         correct(n);
+
+                    }
+
+                }
                 check(n->parent);
                 
             }
@@ -227,6 +296,7 @@ template<
                                 _node->color = Black;
                                 this->root = _node;
                                 _node->parent = nullptr;
+                                last = _node;
                             }
                             return _node;
                     }
@@ -239,7 +309,8 @@ template<
                             _node->left = temp;
                             temp->parent = _node;
                             temp->isRight = false;
-                            check(temp);
+                            last = temp;
+
                         }
                         else {
                             _node->left = temp;
@@ -252,7 +323,7 @@ template<
                             _node->right = temp;
                             temp->isRight = true;
                             temp->parent = _node;
-                            check(temp);
+                            last = temp;
 
                         }
                         else {
