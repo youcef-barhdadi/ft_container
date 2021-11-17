@@ -27,7 +27,8 @@ class  node {
             {
                 this->left = nullptr;
                 this->right = nullptr;
-                this->value = value;
+                this->value = std::make_pair( value.first ,value.second);
+                std::cout << value.second << std::endl;
                 this->color = Red;
             }
   
@@ -163,7 +164,7 @@ template<
                             toDelete->color = Black;
                         }
                         else {
-                            deleteCase1(toDelete, )
+                            deleteCase1(toDelete);
                         }
                     }
                 }
@@ -257,11 +258,11 @@ template<
 
                 }
 
-                void delete_node(node<T> *n)
-                {
-                    node<T> *toDelete = 
+                // void delete_node(node<T> *n)
+                // {
+                //     node<T> *toDelete = 
 
-                }
+                // }
 
     //                private void replaceNode(Node root, Node child, AtomicReference<Node> rootReference) {
     //     child.parent = root.parent;
@@ -327,7 +328,7 @@ template<
             {                                
                 if (n == nullptr)
                     return ;                    
-                std::cout << "=====left rotate"  <<  n->value << std::endl;
+                // std::cout << "=====left rotate"  <<  n->value << std::endl;
                 node<T> *temp = n->right;
                 if (temp == nullptr)
                     return ;

@@ -28,13 +28,17 @@ template<
             map()
             {
                 std::cout << "created " << std::endl;
+                tree = new RBtree <std::pair<const Key,T> >();
+
             }
 
 
 
             void insert (const value_type& val)
             {
-                    std::cout <<  val.second << std::endl;
+                    // std::cout <<  val<< std::endl;
+
+                    tree->insert(val);
             }
 
             //Capacity 
