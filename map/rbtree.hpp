@@ -263,6 +263,20 @@ template<
 
                 }
 
+    //                private void replaceNode(Node root, Node child, AtomicReference<Node> rootReference) {
+    //     child.parent = root.parent;
+    //     if(root.parent == null) {
+    //         rootReference.set(child);
+    //     }
+    //     else {
+    //         if(isLeftChild(root)) {
+    //             root.parent.left = child;
+    //         } else {
+    //             root.parent.right = child;
+    //         }
+    //     }
+    // }
+
 
             node<T>  *root;
             
