@@ -31,7 +31,10 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
     {
     
     }
-
+    difference_type operator-(const randomAccessIterator& rhs) const
+    {
+        return   (this->_ptr-  rhs._ptr);
+    }
 
     
     randomAccessIterator(T* ptr)
@@ -70,33 +73,45 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
 
     randomAccessIterator &operator++(int)
     {
-        *this++;
+        // *this++;
         return  *this;
     }
 
-    bool operator==(randomAccessIterator &a )
+  friend  bool operator==(randomAccessIterator &a  , randomAccessIterator &b)
     {
-    if (*this != *a)
-            return false;
-        return true;
+    if (a._ptr  == b._ptr)
+            return true;
+        return false;
     }
-    bool operator!=(randomAccessIterator &a  )
+    bool operator!=(randomAccessIterator &a)
     {
         if (*this == *a)
             return false;
         return true;
     }
 
+    pointer operator->() { return _ptr; }
 
 
 
-    randomAccessIterator operator + (int c)
+    randomAccessIterator operator + ( size_t n)
     {
-        randomAccessIterator res(this->_ptr + c);
-        return res;
+        
+        return this->_ptr + n;
     }
     
-           
+    // randomAccessIterator operator - (int c)
+    // {
+    //     randomAccessIterator res(this->_ptr + c);
+    // }
+        
+    //    friend  std::ptrdiff_t operator-(randomAccessIterator<T>  left, randomAccessIterator<T>  right);
+    
+                   T *_ptr;
+
     private:
-        T *_ptr;
 };
+
+//  std::ptrdiff_t randomAccessIterator<T>::operator-(randomAccessIterator<T>  left, randomAccessIterator<T>  right) {
+//     return left - right  ;
+// } 

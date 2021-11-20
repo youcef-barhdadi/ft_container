@@ -15,6 +15,24 @@
 #include <iterator>
 #include "randomAccessIterator.hpp"
 
+
+template <class T>
+struct is_sample_type : std::integral_constant <
+    bool,
+    (std::is_floating_point<T>::value || std::is_integral<T>::value)> {};
+namespace ft {
+
+
+    
+template<bool B, class T = void>
+struct enable_if {};
+ 
+template<class T>
+struct enable_if<true, T> { typedef T type; };
+}
+
+
+
 template<
     class T,
     class Allocator = std::allocator<T>
@@ -22,7 +40,7 @@ template<
 {
         public:
             typedef T  value_type;
-            //  typedef Allocator allocator_type  ;
+             typedef   Allocator   allocator_type ;
              typedef size_t size_type  ;
 
              typedef      T& reference;
@@ -32,38 +50,114 @@ template<
              typedef T *  pointer;
              
              typedef const  T *  const_pointer;
-            typedef Allocator Allocator_type;
+            // typedef Allocator_type Allocator ;
 
             typedef  randomAccessIterator<T> iterator;
+            
+            typedef  randomAccessIterator<T> const_iterator;
 
 
 
-            size_type  size()
+
+            size_type  size() const
             {
                 return this->_size;
             }
 
             
 
-            size_type capacity()
+            size_type capacity() const
             {
                 return this->_capacity;
             }
 
-            bool empty()
+            bool empty() const
             {
                 if (this->size() == 0)
                     return  true;
                 return false;
             } 
+            ///* constrcutr  */
+            // vector(int size)
+            // {
+            //     _vec = _myallocator.allocate(size);
+            //     this->_capacity = size;
+            //     this->_size = 0;
 
-            vector(int size)
+            // }
+
+            explicit vector (const allocator_type& alloc = allocator_type())
             {
-                _vec = _myallocator.allocate(size);
-                this->_capacity = size;
-                this->_size = 0;
 
             }
+
+            explicit vector (size_type n, const value_type& val = value_type(),
+                 const allocator_type& alloc = allocator_type())
+            {
+                _vec = _myallocator.allocate(n);
+                _end  = _vec;
+                while (n--)
+                {
+                    *_end = val;
+                    std::cout << val << std::endl;
+                    _end++;
+                }
+                std::cout <<  "size ==>" << _end - _vec << std::endl;
+            }
+
+            template <class InputIterator  >
+            vector (InputIterator first, InputIterator last,
+                    const allocator_type& alloc = allocator_type(),  typename ft::enable_if<!std::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
+            {
+                    size_type  n = last - first;
+                    size_type i = 0;
+                    this->_vec = _myallocator.allocate(n);
+                    this->_capacity = n;
+                    this->_size = n;
+                    _end = _vec + n;
+                    while (n--)
+                    {
+                        this->_vec[i] = *first;
+                        i++;
+                    }
+            }
+
+
+            vector (const vector& x)
+            {
+                    *this = x;
+            }
+            // vector ()
+            // {
+            //     std::cout << "created" << std::endl;
+            // }
+
+            ///*end constructor */
+
+            // overloading oprator 
+
+            vector& operator= (const vector& x)
+            {
+                
+                this->_size = x.size();
+                this->_capacity = x.capacity();
+                const_iterator first = x.const_begin();
+                std::cout << *first << std::endl;
+                const_iterator last = x.const_end();
+                size_type n = last - first;
+                this->_size = n;
+                this->_capacity = n;
+                this->_vec = _myallocator.allocate(n);
+                while (n--)
+                {
+                    *_vec = *first;
+                    first++;  
+                }
+                return *this;
+                
+            }
+
+
 
             void resize( size_type count, T value = T() )
             {
@@ -99,11 +193,20 @@ template<
                 return iterator(this->_vec);
             }
 
+            const_iterator const_begin() const
+            {
+                return iterator(this->_vec);
+            }
+
            iterator end()
             {
-                return iterator(&_vec[this->size() - 1]);
+                return iterator(_end);
             }
             
+            const_iterator const_end() const
+            {
+                return iterator(_end);
+            }
 
 
             T at(size_type n)
@@ -163,7 +266,7 @@ template<
 
                 
                 
-                for (iterator c = position+1; (c != this->end()) ; ++c)
+                for (iterator c = position+1; !(c == this->end()) ; ++c)
                 {
                  
                     old = *c;
@@ -205,9 +308,10 @@ template<
 
             private :
                 T *_vec;
+                T *_end;
                 size_type  _size;
                 size_type _capacity;
-                Allocator_type _myallocator;
+                allocator_type _myallocator;
                 randomAccessIterator<T> *iter;
 
                 void _push(size_type n, const value_type &val)
