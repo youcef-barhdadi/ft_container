@@ -58,7 +58,7 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
 
     randomAccessIterator operator++()
     {
-        T old(*this);
+        T old = *this;
         ++*this;
         return old;   
     }
@@ -73,13 +73,13 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
 
     randomAccessIterator &operator++(int)
     {
-        // *this++;
+        this->_ptr++;
         return  *this;
     }
 
-  friend  bool operator==(randomAccessIterator &a  , randomAccessIterator &b)
+    bool operator==(randomAccessIterator &a)
     {
-    if (a._ptr  == b._ptr)
+    if (this->_ptr  == a._ptr)
             return true;
         return false;
     }

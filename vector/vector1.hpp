@@ -264,13 +264,15 @@ template<
 
                 *position = val;
 
-                
-                
-                for (iterator c = position+1; !(c == this->end()) ; ++c)
+                iterator it = position;
+                iterator en = this->end();
+                while ( !(it == en))
                 {
                  
-                    old = *c;
-                    *c = old;
+                    old = *it;
+                    *it = old;
+
+                    it++;
                     
                 }
                 return iterator(position);

@@ -30,11 +30,15 @@ vector<int> second (4,100);                       // four ints with value 100
 // std::cout <<
  vector<int> third (second.begin(),second.end());  // iterating through secon
 
-second.insert(second.begin(), 44);
+
+second.insert(second.begin(), 42);
+ vector<int>::iterator k =   second.insert(second.begin()+2, 1337);
 // vector<int> fourth (third);                       // a copy of third
 // std::cout << fourth.size() << std::endl;
+    
 
-    std::cout << second.at(0) << std::endl;
+
+    std::cout << "here" <<  *second.begin() << std::endl;
 
 //   // the iterator constructor can also be used to construct from arrays:
 //   int myints[] = {16,2,77,29};
