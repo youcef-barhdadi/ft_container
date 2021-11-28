@@ -21,9 +21,24 @@
 int main(int argc, char **argv)
 {
 
-
+        (void) argc;
+        (void) argv;
         ft::vector<int>  vec;
 
+
+        vec.insert(vec.begin(), 1337);
+
+
+        vec.push_back(42);
+        vec.push_back(42);
+        vec.push_back(42);
+        vec.push_back(42);
+
+        std::cout <<  "size" << vec.size()   << " => max size:" << vec.max_size()  << std::endl ;
+        std::cout <<  "capacity" << vec.capacity() << std::endl ;
+        vec.pop_back();
+        vec.pop_back();
+        vec.print_all();
 
 
 

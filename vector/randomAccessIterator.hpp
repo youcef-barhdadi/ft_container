@@ -10,12 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#pragma once
 #include <iostream>
 #include <memory>
 #include <iterator>
 
 namespace ft {
+
+
+
+
+
+
+
 template <class T>
 class randomAccessIterator  : public std::iterator<std::random_access_iterator_tag, T>
 {

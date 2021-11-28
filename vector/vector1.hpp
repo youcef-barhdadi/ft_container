@@ -9,21 +9,22 @@
 /*   Updated: 2021/11/09 20:45:52 by ybarhdad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#pragma once
 #include <iostream>
 #include <memory>
 #include <iterator>
 #include "randomAccessIterator.hpp"
+#include  "reverse_iterator.hpp"
 
 
-namespace ft{
 
+
+
+namespace ft {
 template <class T>
 struct is_sample_type : std::integral_constant <
     bool,
     (std::is_floating_point<T>::value || std::is_integral<T>::value)> {};
-namespace ft {
-
 
     
 template<bool B, class T = void>
@@ -31,7 +32,7 @@ struct enable_if {};
  
 template<class T>
 struct enable_if<true, T> { typedef T type; };
-}
+
 
 
 
@@ -58,6 +59,9 @@ template<
             
             typedef  randomAccessIterator<T> const_iterator;
 
+            
+            typedef ft::reverse_iterator<iterator> reverse_iterator;
+            typedef ft::reverse_iterator<const iterator> const_reverse_iterator;
 
 
 
@@ -80,16 +84,10 @@ template<
                 return false;
             } 
             ///* constrcutr  */
-            // vector(int size)
-            // {
-            //     _vec = _myallocator.allocate(size);
-            //     this->_capacity = size;
-            //     this->_size = 0;
-
-            // }
 
             explicit vector (const allocator_type& alloc = allocator_type())
             {
+                        (void) alloc;
                     this->_capacity = 0;
                     this->_size = 0;
             }
@@ -243,7 +241,7 @@ template<
                 return iterator(this->_vec);
             }
 
-            const_iterator const_begin() const
+            const_iterator begin() const
             {
                 return iterator(this->_vec);
             }
@@ -253,10 +251,33 @@ template<
                 return iterator(_end);
             }
             
-            const_iterator const_end() const
+            const_iterator end() const
             {
                 return iterator(_end);
             }
+
+
+            reverse_iterator rbgin() 
+            {
+                return reverse_iterator(_end);
+            }
+
+            reverse_iterator rend()
+            {
+                return reverse_iterator(_vec);
+            }
+
+            const_reverse_iterator rbgin()  const
+            {
+                return reverse_iterator(_end);
+            }
+
+            const_reverse_iterator rend() const
+            {
+                return reverse_iterator(_vec);
+            }
+
+
 
 
             T at(size_type n)
@@ -296,7 +317,7 @@ template<
             
             void push_back(const value_type &val)
             {
-               this->_push(this->size() , val);
+               this->insert(this->end()  , val);
             }
 
             void pop_back()
@@ -306,10 +327,8 @@ template<
 
             randomAccessIterator<T> insert (randomAccessIterator<T> position, const value_type& val)
             {
-                T old;
-                T old1;
-                
 
+                 size_type pos = position  -this->begin();
                 if (this->_capacity == 0)
                 {
                     reserve(4);
@@ -318,18 +337,14 @@ template<
                     this->_end = this->_vec + this->size();
                     return begin();
                 }
-
-
                 if (this->size() == this->capacity())
                 {
                     reserve(this->_size * 2);
+                    
                 }
-                int pos = &(*position) -this->_vec;
-                // std::cout <<  "value is [" << val << " " <<  pos << std::endl;
-                // old = this->_vec[pos];
-                // this->_vec[pos] = val;
+                std::cout << "pos ==> " << pos << std::endl;
                 size_type  i =  this->size();
-                old = this->_vec[pos];
+
                 while (i != pos)
                 { 
                     this->_vec[i] = this->_vec[i - 1];
@@ -370,7 +385,7 @@ template<
             void    print_all()
             {
                 std::cout << "=============" << std::endl;
-                for(int i = 0; i < this->size() ; i++)
+                for(size_type i = 0; i < this->size() ; i++)
                 {
                     std::cout << this->_vec[i] << std::endl;
                 }
@@ -439,24 +454,24 @@ template<
                 allocator_type _myallocator;
                 randomAccessIterator<T> *iter;
 
-                void _push(size_type n, const value_type &val)
-                {
-                        reserve(this->size() + 1);
-                        if (n == this->size())
-                        {
-                            this->_vec[n] = val;
-                            this->_size++;
-                            return ;
-                        }
-                        for (size_type i = n; i < this->size() ; i++)
-                        {
-                            value_type t = this->_vec[i + 1];
-                            this->_vec[i +1] = this->_vec[i];
-                            this->_vec [i + 1] = t;
+                // void _push(size_type n, const value_type &val)
+                // {
+                //         reserve(this->size() + 1);
+                //         if (n == this->size())
+                //         {
+                //             this->_vec[n] = val;
+                //             this->_size++;
+                //             return ;
+                //         }
+                //         for (size_type i = n; i < this->size() ; i++)
+                //         {
+                //             value_type t = this->_vec[i + 1];
+                //             this->_vec[i +1] = this->_vec[i];
+                //             this->_vec [i + 1] = t;
                             
-                        }
-                        this->_vec[n] = val;
-                        this->_size++;
-                }
+                //         }
+                //         this->_vec[n] = val;
+                //         this->_size++;
+                // }
 };
 };
