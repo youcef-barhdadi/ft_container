@@ -13,32 +13,18 @@
 
 # include <iostream>
 # include <stack>
-# include "vector1.hpp"
+# include "Vector.hpp"
 
-// # include <vector>
+# include <vector>
 // using namespace std;
 
 int main(int argc, char **argv)
 {
 
-        (void) argc;
-        (void) argv;
-        ft::vector<int>  vec;
-
-
-        vec.insert(vec.begin(), 1337);
-
-
-        vec.push_back(42);
-        vec.push_back(42);
-        vec.push_back(42);
-        vec.push_back(42);
-
-        std::cout <<  "size" << vec.size()   << " => max size:" << vec.max_size()  << std::endl ;
-        std::cout <<  "capacity" << vec.capacity() << std::endl ;
-        vec.pop_back();
-        vec.pop_back();
-        vec.print_all();
+         ft::Vector<int> v(4, 5);
+        ft::Vector<int>::reverse_iterator my_rit2(v.end());
+        ft::Vector<int>::const_reverse_iterator c_it, c_ob(v.end());
+        c_it = my_rit2;
 
 
 

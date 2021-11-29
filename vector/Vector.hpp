@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector1.hpp                                        :+:      :+:    :+:   */
+/*   Vector1.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -39,7 +39,7 @@ struct enable_if<true, T> { typedef T type; };
 template<
     class T,
     class Allocator = std::allocator<T>
-> class vector
+> class Vector
 {
         public:
             typedef T  value_type;
@@ -57,11 +57,11 @@ template<
 
             typedef  randomAccessIterator<T> iterator;
             
-            typedef  randomAccessIterator<T> const_iterator;
+            typedef  randomAccessIterator<const T> const_iterator;
 
             
             typedef ft::reverse_iterator<iterator> reverse_iterator;
-            typedef ft::reverse_iterator<const iterator> const_reverse_iterator;
+            typedef ft::reverse_iterator<randomAccessIterator<const T> > const_reverse_iterator;
 
 
 
@@ -85,16 +85,17 @@ template<
             } 
             ///* constrcutr  */
 
-            explicit vector (const allocator_type& alloc = allocator_type())
+            explicit Vector (const allocator_type& alloc = allocator_type())
             {
                         (void) alloc;
                     this->_capacity = 0;
                     this->_size = 0;
             }
 
-            explicit vector (size_type n, const value_type& val = value_type(),
+            explicit Vector (size_type n, const value_type& val = value_type(),
                  const allocator_type& alloc = allocator_type())
             {
+                (void) alloc;
                 _vec = _myallocator.allocate(n);
                 _end  = _vec;
                 this->_capacity = n;
@@ -102,16 +103,16 @@ template<
                 while (n--)
                 {
                     *_end = val;
-                    std::cout << val << std::endl;
+                    // std::cout << val << std::endl;
                     _end++;
                 }
-                std::cout <<  "size ==>" << _end - _vec << std::endl;
             }
 
             template <class InputIterator  >
-            vector (InputIterator first, InputIterator last,
+            Vector (InputIterator first, InputIterator last,
                     const allocator_type& alloc = allocator_type(),  typename ft::enable_if<!std::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
             {
+                (void) alloc;
                     size_type  n = last - first;
                     size_type i = 0;
                     this->_vec = _myallocator.allocate(n);
@@ -126,7 +127,7 @@ template<
             }
 
 
-            vector (const vector& x)
+            Vector (const Vector& x)
             {
                     *this = x;
             }
@@ -136,13 +137,13 @@ template<
 
             // overloading oprator 
 
-            vector& operator= (const vector& x)
+            Vector& operator= (const Vector& x)
             {
                 
                 this->_size = x.size();
                 this->_capacity = x.capacity();
                 const_iterator first = x.const_begin();
-                std::cout << *first << std::endl;
+                // std::cout << *first << std::endl;
                 const_iterator last = x.const_end();
                 size_type n = last - first;
                 this->_size = n;
@@ -204,7 +205,7 @@ template<
             void assign (InputIterator first, InputIterator last)
             {
                 size_type  n= &(*last) - &(first);
-                size_type i  = 0;
+                // size_type i  = 0;
                 clear();
                 reserve(n);
                 this->insert(this->begin(), first, last);
@@ -227,7 +228,7 @@ template<
                 {
                         this->_vec[i] = this->_vec[j];
                 }
-                for (int i = 0; i < n; i++)
+                for (size_t i = 0; i < n; i++)
                 {
                         this->_vec[pos] = val;
                         pos++;
@@ -236,14 +237,14 @@ template<
                  this->_end = this->_vec + this->size();
 
               }
-            iterator begin()
+            iterator begin() 
             {
-                return iterator(this->_vec);
+                return randomAccessIterator<T>(this->_vec);
             }
 
-            const_iterator begin() const
+            const_iterator begin()  const
             {
-                return iterator(this->_vec);
+                return randomAccessIterator<const T>(this->_vec);
             }
 
            iterator end()
@@ -253,28 +254,28 @@ template<
             
             const_iterator end() const
             {
-                return iterator(_end);
+                return randomAccessIterator<const T>(_end);
             }
 
 
-            reverse_iterator rbgin() 
+            reverse_iterator rbegin() 
             {
-                return reverse_iterator(_end);
+                return ft::reverse_iterator<randomAccessIterator<T> >(this->end() - 1);
             }
 
             reverse_iterator rend()
             {
-                return reverse_iterator(_vec);
+                return ft::reverse_iterator<randomAccessIterator<T> >(this->begin());
             }
 
             const_reverse_iterator rbgin()  const
             {
-                return reverse_iterator(_end);
+                return ft::reverse_iterator<const_iterator >(this->end() - 1);
             }
 
             const_reverse_iterator rend() const
             {
-                return reverse_iterator(_vec);
+                return ft::reverse_iterator<const_iterator >(this->begin());
             }
 
 
@@ -342,7 +343,6 @@ template<
                     reserve(this->_size * 2);
                     
                 }
-                std::cout << "pos ==> " << pos << std::endl;
                 size_type  i =  this->size();
 
                 while (i != pos)
