@@ -96,16 +96,19 @@ template<
                  const allocator_type& alloc = allocator_type())
             {
                 (void) alloc;
+                std::cout << "==>" <<  n << std::endl;
                 _vec = _myallocator.allocate(n);
-                _end  = _vec;
                 this->_capacity = n;
                 this->_size = n;
-                while (n--)
+                size_type i = 0;
+                while (i < n)
                 {
-                    *_end = val;
-                    // std::cout << val << std::endl;
-                    _end++;
+                  
+                    _myallocator.construct(_vec+ i, val);
+
+                    i++;
                 }
+                this->_end = this->_vec + n;
             }
 
             template <class InputIterator  >
@@ -119,7 +122,7 @@ template<
                     this->_capacity = n;
                     this->_size = n;
                     _end = _vec + n;
-                    while (n--)
+                    while (i < n)
                     {
                         this->_vec[i] = *first;
                         i++;
@@ -130,6 +133,17 @@ template<
             Vector (const Vector& x)
             {
                     *this = x;
+                    this->_vec = _myallocator.allocate(x.capacity());
+
+                    for(size_type i = 0; i < x.size() ; i++)
+                    {
+                        // this->_vec[i] = x.at(i);
+                                            _myallocator.construct(_vec+ i, x.at(i));
+
+                    }
+                    this->_size =  x.size();
+                    this->_end = this->_vec + this->size();
+                    this->_capacity  = x.capacity();
             }
     
 
@@ -140,22 +154,21 @@ template<
             Vector& operator= (const Vector& x)
             {
                 
+                std::cout <<  "==>>" << x.size() << std::endl;
+
+                _myallocator.deallocate(this->_vec, x.capacity());
                 this->_size = x.size();
                 this->_capacity = x.capacity();
-                const_iterator first = x.const_begin();
-                // std::cout << *first << std::endl;
-                const_iterator last = x.const_end();
-                size_type n = last - first;
-                this->_size = n;
-                this->_capacity = n;
-                this->_vec = _myallocator.allocate(n);
-                while (n--)
+                this->_vec = _myallocator.allocate(this->_capacity);
+                size_t i = 0;
+                while (i < x.size())
                 {
-                    *_vec = *first;
-                    first++;  
+                    _myallocator.construct(_vec + i, x.at(i));
+                    i++;
                 }
+                // std::cout << 
+                this->_end = this->_vec +  this->size();
                 return *this;
-                
             }
 
 
@@ -163,11 +176,16 @@ template<
             void resize( size_type count, T value = T() )
             {
                 T *vec = _myallocator.allocate(count);
-                for (size_type i =0; i < this->size() ; i++ )
+                size_type  t = this->size();
+                if (this->size() > count)
+                        this->_size =  count;
+                 size_type i ;
+                for (   i = 0;i < this->size() && i < count ; i++ )
                 {
                     vec[i] = this->_vec[i];
                 }
-                for (size_t i =  this->size() ; i < count; i++)
+
+                for (;i < count; i++)
                 {
                     vec[i] = value;
                 }
@@ -175,7 +193,7 @@ template<
                     _myallocator.deallocate(this->_vec, this->_capacity);
                 this->_capacity = count;
                 this->_vec = vec;
-                this->_end  = this->_vec + count;
+                this->_end  = this->_vec + this->size();
             }
 
             
@@ -254,34 +272,41 @@ template<
             
             const_iterator end() const
             {
-                return randomAccessIterator<const T>(_end);
+                return randomAccessIterator<const T>(_end );
             }
 
 
             reverse_iterator rbegin() 
             {
-                return ft::reverse_iterator<randomAccessIterator<T> >(this->end() - 1);
+                return reverse_iterator(iterator(this->_end - 1));
             }
 
             reverse_iterator rend()
             {
-                return ft::reverse_iterator<randomAccessIterator<T> >(this->begin());
+                return reverse_iterator (iterator (this->_vec - 1));
             }
 
-            const_reverse_iterator rbgin()  const
+            const_reverse_iterator rbegin()  const
             {
-                return ft::reverse_iterator<const_iterator >(this->end() - 1);
+                return const_reverse_iterator(const_iterator (this->_end - 1));
             }
 
             const_reverse_iterator rend() const
             {
-                return ft::reverse_iterator<const_iterator >(this->begin());
+                return  const_reverse_iterator (const_iterator(this->_vec - 1));
             }
 
 
 
 
             T at(size_type n)
+            {
+                if (n > this->size() )
+                    throw "ex";
+                return this->_vec[n];
+            }
+
+            T at(size_type n) const
             {
                 if (n > this->size() )
                     throw "ex";
