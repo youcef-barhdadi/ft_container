@@ -1,7 +1,7 @@
 
-#pragma
-# include  <functional>
+#pragma once
 #include <iostream>
+#include "pair.hpp"
 
 
 enum Color {
@@ -27,8 +27,7 @@ class  node {
             {
                 this->left = nullptr;
                 this->right = nullptr;
-                this->value = std::make_pair( value.first ,value.second);
-                std::cout << value.second << std::endl;
+                this->value = value;
                 this->color = Red;
             }
   
@@ -48,6 +47,8 @@ template<
             void insert(T value)
             {
                 node<T> *t =    _insert(this->root, value);
+
+                std::cout << "this is what created " << this->root->value <<  std::endl;
                 if (this->last != nullptr)
                 {
                     check(this->last);
@@ -66,11 +67,12 @@ template<
                 }
 
                 _print(n->left);
-                std::cout << "[" << n->value  <<  " , is root " << (n == this->root) << ( n->isRight ? " is right" : " is left ")  << " " <<  (n->color == Black ? "black" : "red")  <<  "]" << std::endl;
+                std::cout << "[" << n->value   << "]" << std::endl;
                 _print(n->right);
             }
             void print()
             {
+                std::cout << "print" << std::endl;
                 _print(this->root);
             }
 
@@ -491,7 +493,7 @@ template<
 
             node<T>  *_insert(node<T> *_node ,T value)
             {
-                    // std::cout << "Hello world" << std::endl;
+                    std::cout << value << std::endl;
                     if (_node == nullptr)
                     {
                             _node = new node<T>(value);

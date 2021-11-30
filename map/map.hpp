@@ -1,18 +1,19 @@
 
-# include  <functional>
 #include "rbtree.hpp"
+#include "pair.hpp"
+
 template<
     class Key,
-    class T,
-    class Compare = std::less<Key>,
-    class Allocator = std::allocator<std::pair<const Key, T> >
+    class T
+    // class Compare = std::less<Key>
+    // class Allocator = std::allocator<pair<const Key, T> >
 > class map
 {
 
         public :
 
             typedef  T mapped_type;
-           typedef std::pair<const Key, T>   value_type   ;
+           typedef pair< Key, T>   value_type   ;
             //  typedef Allocator allocator_type  ;
              typedef size_t size_type  ;
 
@@ -28,13 +29,13 @@ template<
             map()
             {
                 std::cout << "created " << std::endl;
-                tree = new RBtree <std::pair<const Key,T> >();
+                tree = new RBtree <pair< Key,T> >();
 
             }
 
 
 
-            void insert (const value_type& val)
+            void insert ( value_type val)
             {
                     // std::cout <<  val<< std::endl;
 
@@ -50,8 +51,9 @@ template<
             size_type size() const
             {
                 return  tree->size();
-            }
+            }       
+                 RBtree <pair< Key,T> > *tree;
+
         private :
-            RBtree <std::pair<const Key,T> > *tree;
 
 };

@@ -1,6 +1,7 @@
 // #include "rbtree.hpp"
 #include "map.hpp"
 #include<utility>
+#include "pair.hpp"
 
 int main()
 {
@@ -9,7 +10,10 @@ int main()
                     // std::cout << "Hi" << std::endl;
 
         map<int, int> l;
-        l.insert(std::pair<int, int>(4,55 ));
+        l.insert(pair<int, int>(4,55));
+        l.insert(pair<int, int>(12,515));
+        l.insert(pair<int, int>(0,515));
+        l.tree->print();
 
         // t->insert(1);
         // t->insert(2);

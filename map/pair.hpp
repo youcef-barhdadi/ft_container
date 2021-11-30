@@ -1,5 +1,6 @@
 
-
+#pragma once
+#include <iostream>
 template<
     class T1,
     class T2
@@ -9,42 +10,43 @@ template<
         T1 first;
         T2 second;
 
-    pair& operator=( const pair<U1,U2>& other )
+    pair& operator=( const pair& other )
     {
         this->first = other.first;
         this->second = other.second;
+        return (*this);
     }
 
-    bool operator ==( const pair<T1,T2>& lhs, const pair<T1,T2>& rhs )   
+    bool operator ==( const pair& lhs )   
     {
-            return (lhs.first == rhs.first && lhs.second == rhs.second);
+        return !(this->first != lhs.first);
     }
 
     // template< class T1, class T2 >
-    bool operator!=( constpair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+    bool operator!=( const pair& lhs)
     {
-        return !(lhs == rhs);
+        return !(this->first != lhs.first);
     }
 
 
-    bool operator<( const pair<T1,T2>& lhs, const pair<T1,T2>& rhs )
+    bool operator<( const pair& lhs)
     {
-        return  lhs.first < rhs.first;
+        return  this->first < lhs.first;
     }
 
-    bool operator<=( const pair<T1,T2>& lhs, const pair<T1,T2>& rhs )
+    bool operator<=( const pair& lhs )
     {
-        return  lhs.first <= rhs.first;
+        return  this->first <= lhs.first;
     }
 
-        bool operator>( const pair<T1,T2>& lhs, const pair<T1,T2>& rhs )
+        bool operator>( const pair& lhs)
     {
-        return  lhs.first > rhs.first;
+        return  this->first > lhs.first;
     }
 
-    bool operator>=( const pair<T1,T2>& lhs, const pair<T1,T2>& rhs )
+    bool operator>=( const pair& lhs)
     {
-        return  lhs.first >= rhs.first;
+        return  this->first >= lhs.first;
     }
 
     pair()
@@ -58,7 +60,7 @@ template<
         this->second = y;
     }
 
-    pair( const pair<U1, U2>& p )
+    pair( const pair& p )
     {
         *this = p;
     }
@@ -71,4 +73,10 @@ pair<T1,T2> make_pair( T1 t, T2 u )
     p.first = t;
     p.second = u;
     return p;
+}
+template< class T1, class T2 >
+std::ostream& operator<<(std::ostream& os, const pair<T1,T2>& dt)
+{
+    os <<  "==>" << dt.first << std::endl;
+    return os;
 }
