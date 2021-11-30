@@ -132,7 +132,7 @@ template<
 
             Vector (const Vector& x)
             {
-                    *this = x;
+                    // *this = x;
                     this->_vec = _myallocator.allocate(x.capacity());
 
                     for(size_type i = 0; i < x.size() ; i++)
@@ -175,24 +175,26 @@ template<
 
             void resize( size_type count, T value = T() )
             {
-                T *vec = _myallocator.allocate(count);
-                size_type  t = this->size();
+                reserve(count);
                 if (this->size() > count)
-                        this->_size =  count;
-                 size_type i ;
-                for (   i = 0;i < this->size() && i < count ; i++ )
                 {
-                    vec[i] = this->_vec[i];
+                    for (size_type i = count ; (i < this->size()) ; i++ )
+                    {
+                        _myallocator.destroy((_vec + i));
+                    }
+                    this->_size = count;
                 }
-
-                for (;i < count; i++)
-                {
-                    vec[i] = value;
+                else {
+                    std::cout <<  "[" << value << "]" << std::endl;
+                    for (size_type i = this->size();  i < count; i++)
+                    {
+                        _myallocator.construct(_vec + i,  value);
+                    }
+                    this->_size = count;
                 }
-                if (this->capacity() != 0)
-                    _myallocator.deallocate(this->_vec, this->_capacity);
-                this->_capacity = count;
-                this->_vec = vec;
+                // this->_size =  count;
+                // this->_capacity = count;
+                // this->_vec = vec;
                 this->_end  = this->_vec + this->size();
             }
 
@@ -204,12 +206,13 @@ template<
                         T *vec = _myallocator.allocate(n);
                         for (size_type i = 0; i < this->size() ; i++)
                         {
-                            vec[i] = this->_vec[i];
+                            _myallocator.construct(vec + i,  this->_vec[i]);
+
                         }
-                        for (size_t i =  this->size() ; i < n; i++)
-                        {
-                            vec[i] = T();
-                        }
+                        // for (size_t i =  this->size() ; i < n; i++)
+                        // {
+                        //      _myallocator.construct(vec + i,  T());
+                        // }
                         if (this->capacity() != 0)
                             _myallocator.deallocate(this->_vec, this->_capacity);
                         this->_capacity = n;
@@ -236,19 +239,31 @@ template<
             }
               void insert (iterator position, size_type n, const value_type& val)
               {
+                 size_t pos ;
+                 
+                if (this->size() == 0)
+                    pos  = 0;
+                else 
+                    pos = pos = (&(*position) - this->_vec);
+
                 if (this->size() + n >= this->capacity())
                 {
-                    this->reserve(this->capacity() * 2 + n);
+                    if (this->capacity()  == 0)
+                        this->reserve((this->capacity()  + 1) * n );
+                    else
+                            this->reserve(this->capacity() * 2 < n ? this->capacity() + n :  this->capacity() * 2);
                 }
-                size_t pos = (position - this->begin());
-
-                for (size_t i =  this->size() + n,  j = this->size(); i > pos; j--, i--)
-                {
-                        this->_vec[i] = this->_vec[j];
-                }
+                std::cout << "====>++++++++" << pos  << " " << this->size() << "  ca "  << this->capacity()  << "bbb n" << n << std::endl;
+                if (this->size() != 0)
+                    for (size_t i =  this->size() + n,  j = this->size(); i > pos ; j--, i--)
+                    {
+                        _myallocator.construct(_vec  + i,  this->_vec[j]);
+                    }
                 for (size_t i = 0; i < n; i++)
                 {
-                        this->_vec[pos] = val;
+                        // this->_vec[pos] = val;
+                    _myallocator.construct(_vec  + pos,  val);
+
                         pos++;
                 }
                 this->_size += n;
@@ -299,14 +314,14 @@ template<
 
 
 
-            T at(size_type n)
+            reference at(size_type n)
             {
                 if (n > this->size() )
-                    throw "ex";
+                    throw std::out_of_range("");
                 return this->_vec[n];
             }
 
-            T at(size_type n) const
+            reference at(size_type n) const
             {
                 if (n > this->size() )
                     throw "ex";
@@ -325,7 +340,12 @@ template<
             }
 
 
-            reference fron()
+            reference front()
+            {
+                return this->at(0);
+            }
+
+                        reference front() const
             {
                 return this->at(0);
             }
@@ -336,8 +356,24 @@ template<
             }
 
 
+                  reference  back() const
+            {
+                return this->at(this->size() - 1);
+            }
+
+
             reference operator[](size_type n)
             {
+                if (n > this->size())
+                 throw std::out_of_range("");
+                return this->_vec[n];
+            }
+
+
+            reference operator[](size_type n) const
+            {
+                if (n > this->size())
+                     throw std::out_of_range("");
                 return this->_vec[n];
             }
             
@@ -357,7 +393,7 @@ template<
                  size_type pos = position  -this->begin();
                 if (this->_capacity == 0)
                 {
-                    reserve(4);
+                    reserve(1);
                     _myallocator.construct(this->_vec, val);
                     this->_size++;
                     this->_end = this->_vec + this->size();
@@ -372,14 +408,13 @@ template<
 
                 while (i != pos)
                 { 
-                    this->_vec[i] = this->_vec[i - 1];
+                     _myallocator.construct(_vec  + i,  this->_vec[i - 1]);
                     i--;
                 }
-                this->_vec[pos] = val;
-
+             _myallocator.construct(_vec  + pos,  val);
                 this->_size++;
                 this->_end = this->_vec + this->size();
-                return position; 
+                return iterator(_vec + pos); 
             }
 
 
@@ -394,7 +429,9 @@ template<
                 size_t pos = (position - this->begin());
                 for (size_t i =  this->size() + size,  j = this->size(); i > pos; j--, i--)
                 {
-                        this->_vec[i] = this->_vec[j];
+                        // this->_vec[i] = this->_vec[j];
+                 _myallocator.construct(_vec  + i,  this->_vec[j]);
+
                 }
                 while (size--)
                 {
@@ -422,8 +459,12 @@ template<
 
             void    clear()
             {
-                 _myallocator.deallocate(this->_vec, this->_capacity);
-                 this->_capacity = 0;
+
+                 for(size_type  i = 0; i <this->size() ; i++)
+                 {
+                     _myallocator.destroy((_vec + i));
+
+                 }
                  this->_size = 0;
             }
 
@@ -452,6 +493,31 @@ template<
                 return (position);
             }
 
+
+            void swap (Vector& x)
+            {
+                if (this == &x)
+                    return ;
+
+                size_type size1 = x.size();
+                size_type capacity = x.capacity();
+                pointer ptr = x.data();
+                pointer ptrend = x._end;
+
+
+                x._vec = this->_vec;
+                x._size = this->_size;
+                x._capacity = this->_capacity;
+                x._end = this->_end;
+
+
+                this->_size  = size1;
+                this->_capacity = capacity;
+                this->_vec = ptr;
+                this->_end = ptrend;
+            }
+
+
             iterator erase (iterator first, iterator last)
             {
                 if (this->size() == 0)
@@ -459,23 +525,43 @@ template<
                 size_type len = &(*last) - &(*first);
 
                 size_type pos = &(*first) - this->_vec; 
+                std::cout << "to delete "  << len   <<  " pod "  << pos   <<  "size "  << _size<< std::endl;
 
-                for(size_type  i = pos ; i < this->size() ; i++)
+                for(size_type  i = pos +len ; i < this->size() ; i++)
                 {
                     this->_vec[i] = this->_vec[pos+len + i];
                 }
                 this->_size -=  len;
                 this->_end = this->_vec + len;
-
+                return first;
             }
 
 
 
-            private :
-                T *_vec;
-                T *_end;
-                size_type  _size;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+      T *_vec;
+                T *_end;size_type  _size;
                 size_type _capacity;
+            private :
+          
+                // size_type  _size;
+                // size_type _capacity;
                 allocator_type _myallocator;
                 randomAccessIterator<T> *iter;
 
