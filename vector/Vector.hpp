@@ -225,8 +225,7 @@ template<
             template <class InputIterator>
             void assign (InputIterator first, InputIterator last)
             {
-                size_type  n= &(*last) - &(first);
-                // size_type i  = 0;
+                size_type  n = &(*last)   - &(*first);
                 clear();
                 reserve(n);
                 this->insert(this->begin(), first, last);
@@ -293,22 +292,22 @@ template<
 
             reverse_iterator rbegin() 
             {
-                return reverse_iterator(iterator(this->_end - 1));
+                return reverse_iterator(iterator(this->_end));
             }
 
             reverse_iterator rend()
             {
-                return reverse_iterator (iterator (this->_vec - 1));
+                return reverse_iterator (iterator (this->_vec ));
             }
 
             const_reverse_iterator rbegin()  const
             {
-                return const_reverse_iterator(const_iterator (this->_end - 1));
+                return const_reverse_iterator(const_iterator (this->_end ));
             }
 
             const_reverse_iterator rend() const
             {
-                return  const_reverse_iterator (const_iterator(this->_vec - 1));
+                return  const_reverse_iterator (const_iterator(this->_vec ));
             }
 
 
@@ -421,23 +420,31 @@ template<
             template <class InputIterator>
             void insert (iterator position, InputIterator first, InputIterator last, 	typename ft::enable_if<!std::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
             {
-                size_type  size = &(*last)-&(*first);
+                size_type  size = last.base() - first.base();
                 if (this->_size + size > this->_capacity)
                 {
+                    std::cout << "old capcity =>>>" << _capacity << " new " << this->_capacity *2 + size << std::endl;
                     reserve(this->_capacity *2 + size);
                 }
-                size_t pos = (position - this->begin());
-                for (size_t i =  this->size() + size,  j = this->size(); i > pos; j--, i--)
+                size_t pos = &(*position) - this->_vec;
+            
+   
+                size_t i =  this->size() -1 + size;
+                size_t j  = pos;
+                while (i < size && j < this->size())
                 {
-                        // this->_vec[i] = this->_vec[j];
-                 _myallocator.construct(_vec  + i,  this->_vec[j]);
+                         _myallocator.construct(_vec  + i,  this->_vec[j]);
+                         i++;
+                         j++;
 
                 }
-                while (size--)
+                i = 0;
+                while ( i <size)
                 {
                     insert(position, *first);
                     ++first;
                     ++position;
+                    i++;
                 }
 
             }
@@ -518,6 +525,10 @@ template<
             }
 
 
+
+
+
+
             iterator erase (iterator first, iterator last)
             {
                 if (this->size() == 0)
@@ -539,21 +550,76 @@ template<
 
 
 
+        // bool  oprator == Vector(Vector )
+
+        // template< class T, class Alloc >
+            friend   bool operator==( const Vector& lhs, const Vector& rhs )
+            {
+                if (lhs.size() != rhs.size())
+                    return false;
+                for(size_type i = 0; i < lhs.size() ; i++ )
+                {
+                    if (lhs[i] != rhs[i])
+                        return false;
+                }
+                return true;
+            }
+
+            friend   bool operator!=( const Vector& lhs, const Vector& rhs ) 
+            {
+                if (lhs.size() != rhs.size())
+                    return false;
+                for(size_type i = 0; i < lhs.size() ; i++ )
+                {
+                    if (lhs[i] != rhs[i])
+                        return false;
+                }
+                return true;
+            }
 
 
+            friend   bool operator<( const Vector& lhs, const Vector& rhs )
+            {
+                if (lhs.size() <  rhs.size())
+                    return true;
+                for(size_type i = 0; i < lhs.size() ; i++ )
+                {
+                    if (lhs[i] < rhs[i])
+                        return true;
+                }
+                return false;
+            }
 
 
-
-
-
-
-
-
-
-
-
-
+            friend   bool operator>( const Vector& lhs, const Vector& rhs )
+            {
+                    return !(lhs < rhs);
+            }
             
+
+             friend   bool operator>=( const Vector& lhs, const Vector& rhs )
+            {
+                    return (lhs >  rhs || lhs == rhs );
+            }
+            friend   bool operator<=( const Vector& lhs, const Vector& rhs )
+            {
+                    return (lhs <  rhs || lhs == rhs );
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       T *_vec;
                 T *_end;size_type  _size;

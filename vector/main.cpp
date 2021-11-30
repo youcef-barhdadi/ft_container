@@ -35,44 +35,61 @@
 
 
 
+time_t get_time(void)
+{
+    struct timeval time_now;
 
-class B {
-    public :
-     B ()
-    {
-
-    }
-    virtual void c ()
-    {
-
-    }
-   virtual void ddd()
-    {
-        std::cout << "fdsadd1337f" << std::endl;
-    }
-};
+    gettimeofday(&time_now, NULL);
+    time_t msecs_time = (time_now.tv_sec * 1e3) + (time_now.tv_usec / 1e3);
+    return (msecs_time);
+}
 
 
-class D : public B {
-    public :
-    // virtual D ()
-    // {
-        
-    // }
-   virtual  void ddd()
-    {
-        std::cout << "fdsaf" << std::endl;
-    }
-};
-
-
-
-
-int main(int argc, char **argv)
+int main(void)
 { 
 
-  \
-
+    
+        /*-------------------------------------- time limit test -----------------------------------*/
+        
+            time_t start, end, diff;
+            // test 1: test with capacity greater than or equal the size + n (reallocation must'nt happen)
+            /*------------------ std::vectors ---------------------*/
+            // {
+            //     std::vector<std::string> v(100, "hello");
+            //     std::vector<std::string> v1(1e6, "string2");
+            //     v1.reserve(1e6 + 200);
+            //     start = get_time();
+            //     v1.insert(v1.begin() + 1e5, v.begin(), v.end());
+            //     end = get_time();
+            //     diff = end - start;
+            //     diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+            //     /*------------------ ft::vectors ---------------------*/
+            //     ft::Vector<std::string> ft_v(100, "hello");
+            //     ft::Vector<std::string> ft_v1(1e6, "string2");
+            //     ft_v1.reserve(1e6 + 200);
+            //     ualarm(diff * 1e3, 0);
+            //     ft_v1.insert(ft_v1.begin() + 1e5, ft_v.begin(), ft_v.end());
+            //     ualarm(0, 0);
+            // }
+            /*--------------------------------------------------------------------------------------*/
+            // test 2: test with capacity lesser than the size + n (reallocation must happen)
+            /*------------------ std::vectors ---------------------*/
+            {
+                ft::Vector<std::string> v(1e5, "hello");
+                std::vector<std::string> v1(1e6, "string2");
+                start = get_time();
+                v1.insert(v1.begin() + 1e5, v.begin(), v.end());
+                end = get_time();
+                diff = end - start;
+                diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+                /*------------------ ft::vectors ---------------------*/
+                ft::Vector<std::string> ft_v1(1e6, "string2");
+                ualarm(diff * 1e3, 0);
+                ft_v1.insert(ft_v1.begin() + 1e5, v.begin(), v.end());
+                ualarm(0, 0);
+            }
+            /*--------------------------------------------------------------------------------------*/
+        
 
     return (0);
     

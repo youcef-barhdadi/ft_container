@@ -193,13 +193,13 @@ template<typename T_L, typename T_R>
   friend   randomAccessIterator operator+( difference_type n, randomAccessIterator& rai) 
         {   
             // std::cout << "fdasf" << std::endl;
-            return  randomAccessIterator(&((*rai) + n));
+            return  randomAccessIterator(rai.base() + n);
         }
 
           friend   randomAccessIterator operator-( difference_type n, randomAccessIterator& rai) 
         {   
             // std::cout << "fdasf" << std::endl;
-            return  randomAccessIterator(&((*rai) - n));
+            return  randomAccessIterator((rai.base() - n));
         }
 
 
