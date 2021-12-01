@@ -2,7 +2,17 @@
 #include "rbtree.hpp"
 #include "pair.hpp"
 #include "bidirectional_iterator.hpp"
-
+#include<iostream>
+#include<ctime> // used to work with date and time
+// using namespace std;
+// int printtime() {
+//    time_t t; // t passed as argument in function time()
+//    struct tm * tt; // decalring variable for localtime()
+//    time (&t); //passing argument to time()
+//    tt = localtime(&t);
+//    cout << "Current Day, Date and Time is = "<< asctime(tt);
+//    return 0;
+// }
 
 namespace ft {
 template<
@@ -29,7 +39,8 @@ template<
              typedef const  T *  const_pointer;
 
              typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
-       
+                    typedef ft::bidirectional_iterator<const node <ft::pair<Key, T> > >    const_iterator; 
+
 
             Map()
             {
@@ -41,8 +52,6 @@ template<
 
             void insert ( value_type val)
             {
-                    // std::cout <<  val<< std::endl;
-
                     tree->insert(val);
             }
 

@@ -11,6 +11,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
     public:
 
         typedef typename T::reference reference;
+        typedef typename T::pointer pointer;
 
         bidirectional_iterator() 
         {
@@ -26,6 +27,13 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         {
             return _node->value;
         }
+
+        
+        pointer operator->()
+        {
+            return &(_node->value);
+        }
+
 
 
         bidirectional_iterator operator++(void)
@@ -54,6 +62,17 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             return *this;
         }
 
+      friend  bool  operator==(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
+      {
+          return (lhr._node) == rhr._node; 
+      }
+
+
+          friend  bool  operator!=(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
+      {
+          return (lhr._node) != rhr._node; 
+      }
+
         bidirectional_iterator operator--(int)
         {
          bidirectional_iterator copy(this->_node);
@@ -61,9 +80,9 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             return copy;
         }
 
+        T *_node;
 
     private:
-        T *_node;
 };
 
 };
