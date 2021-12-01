@@ -60,7 +60,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             --(*this);
             return copy;
         }
-        
+
 
     private:
         T *_node;

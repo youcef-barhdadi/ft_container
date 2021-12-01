@@ -20,7 +20,8 @@ class  node {
           node *parent;
         T value;
         Color color;
-                typedef T& reference;
+        typedef T& reference;
+        node <T> _end;
 
         bool isRight;
 
@@ -51,7 +52,7 @@ class  node {
                    }
                    else 
                    {
-                       return tmp;
+                    //    return &_end;
                    }
             }
         }
