@@ -58,11 +58,17 @@ template<
             }   
 
 
-
+//findBigger
               iterator begin()
               {
                   return iterator( tree->findSamllest(this->tree->root));
-              }    
+              }
+
+
+            iterator end()
+              {
+                  return iterator(tree->findBigger(this->tree->root));
+              }   
            ft::RBtree <ft::pair< Key,T> > *tree;
 
         private :

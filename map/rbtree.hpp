@@ -74,19 +74,18 @@ class  node {
                 // tmp = tmp;
                    if (tmp->parent !=nullptr)
                    {    
-                        if (tmp->parent->isRight && tmp->isRight)
+                        if (tmp->isRight)
                             return tmp->parent;
                         
                         //  std::cout << "====>hello world1" << std::endl;
                         tmp = tmp->parent;
                         node<T >  *kepp = tmp;
-                        while ( tmp && tmp->parent  && tmp->isRight ==  true &&  tmp->parent->isRight == true )
+                        while ( tmp && tmp->parent  && tmp->parent->isRight ==  false  )
                         {
-                            std::cout << "====>hello world1 " << tmp->value  << std::endl;
                             kepp = tmp;
                             tmp = tmp->parent;
                         }
-                        return kepp;
+                        return tmp->parent;
                    }
                    else 
                    {
@@ -207,6 +206,19 @@ template<
                     {
                         temp = n;
                         n = n->left;
+                    }
+                    return temp != nullptr ? temp : n;
+                }
+
+                
+                node<T> *findBigger(node<T> *n)
+                {
+                    node<T> *temp = nullptr;
+
+                    while (n != nullptr && !isNullLeaf(n))
+                    {
+                        temp = n;
+                        n = n->right;
                     }
                     return temp != nullptr ? temp : n;
                 }

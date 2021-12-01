@@ -86,9 +86,24 @@ int main()
         std::cout <<  "deincremnt " << (*my_it)  << std::endl;
     --my_it;
         std::cout <<  "deincremnt " << (*my_it)  << std::endl;
+    --my_it;
+        std::cout <<  "deincremnt " << (*my_it)  << std::endl;
 
+        while (&(*my_it) != (&*my_m.end()))
+        {
+                        std::cout <<  "this-> " << (*my_it)  << std::endl;
+                        ++my_it;
+
+        }
+
+        std::cout << "Here" << std::endl;
+            while (&(*my_it) != (&*my_m.begin()))
+        {
+                        std::cout <<  "this-> " << (*my_it)  << std::endl;
+                        --my_it;
+
+        }
 //     --my_it;
-    std::cout << "========{" << (*my_it)   << ",  " << (*my_it1) << "}" << std::endl;
   
 //      my_m.tree->print();
 
