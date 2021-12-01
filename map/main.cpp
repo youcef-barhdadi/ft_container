@@ -126,9 +126,10 @@ int main()
                 // m.insert(std::make_pair(i, "value"));
                 ft_m.insert(ft::make_pair<int, std::string>(i, "value"));
             }
+            ft_m.tree->print();
             start = get_time();
-            for (std::map<int, std::string>::iterator it = m.begin(); it != m.end(); ++it)
-                ;
+            // for (std::map<int, std::string>::iterator it = m.begin(); it != m.end(); ++it)
+            //     ;
             end = get_time();
             diff = end - start;
             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;

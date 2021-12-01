@@ -33,6 +33,7 @@ class  node {
                 this->right = nullptr;
                 this->value = value;
                 this->color = Red;
+                this->parent = nullptr;
             }
 
         node<T> *findNextNode(node<T> *n)
@@ -131,7 +132,7 @@ template<
                 }
 
                 _print(n->left);
-                std::cout << "[" << n->value   << "]" << std::endl;
+                std::cout << "[" << n->value   << "]"  << (n->isRight == true ? " is right " : "is  left" )   << std::endl;
                 _print(n->right);
             }
             void print()
@@ -361,6 +362,7 @@ template<
 
 
 
+
             node<T>  *root;
             
 
@@ -498,18 +500,18 @@ template<
 
             void correct(node<T> *n)
             {
-                // if (n == nullptr)
-                //     return ;
-                // if (n == this->root)
-                // {
-                //    if (n->color == Red)
-                //         n->color = Black;
+                if (n == nullptr)
+                    return ;
+                if (n == this->root)
+                {
+                   if (n->color == Red)
+                        n->color = Black;
 
-                //     return ;
-                // }
+                    return ;
+                }
                 if (n->parent->isRight == false)
                 {
-                        if (( n->parent->parent &&  n->parent->parent->right == nullptr) || (n->parent->parent && n->parent->parent->right->color == Black))
+                        if ((( n->parent->parent != NULL &&  n->parent->parent->right == nullptr) || (n->parent->parent != nullptr && ( n->parent->parent->right && n->parent->parent->right->color == Black))))
                         {
                             rotrate(n);
                             return ;
@@ -540,7 +542,7 @@ template<
                         return;
                   if ( n == this->root )
                   {
-                     // correct(n);
+                     correct(n);
                       return ;
                   }
    
@@ -567,8 +569,8 @@ template<
                             {
                                 _node->color = Black;
                                 this->root = _node;
-                                _node->parent = nullptr;
-                                last = _node;
+                                // _node->parent = nullptr;
+                                // last = _node;
                             }
                             return _node;
                     }
@@ -577,7 +579,7 @@ template<
                     //     last =  nullptr;
                     //     return _node;
                     // }
-                    if (_node->value >= value)
+                    if (value < _node->value)
                     {
                         node<T> *temp  =   _insert(_node->left, value);
 
@@ -596,10 +598,11 @@ template<
                         node<T> *temp = _insert(_node->right, value);
                         if (_node->right == nullptr)
                         {
-                            _node->right = _insert(_node->right, value);
                             temp->isRight = true;
+                            temp->right = temp;
                             temp->parent = _node;
                             last = temp;
+                        //    std::cout  << "right " << temp->value << std::endl;
 
                         }
                         else {
