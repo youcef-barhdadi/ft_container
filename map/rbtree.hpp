@@ -3,7 +3,7 @@
 #include <iostream>
 #include "pair.hpp"
 
-
+namespace ft {
 enum Color {
     Red =1,
     Black = 2
@@ -39,8 +39,7 @@ template<
 {
 
         public :
-
-
+                typedef T& reference;
 
 
 
@@ -545,4 +544,6 @@ template<
             
 
     
+};
+
 };

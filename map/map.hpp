@@ -1,7 +1,10 @@
 
 #include "rbtree.hpp"
 #include "pair.hpp"
+#include "bidirectional_iterator.hpp"
 
+
+namespace ft {
 template<
     class Key,
     class T
@@ -24,6 +27,8 @@ template<
              typedef T *  pointer;
              
              typedef const  T *  const_pointer;
+
+             typedef ft::bidirectional_iterator<RBtree <ft::pair<Key, T> > >    iterator; 
        
 
             map()
@@ -51,9 +56,17 @@ template<
             size_type size() const
             {
                 return  tree->size();
-            }       
-                 RBtree <pair< Key,T> > *tree;
+            }   
+
+
+
+              iterator begin()
+              {
+                  return iterator(this->tree);
+              }    
 
         private :
+           ft::RBtree <ft::pair< Key,T> > *tree;
+};
 
 };

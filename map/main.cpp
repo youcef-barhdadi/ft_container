@@ -9,11 +9,19 @@ int main()
       
                     // std::cout << "Hi" << std::endl;
 
-        map<int, int> l;
-        l.insert(pair<int, int>(4,55));
-        l.insert(pair<int, int>(12,515));
-        l.insert(pair<int, int>(0,515));
-        l.tree->print();
+        ft::map<std::string, int> l;
+        l.insert(ft::pair<std::string, int>("fff",55));
+        l.insert(ft::pair<std::string, int>("Hello world",55));
+        l.insert(ft::pair<std::string, int>("ddd",55));
+
+
+            ft::map<std::string, int>::iterator  c = l.begin();
+                std::cout <<  "=======>" << *c << std::endl;
+
+
+
+
+        // l.tree->print();
 
         // t->insert(1);
         // t->insert(2);
