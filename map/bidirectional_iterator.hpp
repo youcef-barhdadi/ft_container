@@ -33,7 +33,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         {
             return &(_node->value);
         }
-
+        
 
 
         bidirectional_iterator operator++(void)

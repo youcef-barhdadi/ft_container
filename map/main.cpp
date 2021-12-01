@@ -105,7 +105,6 @@ int main()
             m.insert(std::make_pair(13, "HELLO"));
             my_m.insert(ft::make_pair<int, std::string>(13, "HELLO"));
         }
-
         ft::Map<int, std::string>::iterator my_it = my_m.begin();
         std::map<int, std::string>::iterator it = m.begin();
         /*---------------------------------------------- */
@@ -116,29 +115,29 @@ int main()
               << "] --------------------]\t\t\033[0m";
     {
         /*---------------------------------- time limit test --------------------------------------------*/
-        {
-            time_t start, end, diff;
+        // {
+        //     time_t start, end, diff;
 
-            std::map<int, std::string> m;
-            ft::Map<int, std::string> ft_m;
-            for (size_t i = 0; i < 1e6; ++i)
-            {
-                // m.insert(std::make_pair(i, "value"));
-                ft_m.insert(ft::make_pair<int, std::string>(i, "value"));
-            }
-            ft_m.tree->print();
-            start = get_time();
-            // for (std::map<int, std::string>::iterator it = m.begin(); it != m.end(); ++it)
-            //     ;
-            end = get_time();
-            diff = end - start;
-            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+        //     std::map<int, std::string> m;
+        //     ft::Map<int, std::string> ft_m;
+        //     for (size_t i = 0; i < 1e6; ++i)
+        //     {
+        //         // m.insert(std::make_pair(i, "value"));
+        //         ft_m.insert(ft::make_pair<int, std::string>(i, "value"));
+        //     }
+        //     ft_m.tree->print();
+        //     start = get_time();
+        //     // for (std::map<int, std::string>::iterator it = m.begin(); it != m.end(); ++it)
+        //     //     ;
+        //     end = get_time();
+        //     diff = end - start;
+        //     diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
 
-            ualarm(diff * 1e3, 0);
-            for (ft::Map<int, std::string>::iterator it = ft_m.begin(); it != ft_m.end(); ++it)
-                ;
-            ualarm(0, 0);
-        }
+        //     ualarm(diff * 1e3, 0);
+        //     for (ft::Map<int, std::string>::iterator it = ft_m.begin(); it != ft_m.end(); ++it)
+        //         ;
+        //     ualarm(0, 0);
+        // }
     //     bool cond(false);
     //     {
     //         int res(0);
