@@ -117,13 +117,13 @@ template<
 
             void insert(T value)
             {
-                node<T> *t = _insert(this->root, value);
+                 _insert(this->root, value);
 
-                // if (this->last != NULL)
-                // {
-                //     check(this->last);
-                //     last = NULL;
-                // }
+                if (this->last != NULL)
+                {
+                    check(this->last);
+                    last = NULL;
+                }
             }
 
 
@@ -135,7 +135,10 @@ template<
                 {
                     return ;
                 }
-
+                // if (n->left) 
+                //     std::cout << "left :" ;
+                // else 
+                //     std::cout << "right :";
                 _print(n->left);
                 std::cout << "[" << n->value   << "]"  << (n->isRight == true ? " is right " : "is  left" )   << std::endl;
                 _print(n->right);
@@ -545,11 +548,11 @@ template<
             {
                 if (n == NULL)
                         return;
-                  if ( n == this->root )
-                  {
-                     correct(n);
-                      return ;
-                  }
+                //   if ( n == this->root )
+                //   {
+                //      correct(n);
+                //       return ;
+                //   }
    
                 
                 if (n->color == Red && ( n->parent &&  n->parent->color == Red))
@@ -564,6 +567,26 @@ template<
             }
 
 
+            node<T> insert2(node<T> *_node, T value)
+            {
+                node<T> *tmp;
+
+                tmp = _node;
+
+                while (tmp)
+                {
+                    if (tmp->value > value)
+                        tmp = tmp->left;
+                    else
+                        tmp = tmp->right;
+                }
+
+                
+                
+
+            }
+
+
 
             node<T>  *_insert(node<T> *_node ,T value)
             {
@@ -574,15 +597,14 @@ template<
                             {
                                 _node->color = Black;
                                 this->root = _node;
-                                _node->parent = NULL;
                                 last = _node;
                             }
                             return _node;
                     }
-                    if (value <= _node->value)
+                    if (value < _node->value)
                     {
+                        std::cout << "in left" << std::endl;
                         node<T> *temp  =   _insert(_node->left, value);
-
                         if (_node->left  == NULL)
                         {
                             _node->left = temp;
@@ -595,12 +617,14 @@ template<
                         }
                     }
                     else {
+                        // std::cout << "in right" << std::endl;
                         node<T> *temp = _insert(_node->right, value);
                         if (_node->right == NULL)
                         {
 
                             temp->isRight = true;
-                            temp->right = temp;
+                            _node->right = temp;
+                            // std::cout <<  << temp->isRight << std::endl;
                             temp->parent = _node;
                             last = temp;
                         }
@@ -609,7 +633,7 @@ template<
                         }
                     }
                     return _node;
-        } 
+            } 
 
             
 
