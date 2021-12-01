@@ -24,7 +24,41 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
 
         reference operator*()
         {
-            return _node->root->value;
+            return _node->value;
+        }
+
+
+        bidirectional_iterator operator++(void)
+        {
+            T *tmp   = _node->findNextNode(_node);
+            if (tmp != nullptr)
+                _node = tmp;
+            return *this;
+        }
+
+        bidirectional_iterator operator++(int)
+        {
+         bidirectional_iterator copy(this->_node);
+            ++(*this);
+            return copy;
+        }
+
+
+
+        
+        bidirectional_iterator operator--(void)
+        {
+            T *tmp   = _node->findPrevious(_node);
+            if (tmp != nullptr)
+                _node = tmp;
+            return *this;
+        }
+
+        bidirectional_iterator operator--(int)
+        {
+         bidirectional_iterator copy(this->_node);
+            --(*this);
+            return copy;
         }
 
 

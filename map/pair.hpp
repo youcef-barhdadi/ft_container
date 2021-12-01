@@ -80,7 +80,10 @@ pair<T1,T2> make_pair( T1 t, T2 u )
 template< class T1, class T2 >
 std::ostream& operator<<(std::ostream& os, const pair<T1,T2>& dt)
 {
-    os <<  "==>" << dt.first << std::endl;
+
+    os  << dt.first ;
     return os;
+
+
 }
 };

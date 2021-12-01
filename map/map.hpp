@@ -10,7 +10,7 @@ template<
     class T
     // class Compare = std::less<Key>
     // class Allocator = std::allocator<pair<const Key, T> >
-> class map
+> class Map
 {
 
         public :
@@ -28,12 +28,11 @@ template<
              
              typedef const  T *  const_pointer;
 
-             typedef ft::bidirectional_iterator<RBtree <ft::pair<Key, T> > >    iterator; 
+             typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
        
 
-            map()
+            Map()
             {
-                std::cout << "created " << std::endl;
                 tree = new RBtree <pair< Key,T> >();
 
             }
@@ -62,11 +61,11 @@ template<
 
               iterator begin()
               {
-                  return iterator(this->tree);
+                  return iterator( tree->findSamllest(this->tree->root));
               }    
+           ft::RBtree <ft::pair< Key,T> > *tree;
 
         private :
-           ft::RBtree <ft::pair< Key,T> > *tree;
 };
 
 };

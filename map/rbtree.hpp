@@ -20,6 +20,7 @@ class  node {
           node *parent;
         T value;
         Color color;
+                typedef T& reference;
 
         bool isRight;
 
@@ -30,9 +31,72 @@ class  node {
                 this->value = value;
                 this->color = Red;
             }
+
+        node<T> *findNextNode(node<T> *n)
+        {
+            node<T> *tmp = n ;
+            if (n->right)
+            {
+                tmp  =  n->right;
+                while(tmp->left)
+                {
+                    tmp = tmp->left;
+                }
+                return tmp;
+
+            }else {
+                   if (tmp->parent !=nullptr)
+                   {    
+                            return tmp->parent;
+                   }
+                   else 
+                   {
+                       return tmp;
+                   }
+            }
+        }
+
+
+
+        node<T> *findPrevious(node<T> *n)
+        {
+            node<T> *tmp = n ;
+            if (n->left)
+            {
+                tmp  =  n->left;
+                while(tmp->right)
+                {
+                    tmp = tmp->right;
+                }
+                return tmp;
+
+            }else {
+                // tmp = tmp;
+                   if (tmp->parent !=nullptr)
+                   {    
+                        if (tmp->parent->isRight && tmp->isRight)
+                            return tmp->parent;
+                        
+                        //  std::cout << "====>hello world1" << std::endl;
+                        tmp = tmp->parent;
+                        node<T >  *kepp = tmp;
+                        while ( tmp && tmp->parent  && tmp->isRight ==  true &&  tmp->parent->isRight == true )
+                        {
+                            std::cout << "====>hello world1 " << tmp->value  << std::endl;
+                            kepp = tmp;
+                            tmp = tmp->parent;
+                        }
+                        return kepp;
+                   }
+                   else 
+                   {
+                       return tmp;
+                   }
+            }
+        }
   
 } ;
-
+// :()
 template<
     class T
 > class RBtree
@@ -47,7 +111,6 @@ template<
             {
                 node<T> *t =    _insert(this->root, value);
 
-                std::cout << "this is what created " << this->root->value <<  std::endl;
                 if (this->last != nullptr)
                 {
                     check(this->last);
@@ -280,6 +343,9 @@ template<
     // }
 
 
+
+
+
             node<T>  *root;
             
 
@@ -364,7 +430,6 @@ template<
 
             void leftRightRotate(node<T> *n)
             {
-                std::cout <<"left right rotate" << std::endl;
                 if (n == nullptr)
                     return ;
                 leftRoutate(n->left);
@@ -373,7 +438,6 @@ template<
             }
          void    rightleftRotate (node<T> *n)
             {
-                std::cout << "right left rotate" << std::endl;
                 if (n == nullptr)
                         return ;
                 rightRotate(n->right);
@@ -402,7 +466,6 @@ template<
                 if (n->parent->isRight == true)
                 {
                         leftRoutate(n->parent->parent);
-                                        std::cout << "here" << (this->root->left->right) << std::endl;
 
                         n->color = Red;
                         n->parent->color = Black;
@@ -492,7 +555,6 @@ template<
 
             node<T>  *_insert(node<T> *_node ,T value)
             {
-                    std::cout << value << std::endl;
                     if (_node == nullptr)
                     {
                             _node = new node<T>(value);
