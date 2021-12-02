@@ -50,7 +50,7 @@ template<
 
 
 
-            void insert ( value_type val)
+            void insert (const value_type val)
             {
                     tree->insert(val);
             }

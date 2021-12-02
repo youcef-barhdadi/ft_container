@@ -12,14 +12,13 @@ int printtime() {
 int main()
 {
     ft::RBtree<int> list;
-    size_t size = 1.9e5;
+    size_t size = 1.e6;
 printtime();
 
-    map<int, int> ma;
     for (size_t i = 0; i < size; i++)
     {
         // std::cout << i << std::endl;
-            ma.insert( make_pair(i,i));
+            // ma.insert( make_pair(i,i));
             if (i % 2 == 0)
                 list.insert(i);
             else 

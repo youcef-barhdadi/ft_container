@@ -67,6 +67,11 @@ template<
     {
         *this = p;
     }
+
+    operator   pair<T1, T2>() const
+    {
+        return pair();
+    }
 };
 
 template< class T1, class T2 >
@@ -77,6 +82,8 @@ pair<T1,T2> make_pair( T1 t, T2 u )
     p.second = u;
     return p;
 }
+
+
 template< class T1, class T2 >
 std::ostream& operator<<(std::ostream& os, const pair<T1,T2>& dt)
 {
