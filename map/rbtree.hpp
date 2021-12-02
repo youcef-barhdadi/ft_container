@@ -24,7 +24,7 @@ class  node {
         typedef T* pointer;
         // node <T> _end;
 
-        bool isRight;
+        bool isRight ;
 
             node (T value)
             {
@@ -117,37 +117,35 @@ template<
 
             void insert(T value)
             {
-                 _insert(this->root, value);
+                // std::cout << value << std::endl;
+                 insert2(this->root, value);
 
-                if (this->last != NULL)
-                {
-                    check(this->last);
-                    last = NULL;
-                }
+                // if (this->last != NULL)
+                // {
+                //     check(this->last);
+                //     last = NULL;
+                // }
             }
 
 
-
+            int left = 0;
+            int right =0;
 
             void _print(node<T> *n)
             {
                 if (n == NULL)
-                {
                     return ;
-                }
-                // if (n->left) 
-                //     std::cout << "left :" ;
-                // else 
-                //     std::cout << "right :";
                 _print(n->left);
-                std::cout << "[" << n->value   << "]"  << (n->isRight == true ? " is right " : "is  left" )   << std::endl;
+                 std::cout << "[" << n->value   << "]"  << (n->isRight == true ? " is right " : "is  left" )   << std::endl;
                 _print(n->right);
             }
             void print()
             {
+                left = 0;
+                right = 0;
                 std::cout << "print" << std::endl;
                 _print(this->root);
-            }
+             }
 
             size_t size()
             {
@@ -186,7 +184,7 @@ template<
 
                 bool isNullLeaf(node<T> *n)
                 {
-                    return n== NULL;
+                    return n == NULL;
                 }
 
                 void _delete(node<T> *n , T val)
@@ -425,7 +423,7 @@ template<
                 if (temp == NULL)
                     return ;
                 n->right = temp->left;
-      
+
                 if (n->right != NULL)
                 {
                     n->right->parent = n;
@@ -439,10 +437,11 @@ template<
                 else {
                     temp->parent = n->parent;
                     if (n->isRight == false)
-                    {
+                    {                             
                         temp->isRight = false;
                         temp->parent->left =temp;
                     }else {
+
                          temp->isRight = true;
                         temp->parent->right = temp;
                     }
@@ -499,11 +498,8 @@ template<
                 }
                 leftRightRotate(n->parent->parent);
                 n->color = Black;
-                if (n->right !=NULL)
-                    n->right->color = Red;
-                if (n->left != NULL)
-                    n-> left->color = Red;
-                 
+                n->right->color = Red;
+                n-> left->color = Red;
             }
 
             void correct(node<T> *n)
@@ -514,12 +510,11 @@ template<
                 {
                    if (n->color == Red)
                         n->color = Black;
-
                     return ;
                 }
                 if (n->parent->isRight == false)
                 {
-                        if ((( n->parent->parent != NULL &&  n->parent->parent->right == NULL) || (n->parent->parent != NULL && ( n->parent->parent->right && n->parent->parent->right->color == Black))))
+                        if (((   n->parent->parent->right == NULL) || ( ( n->parent->parent->right && n->parent->parent->right->color == Black))))
                         {
                             rotrate(n);
                             return ;
@@ -548,17 +543,17 @@ template<
             {
                 if (n == NULL)
                         return;
+
                 //   if ( n == this->root )
                 //   {
                 //      correct(n);
                 //       return ;
                 //   }
-   
-                
                 if (n->color == Red && ( n->parent &&  n->parent->color == Red))
                 {                      
                     if (n->parent->parent != NULL)
                     {
+
                         correct(n);
                     }
                 }
@@ -566,24 +561,42 @@ template<
                 
             }
 
-
-            node<T> insert2(node<T> *_node, T value)
+            /*
+                this function insert itratavly . i think it's fast then recusive one
+            */
+            node<T> *insert2(node<T> *tmp, T value)
             {
-                node<T> *tmp;
+                node<T> *tmp1;
 
-                tmp = _node;
-
-                while (tmp)
+                tmp1 = tmp;
+                if (root == NULL)
                 {
-                    if (tmp->value > value)
-                        tmp = tmp->left;
-                    else
-                        tmp = tmp->right;
+                    this->root = new node<T>(value);
+                    root->color = Black;
+                    return this->root;
                 }
+                while (tmp1 != NULL)
+                {
+                    tmp = tmp1;
+                    tmp1  = (value< tmp1->value) ? tmp1->left: tmp1->right;
+                }
+    
+                if (value < tmp->value)
+                {
+                    // std::cout << "left" << std::endl;
+                    tmp->left = new node<T>(value);
+                    tmp->left->parent = tmp;
+                    check(tmp->left);
+                    return tmp->left;
 
-                
-                
-
+                }else 
+                {
+                    tmp->right = new node<T>(value);
+                    tmp->right->parent = tmp;
+                    tmp->right->isRight = true;
+                    check(tmp->right);
+                    return tmp->right;
+                }
             }
 
 

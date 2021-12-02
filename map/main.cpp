@@ -124,7 +124,7 @@ int main()
             for (size_t i = 0; i < 1e5; ++i)
             {
                 // m.insert(std::make_pair(i, "value"));
-                ft_m.insert(ft::make_pair<int, std::string>(i, "value"));
+                ft_m.insert(ft::make_pair<int, std::string>(i, "1"));
             }
             ft_m.tree->print();
             start = get_time();
