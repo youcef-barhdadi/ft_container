@@ -175,8 +175,6 @@ template<
                 {
                     return find(val) != NULL;
                 }
-                
-
 
                 bool isNullLeaf(node<T> *n)
                 {
