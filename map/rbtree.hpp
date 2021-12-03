@@ -20,7 +20,8 @@ class  node {
         node *parent;
         T value;
         Color color;
-        typedef T& reference;
+        typedef  T& reference;
+        typedef const T& const_reference;
         typedef T* pointer;
         bool isRight ;
 
@@ -56,6 +57,13 @@ class  node {
                     return tmp;
             }
         }
+
+
+
+        operator node<const T> () 
+        {
+            return node<const T>(this->value);
+        } 
 
 
 

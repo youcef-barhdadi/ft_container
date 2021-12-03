@@ -23,19 +23,18 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             this->_node = node;
         }
 
-        reference operator*()
+        reference operator*() const
         {
             return _node->value;
         }
 
-        
+ 
+
         pointer operator->()
         {
             return &(_node->value);
         }
         
-
-
         bidirectional_iterator operator++(void)
         {
             T *tmp   = _node->findNextNode(_node);
@@ -46,13 +45,10 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
 
         bidirectional_iterator operator++(int)
         {
-         bidirectional_iterator copy(this->_node);
+            bidirectional_iterator copy(this->_node);
             ++(*this);
             return copy;
         }
-
-
-
         
         bidirectional_iterator operator--(void)
         {
@@ -67,17 +63,32 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
           return (lhr._node) == rhr._node; 
       }
 
-
-          friend  bool  operator!=(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
-      {
-          return (lhr._node) != rhr._node; 
-      }
+        friend  bool  operator!=(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
+        {
+            return (lhr._node) != rhr._node; 
+        }
 
         bidirectional_iterator operator--(int)
         {
          bidirectional_iterator copy(this->_node);
             --(*this);
             return copy;
+        }
+
+
+        T *base()
+        {
+            return _node;
+        }
+
+        operator  bidirectional_iterator<const T> () 
+        {
+                return bidirectional_iterator<const T>(_node);
+        }
+
+        operator  bidirectional_iterator<const T> () const
+        {
+                return bidirectional_iterator<const T>(_node);
         }
 
         T *_node;

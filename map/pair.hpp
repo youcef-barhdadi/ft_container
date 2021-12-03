@@ -4,6 +4,10 @@
 
 
 namespace ft{
+
+
+
+
 template<
     class T1,
     class T2
@@ -19,6 +23,13 @@ template<
         this->second = other.second;
         return (*this);
     }
+
+
+    // pair(T1  first,  T2 socond)
+    // {
+    //     this->first = first;
+    //     this->second = socond;
+    // }
 
     bool operator ==( const pair& lhs )   
     {
@@ -42,7 +53,7 @@ template<
         return  this->first <= lhs.first;
     }
 
-        bool operator>( const pair& lhs)
+    bool operator>( const pair& lhs)
     {
         return  this->first > lhs.first;
     }
@@ -63,25 +74,28 @@ template<
         this->second = y;
     }
 
+    // operator pair<const T1, const T2> () const
+    // {
+    //     return pair<const T1, const T2>(pair(this->first, this->second));
+    // }
+
+    // operator pair<T1, const T2> ()
+    // {
+    //     return pair<T1, const T2>(pair(this->first, this->second));
+    // }
+
     pair( const pair& p )
     {
         *this = p;
     }
-
-    operator   pair<T1, T2>() const
-    {
-        return pair();
-    }
 };
-
 template< class T1, class T2 >
-pair<T1,T2> make_pair( T1 t, T2 u )
+pair<T1,T2> make_pair(T1 t, T2 u )
 {
-    pair<T1, T2> p;
-    p.first = t;
-    p.second = u;
-    return p;
+
+    return pair<T1, T2>(t, u);
 }
+
 
 
 template< class T1, class T2 >

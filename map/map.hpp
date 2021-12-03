@@ -2,6 +2,7 @@
 #include "rbtree.hpp"
 #include "pair.hpp"
 #include "bidirectional_iterator.hpp"
+#include "const_bidirection_iterator.hpp"
 #include<iostream>
 #include<ctime> // used to work with date and time
 // using namespace std;
@@ -39,7 +40,7 @@ template<
              typedef const  T *  const_pointer;
 
              typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
-                    typedef ft::bidirectional_iterator<const node <ft::pair<Key, T> > >    const_iterator; 
+            typedef ft::const_bidirectional_iterator<node < const ft::pair< Key, T> > >    const_iterator; 
 
 
             Map()
