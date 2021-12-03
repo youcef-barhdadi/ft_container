@@ -17,24 +17,17 @@
 #include  "reverse_iterator.hpp"
 
 
-
-
-
 namespace ft {
 template <class T>
 struct is_sample_type : std::integral_constant <
     bool,
     (std::is_floating_point<T>::value || std::is_integral<T>::value)> {};
 
-    
 template<bool B, class T = void>
 struct enable_if {};
  
 template<class T>
 struct enable_if<true, T> { typedef T type; };
-
-
-
 
 template<
     class T,
@@ -43,7 +36,9 @@ template<
 {
         public:
             typedef T  value_type;
+
              typedef   Allocator   allocator_type ;
+
              typedef size_t size_type  ;
 
              typedef      T& reference;
@@ -53,7 +48,6 @@ template<
              typedef T *  pointer;
              
              typedef const  T *  const_pointer;
-            // typedef Allocator_type Allocator ;
 
             typedef  randomAccessIterator<T> iterator;
             
@@ -61,6 +55,7 @@ template<
 
             
             typedef ft::reverse_iterator<iterator> reverse_iterator;
+
             typedef ft::reverse_iterator<randomAccessIterator<const T> > const_reverse_iterator;
 
 
@@ -103,9 +98,7 @@ template<
                 size_type i = 0;
                 while (i < n)
                 {
-                  
                     _myallocator.construct(_vec+ i, val);
-
                     i++;
                 }
                 this->_end = this->_vec + n;
@@ -171,8 +164,6 @@ template<
                 return *this;
             }
 
-
-
             void resize( size_type count, T value = T() )
             {
                 reserve(count);
@@ -192,9 +183,6 @@ template<
                     }
                     this->_size = count;
                 }
-                // this->_size =  count;
-                // this->_capacity = count;
-                // this->_vec = vec;
                 this->_end  = this->_vec + this->size();
             }
 
@@ -209,10 +197,6 @@ template<
                             _myallocator.construct(vec + i,  this->_vec[i]);
 
                         }
-                        // for (size_t i =  this->size() ; i < n; i++)
-                        // {
-                        //      _myallocator.construct(vec + i,  T());
-                        // }
                         if (this->capacity() != 0)
                             _myallocator.deallocate(this->_vec, this->_capacity);
                         this->_capacity = n;
@@ -252,7 +236,6 @@ template<
                     else
                             this->reserve(this->capacity() * 2 < n ? this->capacity() + n :  this->capacity() * 2);
                 }
-                std::cout << "====>++++++++" << pos  << " " << this->size() << "  ca "  << this->capacity()  << "bbb n" << n << std::endl;
                 if (this->size() != 0)
                     for (size_t i =  this->size() + n,  j = this->size(); i > pos ; j--, i--)
                     {
@@ -309,9 +292,6 @@ template<
             {
                 return  const_reverse_iterator (const_iterator(this->_vec ));
             }
-
-
-
 
             reference at(size_type n)
             {
@@ -416,7 +396,6 @@ template<
                 return iterator(_vec + pos); 
             }
 
-
             template <class InputIterator>
             void insert (iterator position, InputIterator first, InputIterator last, 	typename ft::enable_if<!std::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
             {
@@ -436,7 +415,6 @@ template<
                          _myallocator.construct(_vec  + i,  this->_vec[j]);
                          i++;
                          j++;
-
                 }
                 i = 0;
                 while ( i <size)
@@ -449,8 +427,6 @@ template<
 
             }
 
-
-
             void    print_all()
             {
                 std::cout << "=============" << std::endl;
@@ -461,8 +437,6 @@ template<
                 std::cout << "/=============/" << std::endl;
 
             }
-
-
 
             void    clear()
             {
@@ -485,8 +459,6 @@ template<
             {
                 return _myallocator;
             }
-
-
 
             iterator erase(iterator position)
             {
@@ -523,11 +495,6 @@ template<
                 this->_vec = ptr;
                 this->_end = ptrend;
             }
-
-
-
-
-
 
             iterator erase (iterator first, iterator last)
             {
@@ -606,49 +573,11 @@ template<
                     return (lhs <  rhs || lhs == rhs );
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      T *_vec;
-                T *_end;size_type  _size;
-                size_type _capacity;
+            T *_vec;
+            T *_end;size_type  _size;
+            size_type _capacity;
             private :
-          
-                // size_type  _size;
-                // size_type _capacity;
                 allocator_type _myallocator;
                 randomAccessIterator<T> *iter;
-
-                // void _push(size_type n, const value_type &val)
-                // {
-                //         reserve(this->size() + 1);
-                //         if (n == this->size())
-                //         {
-                //             this->_vec[n] = val;
-                //             this->_size++;
-                //             return ;
-                //         }
-                //         for (size_type i = n; i < this->size() ; i++)
-                //         {
-                //             value_type t = this->_vec[i + 1];
-                //             this->_vec[i +1] = this->_vec[i];
-                //             this->_vec [i + 1] = t;
-                            
-                //         }
-                //         this->_vec[n] = val;
-                //         this->_size++;
-                // }
 };
 };
