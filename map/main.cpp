@@ -131,6 +131,7 @@ int main()
 
             std::map<int, std::string> m;
             ft::Map<int, std::string> ft_m;
+            std::cout << std::endl;
             printtime();
             for (size_t i = 0; i < 1e6; ++i)
             {
@@ -138,7 +139,6 @@ int main()
                 ft_m.insert(ft::make_pair<int, std::string>(i, "value"));
             }
             printtime();
-            std::cout << "\ncreated "  << ft_m.tree->getCreated() << std::endl;
             start = get_time();
             for (std::map<int, std::string>::iterator it = m.begin(); it != m.end(); ++it)
                 ;
@@ -146,9 +146,9 @@ int main()
             diff = end - start;
             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
 
-            // ualarm(diff * 1e3, 0);
+            ualarm(diff * 1e3, 0);
             for (ft::Map<int, std::string>::iterator it = ft_m.begin(); it != ft_m.end(); ++it);
-            // ualarm(0, 0);
+            ualarm(0, 0);
         }
     //     bool cond(false);
     //     {

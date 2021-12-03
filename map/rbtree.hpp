@@ -114,11 +114,11 @@ template<
                 // std::cout << value << std::endl;
                  insert2(this->root, value);
 
-                if (this->last != NULL)
-                {
-                    check(this->last);
-                    last = NULL;
-                }
+                // if (this->last != NULL)
+                // {
+                //     check(this->last);
+                //     last = NULL;
+                // }
             }
 
             int getCreated()
@@ -142,6 +142,33 @@ template<
                 std::cout << "print" << std::endl;
                 _print(this->root);
              }
+            
+
+            void printTree() {
+                if (this->root) {
+                printHelper(this->root, "", true);
+                }
+            }
+            void printHelper(node<T> *_node, std::string indent, bool last)
+            {
+                if (_node != NULL)
+                {
+                    std::cout << indent;
+                    if (last) {
+                        std::cout << "R----";
+                        indent += "   ";
+                    } else {
+                        std::cout << "L----";
+                        indent += "|  ";
+                    }
+
+                    std::string sColor = _node->color  == Red ? "RED" : "BLACK";
+                    std::cout << _node->value << "(" << sColor   << ")" << std::endl;
+                    printHelper(_node->left, indent, false);
+                    printHelper(_node->right, indent, true);
+                }
+            }
+
 
             size_t size()
             {
@@ -344,11 +371,11 @@ template<
 
             void rightRotate(node<T> *n)
             {
-                if (n == NULL)
-                        return ;
+                // if (n == NULL)
+                //         return ;
+                node<T> *temp;
 
-                node<T> *temp = n->left;
-
+                temp =  n->left;
                 n->left =  temp->right;
                 if (n->left != NULL)
                 {
@@ -381,8 +408,8 @@ template<
 
             void leftRoutate(node<T> *n)
             {                                
-                if (n == NULL)
-                    return ;                    
+                // if (n == NULL)
+                //     return ;                    
                 node<T> *temp;
 
                 temp = n->right;
@@ -462,7 +489,10 @@ template<
                 n->right->color = Red;
                 n-> left->color = Red;
             }
-
+            /*
+                    Black ant rotate
+                    Red ant color flip
+            */
             void correct(node<T> *n)
             {
                 if (n == NULL)
@@ -475,18 +505,20 @@ template<
                 }
                 if (n->parent->isRight == false)
                 {
-                        if ((n->parent->parent->right == NULL) || ( ( n->parent->parent->right && n->parent->parent->right->color == Black)))
+                        // the ant is black child    || the ant is (n->parent->parent)
+                        if ((n->parent->parent->right == NULL) || ((n->parent->parent->right && n->parent->parent->right->color == Black)))
                         {
                             rotrate(n);
                             return ;
                         }
+                        // this if the ant is red
                         if (n->parent->parent->right != NULL)
                                 n->parent->parent->right->color = Black;
                         n->parent->parent->color = Red;
                         n->parent->color = Black;
                     return ;
                 }
-                if (n->parent->parent->left ==  NULL || n->parent->parent->right->color == Black)
+                if (n->parent->parent->left ==  NULL || n->parent->parent->left->color == Black)
                 {
                     rotrate(n);
                     return ;
@@ -504,10 +536,11 @@ template<
                         return;
                 if ( n == this->root )
                 {
+                    // this->root->color = Black;
                     return ;
                 }
                 if (n->color == Red && (n->parent->color == Red))
-                {                      
+                {
                     if (n->parent->parent != NULL)
                         correct(n);
                 }
@@ -534,7 +567,6 @@ template<
                     tmp = tmp1;
                     tmp1  = (value< tmp1->value) ? tmp1->left: tmp1->right;
                 }
-    
                 if (value < tmp->value)
                 {
                     tmp->left = new node<T>(value);

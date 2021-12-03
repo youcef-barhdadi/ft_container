@@ -17,14 +17,11 @@ printtime();
 
     for (size_t i = 0; i < size; i++)
     {
-        // std::cout << i << std::endl;
-            // ma.insert( make_pair(i,i));
-            if (i % 2 == 0)
-                list.insert(i);
-            else 
-               list.insert(size - i);
+        //  if (i % 2 == 0)
+        //     list.insert(i);
+        //  else
+             list.insert(i);
     }
     printtime();
-    // list.print();
-    
+    list.printTree();    
 }
