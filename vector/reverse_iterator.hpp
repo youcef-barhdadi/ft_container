@@ -18,50 +18,29 @@ namespace ft {
 			typedef typename Iterator::pointer pointer;
 			typedef typename Iterator::reference reference;
 
-
 			Iterator iter;
 
             explicit reverse_iterator (iterator_type it) 
             {
-                // std::cout << "==> "<< *it << std::endl;
                 this->iter = it;
             }
 
-
-
-          template <class Iter>
+            template <class Iter>
             reverse_iterator (const reverse_iterator<Iter>& rev_it)
             {
                 this->iter = rev_it.base();
             }
 
-
-             pointer operator->(void) 
+            pointer operator->(void) 
             {
-
-                    Iterator I = iter;
-                I--;
-                return &(*I);
+                Iterator copy = iter;
+                copy--;
+                return &(*copy);
             }
 
-
-
-            // reverse_iterator(  iterator_type  c)  : iter(c)
-            // {
-            //         // this->iter = c;÷
-            // }
-
-                
-
-                reverse_iterator( )
+            reverse_iterator( )
             {
-                    // this->iter = c;
             }
-
-            // iterator_type base() const
-            // {
-            //     return iter;
-            // }
 
             reference  operator*()
             {
@@ -75,8 +54,6 @@ namespace ft {
                 return reverse_iterator(iter -n );
             }
 
-      
-            
             reverse_iterator  operator-(difference_type n) 
             {
                 return reverse_iterator(iter + n );
@@ -109,12 +86,12 @@ namespace ft {
                 ++(this->iter);
                 return (tmp);
             }
-
+    
             pointer				operator -> ()		const		
-            { return (&(operator * ())); }
-
-
-
+            {
+                return (&(operator * ())); 
+            }
+    
             reverse_iterator &operator+=(difference_type n)
             {
                 iter -= n;
@@ -127,22 +104,11 @@ namespace ft {
                 return (*this);
             }
 
-
             iterator_type base() const
             {
                 return this->iter;
             }
         
-        
-        //    operator  reverse_iterator<>  ()  
-        //     {
-        //         return reverse_iterator<const Iterator>();
-        //     }
-
-            //  operator const reverse_iterator<const iterator_type>  () 
-            // {
-            //     return reverse_iterator<const iterator_type>(iter);
-            // }
            operator  reverse_iterator<const  iterator_type>() 
             {
                 return reverse_iterator<const iterator_type>(iter);
@@ -185,16 +151,6 @@ namespace ft {
 			{
 				return (rit.base() - lit.base());
 			}
-        
-
-        // friend	reverse_iterator	operator - (difference_type a, const reverse_iterator &rit) 
-		// 	{
-		// 		return (reverse_iterator(rit.base() + a));
-		// 	}
-
-
-
-
 
     };
 };

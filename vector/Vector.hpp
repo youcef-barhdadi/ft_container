@@ -125,30 +125,21 @@ template<
 
             Vector (const Vector& x)
             {
-                    // *this = x;
-                    this->_vec = _myallocator.allocate(x.capacity());
-
-                    for(size_type i = 0; i < x.size() ; i++)
-                    {
-                        // this->_vec[i] = x.at(i);
-                                            _myallocator.construct(_vec+ i, x.at(i));
-
-                    }
-                    this->_size =  x.size();
-                    this->_end = this->_vec + this->size();
-                    this->_capacity  = x.capacity();
+                this->_vec = _myallocator.allocate(x.capacity());
+                for(size_type i = 0; i < x.size() ; i++)
+                {
+                    _myallocator.construct(_vec+ i, x.at(i));
+                }
+                this->_size =  x.size();
+                this->_end = this->_vec + this->size();
+                this->_capacity  = x.capacity();
             }
-    
-
             ///*end constructor */
 
-            // overloading oprator 
+            // overloading oprator
 
             Vector& operator= (const Vector& x)
             {
-                
-                std::cout <<  "==>>" << x.size() << std::endl;
-
                 _myallocator.deallocate(this->_vec, x.capacity());
                 this->_size = x.size();
                 this->_capacity = x.capacity();
@@ -159,7 +150,6 @@ template<
                     _myallocator.construct(_vec + i, x.at(i));
                     i++;
                 }
-                // std::cout << 
                 this->_end = this->_vec +  this->size();
                 return *this;
             }
@@ -175,8 +165,8 @@ template<
                     }
                     this->_size = count;
                 }
-                else {
-                    std::cout <<  "[" << value << "]" << std::endl;
+                else
+                {
                     for (size_type i = this->size();  i < count; i++)
                     {
                         _myallocator.construct(_vec + i,  value);
@@ -195,7 +185,6 @@ template<
                         for (size_type i = 0; i < this->size() ; i++)
                         {
                             _myallocator.construct(vec + i,  this->_vec[i]);
-
                         }
                         if (this->capacity() != 0)
                             _myallocator.deallocate(this->_vec, this->_capacity);
@@ -243,13 +232,11 @@ template<
                     }
                 for (size_t i = 0; i < n; i++)
                 {
-                        // this->_vec[pos] = val;
                     _myallocator.construct(_vec  + pos,  val);
-
-                        pos++;
+                    pos++;
                 }
                 this->_size += n;
-                 this->_end = this->_vec + this->size();
+                this->_end = this->_vec + this->size();
 
               }
             iterator begin() 
@@ -271,7 +258,6 @@ template<
             {
                 return randomAccessIterator<const T>(_end );
             }
-
 
             reverse_iterator rbegin() 
             {
@@ -307,7 +293,6 @@ template<
                 return this->_vec[n];
             }
 
-
             value_type *data()
             {
                 return this->_vec;
@@ -318,13 +303,12 @@ template<
                 return this->_vec;
             }
 
-
             reference front()
             {
                 return this->at(0);
             }
 
-                        reference front() const
+            reference front() const
             {
                 return this->at(0);
             }
@@ -334,12 +318,10 @@ template<
                 return this->at(this->size() - 1);
             }
 
-
-                  reference  back() const
+            reference  back() const
             {
                 return this->at(this->size() - 1);
             }
-
 
             reference operator[](size_type n)
             {
@@ -347,7 +329,6 @@ template<
                  throw std::out_of_range("");
                 return this->_vec[n];
             }
-
 
             reference operator[](size_type n) const
             {
@@ -390,7 +371,7 @@ template<
                      _myallocator.construct(_vec  + i,  this->_vec[i - 1]);
                     i--;
                 }
-             _myallocator.construct(_vec  + pos,  val);
+                _myallocator.construct(_vec  + pos,  val);
                 this->_size++;
                 this->_end = this->_vec + this->size();
                 return iterator(_vec + pos); 
@@ -402,12 +383,9 @@ template<
                 size_type  size = last.base() - first.base();
                 if (this->_size + size > this->_capacity)
                 {
-                    std::cout << "old capcity =>>>" << _capacity << " new " << this->_capacity *2 + size << std::endl;
                     reserve(this->_capacity *2 + size);
                 }
                 size_t pos = &(*position) - this->_vec;
-            
-   
                 size_t i =  this->size() -1 + size;
                 size_t j  = pos;
                 while (i < size && j < this->size())
@@ -424,7 +402,6 @@ template<
                     ++position;
                     i++;
                 }
-
             }
 
             void    print_all()
@@ -440,11 +417,9 @@ template<
 
             void    clear()
             {
-
                  for(size_type  i = 0; i <this->size() ; i++)
                  {
                      _myallocator.destroy((_vec + i));
-
                  }
                  this->_size = 0;
             }
@@ -477,18 +452,15 @@ template<
             {
                 if (this == &x)
                     return ;
-
                 size_type size1 = x.size();
                 size_type capacity = x.capacity();
                 pointer ptr = x.data();
                 pointer ptrend = x._end;
 
-
                 x._vec = this->_vec;
                 x._size = this->_size;
                 x._capacity = this->_capacity;
                 x._end = this->_end;
-
 
                 this->_size  = size1;
                 this->_capacity = capacity;
@@ -500,11 +472,9 @@ template<
             {
                 if (this->size() == 0)
                     return first;
+
                 size_type len = &(*last) - &(*first);
-
                 size_type pos = &(*first) - this->_vec; 
-                std::cout << "to delete "  << len   <<  " pod "  << pos   <<  "size "  << _size<< std::endl;
-
                 for(size_type  i = pos +len ; i < this->size() ; i++)
                 {
                     this->_vec[i] = this->_vec[pos+len + i];
@@ -513,9 +483,6 @@ template<
                 this->_end = this->_vec + len;
                 return first;
             }
-
-
-
 
         // bool  oprator == Vector(Vector )
 
@@ -544,7 +511,6 @@ template<
                 return true;
             }
 
-
             friend   bool operator<( const Vector& lhs, const Vector& rhs )
             {
                 if (lhs.size() <  rhs.size())
@@ -557,20 +523,19 @@ template<
                 return false;
             }
 
-
             friend   bool operator>( const Vector& lhs, const Vector& rhs )
             {
-                    return !(lhs < rhs);
+                return !(lhs < rhs);
             }
             
 
              friend   bool operator>=( const Vector& lhs, const Vector& rhs )
             {
-                    return (lhs >  rhs || lhs == rhs );
+                return (lhs >  rhs || lhs == rhs );
             }
             friend   bool operator<=( const Vector& lhs, const Vector& rhs )
             {
-                    return (lhs <  rhs || lhs == rhs );
+                return (lhs <  rhs || lhs == rhs );
             }
 
             T *_vec;

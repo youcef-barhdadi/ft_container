@@ -30,19 +30,11 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         typedef   T    value_type ;
         typedef  std::ptrdiff_t  difference_type ;
         typedef T*  pointer ;
-        typedef  T&  reference ;
-        // typedef std::iterator_category std::random_access_iterator_tag;
-
-
-
-
-  
-
-    
+        typedef  T&  referenc ;
 
     randomAccessIterator(void)
     {
-                    this->_ptr  = nullptr;
+        this->_ptr  = nullptr;
     }
 
     randomAccessIterator(pointer ptr)
@@ -50,20 +42,15 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         this->_ptr = ptr;
     }
 
-    
-
-      operator randomAccessIterator<const T> ()
+    operator randomAccessIterator<const T> ()
     {
         return randomAccessIterator<const T>(this->base());
     }
 
-
-      operator randomAccessIterator< const T> () const
+    operator randomAccessIterator< const T> () const
     {
         return randomAccessIterator<const T>(this->base());
     }
-
- 
 
     randomAccessIterator(const randomAccessIterator& op) 
     {
@@ -105,7 +92,6 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         return (*this);    
     }
 
-    
     virtual  ~randomAccessIterator() {}
     
     randomAccessIterator operator++(int)
@@ -130,13 +116,8 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
 
     randomAccessIterator operator+(difference_type n)  
     {
-
-
-        
-          randomAccessIterator c;
+        randomAccessIterator c;
         c._ptr =  this->_ptr + n ;
-        // exit(0);÷
-
         return (c);
     }
 
@@ -149,16 +130,13 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
 
     randomAccessIterator &operator+=(difference_type n)
     {
-    
-            this->_ptr +=n;
-
+        this->_ptr +=n;
         return (*this);
     }
 
     randomAccessIterator& operator-=(difference_type n)
     {
         this->_ptr -= n;
-
         return (*this);
     }
 
@@ -167,40 +145,27 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         this->_ptr += n;
         return  (*(this->_ptr));
     }
-    
 
-  
+    friend difference_type operator ==(const randomAccessIterator<T> lhs, const randomAccessIterator<T> rhs)
+    {
+        return (lhs.base() == rhs.base());
+    }
 
-    
-
- friend difference_type operator ==(const randomAccessIterator<T> lhs, const randomAccessIterator<T> rhs)
-{
-    return (lhs.base() == rhs.base());
-}
-
-template<typename T_L, typename T_R>
+    template<typename T_L, typename T_R>
     friend difference_type operator==(const randomAccessIterator<T_L> lhs,  const randomAccessIterator<T_R> rhs)
-{
-    return (lhs.base() == rhs.base());
-}
+    {
+        return (lhs.base() == rhs.base());
+    }
 
+    friend   randomAccessIterator operator+( difference_type n, randomAccessIterator& rai) 
+    {   
+        return  randomAccessIterator(rai.base() + n);
+    }
 
-
-
-
-
-
-  friend   randomAccessIterator operator+( difference_type n, randomAccessIterator& rai) 
-        {   
-            // std::cout << "fdasf" << std::endl;
-            return  randomAccessIterator(rai.base() + n);
-        }
-
-          friend   randomAccessIterator operator-( difference_type n, randomAccessIterator& rai) 
-        {   
-            // std::cout << "fdasf" << std::endl;
-            return  randomAccessIterator((rai.base() - n));
-        }
+    friend   randomAccessIterator operator-( difference_type n, randomAccessIterator& rai) 
+    {   
+        return  randomAccessIterator((rai.base() - n));
+    }
 
 
     
