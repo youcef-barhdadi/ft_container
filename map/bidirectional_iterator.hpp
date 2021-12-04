@@ -22,7 +22,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             // this->_node = nullptr;
         }
 
-        bidirectional_iterator(T *node , T*& root) : _node(node) , root(root)
+        bidirectional_iterator( T *node , T*& root) : root(root)
         {
             this->_node = node;
         }
@@ -39,17 +39,18 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         }
 
 
-        bidirectional_iterator &operator=(const_bidirectional_iterator<T> &n)
-        {
-            this->_node = n._node;
-            return (*this);
-        }
+        // bidirectional_iterator &operator=(const_bidirectional_iterator<T> &n)
+        // {
+        //     this->_node = n._node;
+        //     this->root = root;
+        //     return (*this);
+        // }
 
 
         bidirectional_iterator &operator=(const bidirectional_iterator<T> &n)
         {
-            if (this == &n)
-                return (*this);
+            // if (this == &n)
+            //     return (*this);
             this->_node = n._node;
             this->root = n.root;
             return (*this);
@@ -99,8 +100,8 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
 
         bidirectional_iterator operator--(int)
         {
-         bidirectional_iterator copy(this->_node, root);
-            --(*this);
+            bidirectional_iterator copy(*this);
+            operator--();
             return copy;
         }
 
