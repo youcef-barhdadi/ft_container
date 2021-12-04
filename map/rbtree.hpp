@@ -57,15 +57,15 @@ class  node {
                         return tmp->parent;
                     tmp = tmp->parent;
                     node<T >  *kepp = tmp;
-                    while ( tmp && tmp->parent  && tmp->parent->isRight ==  true)
+                    while ( tmp && tmp->parent   && tmp->isRight ==  true)
                     {
                         kepp = tmp;
                         tmp = tmp->parent;
                     }
                     // return (tmp->parent && tmp->parent->parent)  ? tmp->parent->parent : tmp->parent;
-                    if (tmp->parent && tmp->parent->parent) 
-                        return tmp->parent->parent;
-                    return tmp->parent;
+                    // if (tmp->parent && tmp->parent->parent) 
+                        return tmp->parent;
+                    // return tmp->parent;
                 }
                 else{
                     std::cout << "this "<< std::endl;
@@ -104,7 +104,7 @@ class  node {
                         return tmp->parent;
                     tmp = tmp->parent;
                     node<T >  *kepp = tmp;
-                    while ( tmp && tmp->parent  && tmp->parent->isRight ==  false)
+                    while ( tmp && tmp->parent  && tmp->isRight ==  false)
                     {
                         kepp = tmp;
                         tmp = tmp->parent;
@@ -560,7 +560,7 @@ template<
                         return;
                 if ( n == this->root )
                 {
-                    // this->root->color = Black;
+                    this->root->color = Black;
                     return ;
                 }
                 if (n->color == Red && (n->parent->color == Red))

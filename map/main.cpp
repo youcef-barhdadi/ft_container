@@ -71,8 +71,8 @@ int main()
      /*------------ std::map ---------*/
     ft::Map<int, char> m;
     ft::Map<int, char>::iterator it;
-        size_t size = 10;
-        for (size_t i = 0; i < size; i++)
+        size_t size = 100;
+        for (size_t i = 1; i <= size; i++)
         {
             m.insert(ft::make_pair<int ,char>(i, '1'));
         }
@@ -86,7 +86,12 @@ int main()
             ++it; 
             i++;
         }
-    
+        
+                while ( size--)
+        {
+            std::cout << *it << std::endl;
+            --it; 
+        }
         m.tree->printTree();
 
 
