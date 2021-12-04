@@ -225,7 +225,10 @@ int main()
                 res += it->first;
             }
         }
+        std::cout <<  std::endl  << "my_it ||| " << *my_it << " |||  my_ut1 ||||  " << *my_it1 << std::endl;
+
         --my_it; // I decremented here to make sure that the object changes
+        std::cout <<  std::endl  << "my_it ||| " << *my_it << " |||  my_ut1 ||||  " << *my_it1 << std::endl;
         EQUAL(*my_it != *my_it1);
     }
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " it++ operator "

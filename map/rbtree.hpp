@@ -62,13 +62,10 @@ class  node {
                         kepp = tmp;
                         tmp = tmp->parent;
                     }
-                    // return (tmp->parent && tmp->parent->parent)  ? tmp->parent->parent : tmp->parent;
                     if (tmp->parent) 
                         return tmp->parent;
-                    // return tmp->parent;
                 }
                 else{
-                    std::cout << "this "<< std::endl;
                     return NULL;
                 }
             }

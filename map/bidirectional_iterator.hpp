@@ -27,17 +27,23 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             this->_node = node;
         }
 
+        bidirectional_iterator(const bidirectional_iterator &n)
+        {
+            this->_node = n._node;
+            this->root = n.root;
+        }
+
         reference operator*() 
         {
              return _node->value;
         }
 
 
-        // bidirectional_iterator &operator=(const_bidirectional_iterator<T> &n)
-        // {
-        //     this->_node = n._node;
-        //     return (*this);
-        // }
+        bidirectional_iterator &operator=(const_bidirectional_iterator<T> &n)
+        {
+            this->_node = n._node;
+            return (*this);
+        }
 
 
         bidirectional_iterator &operator=(const bidirectional_iterator<T> &n)
@@ -63,7 +69,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
 
         bidirectional_iterator operator++(int)
         {
-            bidirectional_iterator copy(this->_node);
+            bidirectional_iterator copy(this->_node, root);
             ++(*this);
             return copy;
         }
@@ -93,7 +99,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
 
         bidirectional_iterator operator--(int)
         {
-         bidirectional_iterator copy(this->_node);
+         bidirectional_iterator copy(this->_node, root);
             --(*this);
             return copy;
         }
