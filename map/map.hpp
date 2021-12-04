@@ -79,7 +79,7 @@ template<
 
             iterator end()
               {
-                  return iterator(tree->findBigger(this->tree->root));
+                  return iterator(NULL);
               }   
            ft::RBtree <ft::pair< Key,T> > *tree;
 

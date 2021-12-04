@@ -56,8 +56,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         bidirectional_iterator operator++(void)
         {
             T *tmp   = _node->findNextNode(_node);
-            if (tmp != nullptr)
-                _node = tmp;
+            _node = tmp;
             return *this;
         }
 
@@ -71,8 +70,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         bidirectional_iterator operator--(void)
         {
             T *tmp   = _node->findPrevious(_node);
-            if (tmp != nullptr)
-                _node = tmp;
+            _node = tmp;
             return *this;
         }
 

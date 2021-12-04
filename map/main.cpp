@@ -80,19 +80,23 @@ int main()
         it = m.begin();
         std::cout <<  "this is first elment" << *it << std::endl;
         size_t i = 0;
-        while (i  < size)
+        while (it  !=  m.end())
         {
             std::cout << *it << std::endl;
             ++it; 
             i++;
         }
-        
-                while ( size--)
+
+        while (it  !=  m.begin())
         {
             std::cout << *it << std::endl;
             --it; 
+            i++;
         }
-        m.tree->printTree();
+        
+    
+
+        // m.tree->printTree();
 
 
 }
