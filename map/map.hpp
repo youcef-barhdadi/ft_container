@@ -72,14 +72,14 @@ template<
               iterator begin()
               {
                 //   std::cout << "root adress is " << this->tree->root << std::endl;
-                  return iterator( tree->findSamllest(this->tree->root));
+                  return iterator( tree->findSamllest(this->tree->root), tree->root);
                 //   return iterator((this->tree->root));
               }
 
 
             iterator end()
               {
-                  return iterator(NULL);
+                  return iterator(NULL, tree->root);
               }   
            ft::RBtree <ft::pair< Key,T> > *tree;
 

@@ -22,7 +22,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             // this->_node = nullptr;
         }
 
-        bidirectional_iterator(T *node) : _node(node)
+        bidirectional_iterator(T *node , T*& root) : _node(node) , root(root)
         {
             this->_node = node;
         }
@@ -45,6 +45,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             if (this == &n)
                 return (*this);
             this->_node = n._node;
+            this->root = n.root;
             return (*this);
         }
 
@@ -68,8 +69,14 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         }
         
         bidirectional_iterator operator--(void)
-        {
-            T *tmp   = _node->findPrevious(_node);
+        {   
+            T *tmp;
+            if (_node == nullptr)
+            {
+                tmp = root->findBigger(root);
+            }
+            else
+                tmp  = _node->findPrevious(_node);
             _node = tmp;
             return *this;
         }
@@ -98,6 +105,7 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         }
 
         T *_node;
+        T *root;
 
     private:
 };
@@ -160,8 +168,7 @@ class const_bidirectional_iterator  : public std::iterator<std::bidirectional_it
         const_bidirectional_iterator operator++(void)
         {
             T *tmp   = _node->findNextNode(_node);
-            if (tmp != nullptr)
-                _node = tmp;
+            _node = tmp;
             return *this;
         }
 

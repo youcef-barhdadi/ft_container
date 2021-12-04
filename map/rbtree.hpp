@@ -82,7 +82,18 @@ class  node {
             return node<const T>(this->value);
         } 
 
+        node<T> *findBigger(node<T> *n)
+        {
+            node<T> *temp ;
 
+            temp = NULL;
+            while (n != NULL)
+            {
+                temp = n;
+                n = n->right;
+            }
+            return temp != NULL ? temp : n;
+        }
 
         node<T> *findPrevious(node<T> *n)
         {
