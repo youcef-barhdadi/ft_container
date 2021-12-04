@@ -1,5 +1,6 @@
 #include "rbtree.hpp"
 #include <map>
+# include "map.hpp"
 using namespace std;
 int printtime() {
    time_t t; // t passed as argument in function time()
@@ -11,17 +12,8 @@ int printtime() {
 }
 int main()
 {
-    ft::RBtree<int> list;
-    size_t size = 1.e6;
-printtime();
+   
 
-    for (size_t i = 0; i < size; i++)
-    {
-        //  if (i % 2 == 0)
-        //     list.insert(i);
-        //  else
-             list.insert(i);
-    }
-    printtime();
-    list.printTree();    
+
+
 }

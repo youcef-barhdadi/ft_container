@@ -68,65 +68,26 @@ bool compareMaps(Iter1 first1, Iter1 last1, Iter2 first2, Iter2 last2)
 }
 int main()
 {
-    std::map<int, char> m;
-    std::map<int, char>::iterator it, it1;
-
-    ft::Map<int, char> my_m;
-    ft::Map<int, char>::iterator my_it, my_it1, tmp;
-
-    for (int i = 0; i < 10; ++i)
-    {
-        my_m.insert(ft::make_pair(i, static_cast<char>(i + 97)));
-        m.insert(std::make_pair(i, static_cast<char>(i + 97)));
-    }
-
-    it = m.begin();
-    it1 = ++(m.begin());
-    my_it = my_m.begin();
-    my_it1 = ++(my_m.begin());
-    /*----------------------------------*/
-    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " copy constructor "
-              << "] --------------------]\t\t\033[0m";
-    {
-        ft::Map<int, char>::iterator ob(my_it);
-        EQUAL(&(*my_it) == &(*ob));
-    }
-    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " iterator to const_iterator "
-              << "] --------------------]\t\t\033[0m";
-    {
-        ft::Map<int, char>::const_iterator c_it, c_ob(my_it);
-        c_it = my_it;
-        EQUAL(&(*my_it) == &(*c_it) && (&(*my_it) == &(*c_ob)));
-    }
-    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " == operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it == it1) == (my_it == my_it1));
-    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " != operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it != it1) == (my_it != my_it1));
-    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " * operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((((*my_it).second = '6') == '6') && ((*my_it).first == ((*my_m.begin()).first)));
-    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " -> operator "
-              << "] --------------------]\t\t\033[0m";
-    {
-        /*--------------- std::map-------------------- */
-        std::map<int, std::string> m;
-        ft::Map<int, std::string> my_m;
-
-        for (int i = 0; i < 5; ++i)
+     /*------------ std::map ---------*/
+    ft::Map<int, char> m;
+    ft::Map<int, char>::iterator it;
+        size_t size = 10;
+        for (size_t i = 0; i < size; i++)
         {
-            m.insert(std::make_pair(13, "HELLO"));
-            my_m.insert(ft::make_pair<int, std::string>(13, "HELLO"));
+            m.insert(ft::make_pair<int ,char>(i, '1'));
         }
 
-        ft::Map<int, std::string>::iterator my_it = my_m.begin();
-        std::map<int, std::string>::iterator it = m.begin();
-        /*---------------------------------------------- */
-        EQUAL(it->second.length() == my_it->second.length());
-    }
-
+        it = m.begin();
+        std::cout <<  "this is first elment" << *it << std::endl;
+        size_t i = 0;
+        while (i  < size)
+        {
+            std::cout << *it << std::endl;
+            ++it; 
+            i++;
+        }
     
-//      my_m.tree->print();
+        m.tree->printTree();
+
 
 }

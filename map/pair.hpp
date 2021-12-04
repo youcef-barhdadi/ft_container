@@ -102,7 +102,7 @@ template< class T1, class T2 >
 std::ostream& operator<<(std::ostream& os, const pair<T1,T2>& dt)
 {
 
-    os  << dt.first ;
+    os  << dt.first << "|" << dt.second ;
     return os;
 
 

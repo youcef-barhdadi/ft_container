@@ -52,9 +52,25 @@ class  node {
             else
             {
                 if (tmp->parent !=NULL)
+                {
+                    if (tmp->isRight == false)
+                        return tmp->parent;
+                    tmp = tmp->parent;
+                    node<T >  *kepp = tmp;
+                    while ( tmp && tmp->parent  && tmp->parent->isRight ==  true)
+                    {
+                        kepp = tmp;
+                        tmp = tmp->parent;
+                    }
+                    // return (tmp->parent && tmp->parent->parent)  ? tmp->parent->parent : tmp->parent;
+                    if (tmp->parent && tmp->parent->parent) 
+                        return tmp->parent->parent;
                     return tmp->parent;
-                else 
+                }
+                else{
+                    std::cout << "this "<< std::endl;
                     return tmp;
+                }
             }
         }
 

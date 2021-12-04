@@ -40,7 +40,7 @@ template<
              typedef const  T *  const_pointer;
 
              typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
-            typedef ft::const_bidirectional_iterator<node < const ft::pair< Key, T> > >    const_iterator; 
+            typedef ft::const_bidirectional_iterator<node <ft::pair< Key, T> > >    const_iterator; 
 
 
             Map()
@@ -71,7 +71,9 @@ template<
 //findBigger
               iterator begin()
               {
+                //   std::cout << "root adress is " << this->tree->root << std::endl;
                   return iterator( tree->findSamllest(this->tree->root));
+                //   return iterator((this->tree->root));
               }
 
 
