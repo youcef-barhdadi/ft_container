@@ -177,22 +177,13 @@ template<
          
             void insert(T value)
             {
-                // std::cout << value << std::endl;
                  insert2(this->root, value);
-
-                // if (this->last != NULL)
-                // {
-                //     check(this->last);
-                //     last = NULL;
-                // }
             }
 
             int getCreated()
             {
                 return created ;
             }
-
-
 
             void _print(node<T> *n)
             {
@@ -202,19 +193,22 @@ template<
                  std::cout << "[" << n->value   << "]"  << (n->isRight == true ? " is right " : "is  left" )   << std::endl;
                 _print(n->right);
             }
+    
             void print()
             {
-
                 std::cout << "print" << std::endl;
                 _print(this->root);
              }
             
 
-            void printTree() {
-                if (this->root) {
-                printHelper(this->root, "", true);
+            void printTree()
+            {
+                if (this->root) 
+                {
+                    printHelper(this->root, "", true);
                 }
             }
+            
             void printHelper(node<T> *_node, std::string indent, bool last)
             {
                 if (_node != NULL)

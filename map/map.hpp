@@ -20,7 +20,7 @@ template<
     class Key,
     class T,
     class Compare = std::less<Key>,
-    class Allocator = std::allocator<pair<const Key, T> >
+    class Allocator = std::allocator<pair<const Key, T>>
 > class Map
 {
 
