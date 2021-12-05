@@ -39,7 +39,7 @@ template<
     // template< class T1, class T2 >
     bool operator!=( const pair& lhs)
     {
-        return !(this->first != lhs.first);
+        return (this->first != lhs.first);
     }
 
 

@@ -78,7 +78,9 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         bidirectional_iterator operator--(void)
         {   
             T *tmp;
-            if (_node == nullptr)
+            if (_node  != NULL &&  *(this->_node) == *(root->findSmallest(root)))
+                    return (*this);
+            if (_node == NULL)
             {
                 tmp = root->findBigger(root);
             }

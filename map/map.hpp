@@ -18,9 +18,9 @@
 namespace ft {
 template<
     class Key,
-    class T
-    // class Compare = std::less<Key>
-    // class Allocator = std::allocator<pair<const Key, T> >
+    class T,
+    class Compare = std::less<Key>,
+    class Allocator = std::allocator<pair<const Key, T> >
 > class Map
 {
 
@@ -28,6 +28,7 @@ template<
 
             typedef  T mapped_type;
            typedef pair< Key, T>   value_type   ;
+           typedef Key   key_type   ;
             //  typedef Allocator allocator_type  ;
              typedef size_t size_type  ;
 
@@ -42,11 +43,41 @@ template<
              typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
             typedef ft::const_bidirectional_iterator<node <ft::pair< Key, T> > >    const_iterator; 
 
+            typedef  Compare   key_compare;
+            typedef    Allocator   allocator_type;
 
-            Map()
+            // Map()
+            // {
+            //     tree = new RBtree <pair< Key,T> >();
+
+            // }
+
+            explicit Map (const key_compare& comp = key_compare(),
+              const allocator_type& alloc = allocator_type())
             {
-                tree = new RBtree <pair< Key,T> >();
 
+            }
+            template <class InputIterator>
+            Map (InputIterator first, InputIterator last,
+              const key_compare& comp = key_compare(),
+              const allocator_type& alloc = allocator_type())
+            {
+                while (first != last)
+                {
+                  this->insert(*first);
+                  ++first;
+                }
+            }
+
+            Map (const Map& x)
+            {
+                iterator c =   x.begin();
+
+                while (c != x.end())
+                {
+                  this->insert(*c);
+                  ++c;
+                }
             }
 
 
@@ -81,6 +112,13 @@ template<
               {
                   return iterator(NULL, tree->root);
               }   
+            mapped_type& operator[] (const key_type& k)
+            {
+                return  this->tree->find(k);
+            }
+
+
+
            ft::RBtree <ft::pair< Key,T> > *tree;
 
         private :

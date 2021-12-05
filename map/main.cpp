@@ -66,14 +66,47 @@ bool compareMaps(Iter1 first1, Iter1 last1, Iter2 first2, Iter2 last2)
             return false;
     return true;
 }
+
+
+struct classcomp
+{
+    bool operator()(const char &lhs, const char &rhs) const
+    {
+        return lhs < rhs;
+    }
+};
+bool fncomp(char lhs, char rhs) { return lhs < rhs; }
+
+
+bool testMapConstructors();
+void const_iterator_tests(void);
+
+
+
 int main()
 {
-      /*------------ std::map ---------*/
+        //  const_iterator_tests();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+void const_iterator_tests(void)
+{
+    /*------------ std::map ---------*/
     std::map<int, char> m;
-    std::map<int, char>::iterator it, it1;
+    std::map<int, char>::const_iterator it, it1;
 
     ft::Map<int, char> my_m;
-    ft::Map<int, char>::iterator my_it, my_it1, tmp;
+    ft::Map<int, char>::const_iterator my_it, my_it1, tmp;
 
     for (int i = 0; i < 10; ++i)
     {
@@ -85,10 +118,170 @@ int main()
     it1 = ++(m.begin());
     my_it = my_m.begin();
     my_it1 = ++(my_m.begin());
-    std::cout << *my_it1 << "|||" << *my_it << std::endl;
-     ft::Map<int, char>::iterator  ll = my_it--;
-    --my_it;
-    // --my_it1;
-    std::cout << *my_it1 << "|||" << *my_it  << "|||" << *ll  << std::endl;
+    /*----------------------------------*/
 
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " copy constructor "
+              << "] --------------------]\t\t\033[0m";
+    {
+        ft::Map<int, char>::const_iterator ob(my_it);
+        EQUAL(*my_it == *ob);
+    }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " == operator "
+              << "] --------------------]\t\t\033[0m";
+    EQUAL((it == it1) == (my_it == my_it1));
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " != operator "
+              << "] --------------------]\t\t\033[0m";
+    EQUAL((it != it1) == (my_it != my_it1));
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " -> operator "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*--------------- std::map-------------------- */
+        std::map<int, std::string> m;
+        ft::Map<int, std::string> my_m;
+
+        for (int i = 0; i < 5; ++i)
+        {
+            m.insert(std::make_pair(13, "HELLO"));
+            my_m.insert(ft::make_pair<int, std::string>(13, "HELLO"));
+        }
+
+        ft::Map<int, std::string>::iterator my_it = my_m.begin();
+        std::map<int, std::string>::iterator it = m.begin();
+        /*---------------------------------------------- */
+        EQUAL(it->second.length() == my_it->second.length());
+    }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " ++it operator "
+              << "] --------------------]\t\t\033[0m";
+    ++my_it; // I incremented here to make sure that the object changes
+    EQUAL(*my_it == *my_it1);
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " --it operator "
+              << "] --------------------]\t\t\033[0m";
+    --my_it; // I decremented here to make sure that the object changes
+    EQUAL(*my_it != *my_it1);
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " it++ operator "
+              << "] --------------------]\t\t\033[0m";
+    tmp = my_it++;
+    EQUAL(*my_it != *tmp && *my_it == *my_it1);
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " it-- operator "
+              << "] --------------------]\t\t\033[0m";
+    tmp = my_it--;
+    EQUAL(*my_it != *tmp && *my_it == *(my_m.begin()));
 }
+
+bool testMapConstructors()
+{
+    bool cond;
+    std::map<char, int> first;
+    ft::Map<char, int> m_first;
+
+    for (size_t i = 97; i < 110; i++)
+    {
+        first[i - 97] = i;
+        m_first[i - 97] = i;
+    }
+
+    std::map<char, int> copy(first);
+    ft::Map<char, int> m_copy(m_first);
+
+    cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+
+    std::map<char, int> second(first.begin(), first.end());
+    ft::Map<char, int> m_second(m_first.begin(), m_first.end());
+
+    cond = cond && second.size() == m_second.size() && compareMaps(second.begin(), second.end(), m_second.begin(), m_second.end());
+    std::map<char, int> third(second);
+    ft::Map<char, int> m_third(m_second);
+
+    cond = cond && third.size() == m_third.size() && compareMaps(third.begin(), third.end(), m_third.begin(), m_third.end());
+
+    std::map<char, int, classcomp> fourth;  // class as Compare
+    ft::Map<char, int, classcomp> m_fourth; // class as Compare
+
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+
+    bool (*fn_pt)(char, char) = fncomp;
+    std::map<char, int, bool (*)(char, char)> fifth(fn_pt);  // function pointer as Compare
+    ft::Map<char, int, bool (*)(char, char)> m_fifth(fn_pt); // function pointer as Compare
+
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+
+    first = std::map<char, int>();
+    m_first = ft::Map<char, int>();
+
+    cond = copy.size() == m_copy.size() && cond && compareMaps(copy.begin(), copy.end(), m_copy.begin(), m_copy.end());
+
+    return cond;
+}
+
+
+
+
+// void const_iterator_tests(void)
+// {
+//     /*------------ std::map ---------*/
+//     std::map<int, char> m;
+//     std::map<int, char>::const_iterator it, it1;
+
+//     ft::Map<int, char> my_m;
+//     ft::Map<int, char>::const_iterator my_it, my_it1, tmp;
+
+//     for (int i = 0; i < 10; ++i)
+//     {
+//         my_m.insert(ft::make_pair(i, static_cast<char>(i + 97)));
+//         m.insert(std::make_pair(i, static_cast<char>(i + 97)));
+//     }
+
+//     it = m.begin();
+//     it1 = ++(m.begin());
+//     my_it = my_m.begin();
+//     my_it1 = ++(my_m.begin());
+//     /*----------------------------------*/
+
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " copy constructor "
+//               << "] --------------------]\t\t\033[0m";
+//     {
+//         ft::Map<int, char>::const_iterator ob(my_it);
+//         EQUAL(*my_it == *ob);
+//     }
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " == operator "
+//               << "] --------------------]\t\t\033[0m";
+//     EQUAL((it == it1) == (my_it == my_it1));
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " != operator "
+//               << "] --------------------]\t\t\033[0m";
+//     EQUAL((it != it1) == (my_it != my_it1));
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " -> operator "
+//               << "] --------------------]\t\t\033[0m";
+//     {
+//         /*--------------- std::map-------------------- */
+//         std::map<int, std::string> m;
+//         ft::Map<int, std::string> my_m;
+
+//         for (int i = 0; i < 5; ++i)
+//         {
+//             m.insert(std::make_pair(13, "HELLO"));
+//             my_m.insert(ft::make_pair<int, std::string>(13, "HELLO"));
+//         }
+
+//         ft::Map<int, std::string>::iterator my_it = my_m.begin();
+//         std::map<int, std::string>::iterator it = m.begin();
+//         /*---------------------------------------------- */
+//         EQUAL(it->second.length() == my_it->second.length());
+//     }
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " ++it operator "
+//               << "] --------------------]\t\t\033[0m";
+//     ++my_it; // I incremented here to make sure that the object changes
+//     EQUAL(*my_it == *my_it1);
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " --it operator "
+//               << "] --------------------]\t\t\033[0m";
+//     --my_it; // I decremented here to make sure that the object changes
+//     EQUAL(*my_it != *my_it1);
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " it++ operator "
+//               << "] --------------------]\t\t\033[0m";
+//     tmp = my_it++;
+//     EQUAL(*my_it != *tmp && *my_it == *my_it1);
+//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " it-- operator "
+//               << "] --------------------]\t\t\033[0m";
+//     tmp = my_it--;
+//     EQUAL(*my_it != *tmp && *my_it == *(my_m.begin()));
+
+// }

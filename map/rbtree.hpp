@@ -92,6 +92,37 @@ class  node {
             return temp != NULL ? temp : n;
         }
 
+          node<T> *findSmallest(node<T> *n)
+        {
+            node<T> *temp ;
+
+            temp = NULL;
+            while (n != NULL)
+            {
+                temp = n;
+                n = n->left;
+            }
+            return temp != NULL ? temp : n;
+        }
+
+        node<T> *find(node<T> *n)
+        {
+            node<T> *temp ;
+
+            temp = NULL;
+            while (n != NULL)
+            {
+                temp = n;
+                n = n->right;
+            }
+            return temp != NULL ? temp : n;
+        }
+
+        bool   operator== (node &n) 
+        {
+            return  n.value == this->value;
+        }
+
         node<T> *findPrevious(node<T> *n)
         {
             node<T> *tmp = n;
