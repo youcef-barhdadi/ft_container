@@ -61,9 +61,12 @@ int printtime() {
 template <typename Iter1, typename Iter2>
 bool compareMaps(Iter1 first1, Iter1 last1, Iter2 first2, Iter2 last2)
 {
-    for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
-        if (first1->first != first2->first || first1->second != first2->second)
-            return false;
+        std::cout << "this is good "  << std::endl;
+    // for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
+    // {
+    //     if (first1->first != first2->first || first1->second != first2->second)
+    //         return false;
+    // }
     return true;
 }
 
@@ -176,17 +179,18 @@ bool testMapConstructors()
     std::map<char, int> first;
     ft::Map<char, int> m_first;
 
-    for (size_t i = 97; i < 110; i++)
+    for (size_t i = 97; i < 130; i++)
     {
         first[i - 97] = i;
         m_first[i - 97] = i;
-        // std::cout << m_first[i - 97]  << std::endl;
+   
     }
 
-    // std::map<char, int> copy(first);
-    // ft::Map<char, int> m_copy(m_first);
 
-    // cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+    std::map<char, int> copy(first);
+    ft::Map<char, int> m_copy(m_first);
+    std::cout << first.size() << "  " << m_first.size() << std::endl;
+    cond = first.size() == m_first.size()  &&  compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
 
     // std::map<char, int> second(first.begin(), first.end());
     // ft::Map<char, int> m_second(m_first.begin(), m_first.end());

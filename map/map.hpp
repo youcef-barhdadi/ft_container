@@ -41,7 +41,7 @@ template<
              typedef const  T *  const_pointer;
 
              typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
-            typedef ft::const_bidirectional_iterator<node <ft::pair< Key, T> > >    const_iterator; 
+            typedef ft::const_bidirectional_iterator<node <ft::pair< Key, T> > > const_iterator; 
 
             typedef  Compare   key_compare;
             typedef    Allocator   allocator_type;
@@ -55,7 +55,8 @@ template<
             explicit Map (const key_compare& comp = key_compare(),
               const allocator_type& alloc = allocator_type())
             {
-
+                this->tree = new RBtree<value_type>();
+              
             }
             template <class InputIterator>
             Map (InputIterator first, InputIterator last,
@@ -71,11 +72,12 @@ template<
 
             Map (const Map& x)
             {
-                iterator c =   x.begin();
-
-                while (c != x.end())
+                const_iterator c =   x.begin();
+                size_t size = x.size();
+                while (--size)
                 {
                   this->insert(*c);
+                  std::cout << *c << std::endl;
                   ++c;
                 }
             }
@@ -102,8 +104,15 @@ template<
 //findBigger
               iterator begin()
               {
-                //   std::cout << "root adress is " << this->tree->root << std::endl;
+                  std::cout << "root adress is " << this->tree->root << std::endl;
                   return iterator( tree->findSamllest(this->tree->root), tree->root);
+                //   return iterator((this->tree->root));
+              }
+
+               const_iterator begin() const
+              {
+                //   std::cout << "root adress is " << this->tree->root << std::endl;
+                  return const_iterator( tree->findSamllest(this->tree->root), tree->root);
                 //   return iterator((this->tree->root));
               }
 
@@ -111,20 +120,24 @@ template<
             iterator end()
             {
                 return iterator(NULL, tree->root);
-            }   
+            } 
+
+
+              const_iterator end() const 
+            {
+                return const_iterator(NULL, this->tree->root);
+            }  
+
+
             mapped_type& operator[] (const key_type& k)
             {
 
-                iterator  iter  =  this->find(k);
-
+                 iterator  iter  =  this->find(k);
                 if (iter == this->end())
                 {
                     this->insert(ft::make_pair(k, mapped_type()));
                 }
-
                 iter = this->find(k);
-                
-
                 return  (*iter).second;
 
             }

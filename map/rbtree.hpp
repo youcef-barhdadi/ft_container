@@ -175,12 +175,12 @@ template<
             {
                 this->root = NULL;
                 this->last = NULL;
-                 created = 0;
+                this->_size = 0;
             }
          
             void insert(T value)
             {
-                std::cout << "called" << std::endl;
+                this->_size ++;
                  insert2(this->root, value);
             }
 
@@ -236,9 +236,7 @@ template<
 
             size_t size()
             {
-                if (this->root == NULL)
-                    return  0;
-                return 1;
+                return _size;
             }
 
 
@@ -247,18 +245,19 @@ template<
                 node<T> *_find(node<T> *n , T val)
                 {
                         if (n == NULL)
-                            return  n;
-                        if (val < n->value)
-                            _find(n->left, val);
-                        else if (val > n->value)
-                            _find(n->right, val);
-                        else
+                            return  NULL;
+                        if (n->value == val)
                             return n;
-                        return NULL;
+                    
+                        if (val < n->value)
+                            return   _find(n->left, val);
+                        return    _find(n->right, val);
                 }
 
                 node<T> *find(T val)
                 {
+                    if (this->root == NULL)
+                        return NULL;
                     return _find(root, val);
                 }
 
@@ -432,6 +431,7 @@ template<
                 node<T>  *root;
         private :
                 node<T> *last;
+                size_t _size;
 
             void rightRotate(node<T> *n)
             {
