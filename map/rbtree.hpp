@@ -167,6 +167,9 @@ template<
 
         public :
                 typedef T& reference;
+                typedef typename  T::Key Key;
+                
+
     int created;
             RBtree()
             {
@@ -177,6 +180,7 @@ template<
          
             void insert(T value)
             {
+                std::cout << "called" << std::endl;
                  insert2(this->root, value);
             }
 
@@ -240,7 +244,7 @@ template<
 
 
             
-                node<T> *_find(node<T> *n ,T val)
+                node<T> *_find(node<T> *n , T val)
                 {
                         if (n == NULL)
                             return  n;

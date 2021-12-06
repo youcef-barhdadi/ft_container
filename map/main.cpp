@@ -86,6 +86,8 @@ void const_iterator_tests(void);
 int main()
 {
         //  const_iterator_tests();
+
+        testMapConstructors();
 }
 
 
@@ -178,37 +180,38 @@ bool testMapConstructors()
     {
         first[i - 97] = i;
         m_first[i - 97] = i;
+        // std::cout << m_first[i - 97]  << std::endl;
     }
 
-    std::map<char, int> copy(first);
-    ft::Map<char, int> m_copy(m_first);
+    // std::map<char, int> copy(first);
+    // ft::Map<char, int> m_copy(m_first);
 
-    cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+    // cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
 
-    std::map<char, int> second(first.begin(), first.end());
-    ft::Map<char, int> m_second(m_first.begin(), m_first.end());
+    // std::map<char, int> second(first.begin(), first.end());
+    // ft::Map<char, int> m_second(m_first.begin(), m_first.end());
 
-    cond = cond && second.size() == m_second.size() && compareMaps(second.begin(), second.end(), m_second.begin(), m_second.end());
-    std::map<char, int> third(second);
-    ft::Map<char, int> m_third(m_second);
+    // cond = cond && second.size() == m_second.size() && compareMaps(second.begin(), second.end(), m_second.begin(), m_second.end());
+    // std::map<char, int> third(second);
+    // ft::Map<char, int> m_third(m_second);
 
-    cond = cond && third.size() == m_third.size() && compareMaps(third.begin(), third.end(), m_third.begin(), m_third.end());
+    // cond = cond && third.size() == m_third.size() && compareMaps(third.begin(), third.end(), m_third.begin(), m_third.end());
 
-    std::map<char, int, classcomp> fourth;  // class as Compare
-    ft::Map<char, int, classcomp> m_fourth; // class as Compare
+    // std::map<char, int, classcomp> fourth;  // class as Compare
+    // ft::Map<char, int, classcomp> m_fourth; // class as Compare
 
-    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+    // cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
 
-    bool (*fn_pt)(char, char) = fncomp;
-    std::map<char, int, bool (*)(char, char)> fifth(fn_pt);  // function pointer as Compare
-    ft::Map<char, int, bool (*)(char, char)> m_fifth(fn_pt); // function pointer as Compare
+    // bool (*fn_pt)(char, char) = fncomp;
+    // std::map<char, int, bool (*)(char, char)> fifth(fn_pt);  // function pointer as Compare
+    // ft::Map<char, int, bool (*)(char, char)> m_fifth(fn_pt); // function pointer as Compare
 
-    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+    // cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
 
-    first = std::map<char, int>();
-    m_first = ft::Map<char, int>();
+    // first = std::map<char, int>();
+    // m_first = ft::Map<char, int>();
 
-    cond = copy.size() == m_copy.size() && cond && compareMaps(copy.begin(), copy.end(), m_copy.begin(), m_copy.end());
+    // cond = copy.size() == m_copy.size() && cond && compareMaps(copy.begin(), copy.end(), m_copy.begin(), m_copy.end());
 
     return cond;
 }

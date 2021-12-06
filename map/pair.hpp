@@ -14,6 +14,8 @@ template<
 > struct pair
 {
     public:
+        typedef T1 Key;
+
         T1 first;
         T2 second;
 

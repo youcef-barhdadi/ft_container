@@ -109,14 +109,29 @@ template<
 
 
             iterator end()
-              {
-                  return iterator(NULL, tree->root);
-              }   
+            {
+                return iterator(NULL, tree->root);
+            }   
             mapped_type& operator[] (const key_type& k)
             {
-                return  this->tree->find(k);
-            }
 
+                iterator  iter  =  this->find(k);
+
+                if (iter == this->end())
+                {
+                    this->insert(ft::make_pair(k, mapped_type()));
+                }
+
+                iter = this->find(k);
+                
+
+                return  (*iter).second;
+
+            }
+             iterator find (const key_type& k)
+             {
+                   return iterator(this->tree->find( ft::pair<key_type, mapped_type>(k, mapped_type()) ), tree->root);
+             }
 
 
            ft::RBtree <ft::pair< Key,T> > *tree;
