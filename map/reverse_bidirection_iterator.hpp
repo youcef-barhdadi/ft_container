@@ -21,24 +21,30 @@ namespace ft {
                 {
 
                 }
-                reverse_bidirection_iterator(const Iterator iter)
+                reverse_bidirection_iterator(const Iterator  & iter)
                 {
+                    // std::cout << "iter" << iter < std::endl;
                     this->iter = iter;
                 }
                     
                 reference operator*() 
                 {
-                    return  (*iter);
+                    iterator_type  pre = iter;
+                    pre--;
+                    return  (*pre);
                 }
 
                 pointer operator->()
                 {
-                    return &(iter);
+                    iterator_type  pre(iter);
+                    std::cout << pre.base() << std::endl;
+                    pre--;
+                    return  &(*pre);
                 }
                         
                 reverse_bidirection_iterator operator++(void)
                 {
-                    ++iter;
+                    --iter;
                     return *this;
                 }
 
@@ -54,7 +60,7 @@ namespace ft {
 
                 reverse_bidirection_iterator operator--(void)
                 {   
-                    --iter;
+                    ++iter;
                     return *this;
                 }
 
@@ -66,7 +72,16 @@ namespace ft {
                     return copy;
                 }
 
+                friend  bool  operator==( reverse_bidirection_iterator &lhr,  reverse_bidirection_iterator  &rhr)
+                {
+                    return lhr.iter == rhr.iter; 
+                }
 
+
+                friend  bool  operator!=(const reverse_bidirection_iterator &lhr, const reverse_bidirection_iterator  &rhr)
+                {
+                    return lhr.iter != rhr.iter; 
+                }
 
 
         private:

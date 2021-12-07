@@ -3,25 +3,24 @@
 #include <memory>
 #include <iterator>
 
-
-namespace ft {
-
-template <class T>
-class const_bidirectional_iterator  ;
-template <class T>
-class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator_tag, T> 
+namespace ft
 {
-    public:
 
+    template <class T>
+    class const_bidirectional_iterator;
+    template <class T>
+    class bidirectional_iterator : public std::iterator<std::bidirectional_iterator_tag, T>
+    {
+    public:
         typedef typename T::reference reference;
         typedef typename T::pointer pointer;
 
-        bidirectional_iterator() 
+        bidirectional_iterator()
         {
-            // this->_node = nullptr;
+            // this->_node = NULL;
         }
 
-        bidirectional_iterator( T *node , T*& root) : root(root)
+        bidirectional_iterator(T *node, T *&root) : root(root)
         {
             this->_node = node;
         }
@@ -32,11 +31,10 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             this->root = n.root;
         }
 
-        reference operator*() 
+        reference operator*()
         {
-             return _node->value;
+            return _node->value;
         }
-
 
         // bidirectional_iterator &operator=(const_bidirectional_iterator<T> &n)
         // {
@@ -44,7 +42,6 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         //     this->root = root;
         //     return (*this);
         // }
-
 
         bidirectional_iterator &operator=(const bidirectional_iterator<T> &n)
         {
@@ -59,10 +56,10 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         {
             return &(_node->value);
         }
-        
+
         bidirectional_iterator operator++(void)
         {
-            T *tmp   = _node->findNextNode(_node);
+            T *tmp = _node->findNextNode(_node);
             _node = tmp;
             return *this;
         }
@@ -73,30 +70,35 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             ++(*this);
             return copy;
         }
-        
+
         bidirectional_iterator operator--(void)
-        {   
+        {
             T *tmp;
-            if (_node  != NULL &&  *(this->_node) == *(root->findSmallest(root)))
-                    return (*this);
+
+            if (_node != NULL && *(this->_node) == *(root->findSmallest(root)))
+                return (*this);
             if (_node == NULL)
             {
                 tmp = root->findBigger(root);
             }
             else
-                tmp  = _node->findPrevious(_node);
+                tmp = _node->findPrevious(_node);
             _node = tmp;
             return *this;
         }
 
-      friend  bool  operator==(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
-      {
-          return (lhr._node) == rhr._node; 
-      }
-
-        friend  bool  operator!=(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
+        friend bool operator==(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
         {
-            return (lhr._node) != rhr._node; 
+            if (lhr._node == NULL && rhr._node == NULL)
+                return (true);
+            if (lhr._node == NULL || rhr._node == NULL)
+                return (false);
+            return (lhr._node) == rhr._node;
+        }
+
+        friend bool operator!=(const bidirectional_iterator &lhr, const bidirectional_iterator &rhr)
+        {
+            return !(lhr == rhr);
         }
 
         bidirectional_iterator operator--(int)
@@ -105,7 +107,6 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
             operator--();
             return copy;
         }
-
 
         T *base()
         {
@@ -116,29 +117,21 @@ class bidirectional_iterator  : public std::iterator<std::bidirectional_iterator
         T *root;
 
     private:
-};
+    };
 
-
-
-template <class T>
-class const_bidirectional_iterator  : public std::iterator<std::bidirectional_iterator_tag, T> 
-{
+    template <class T>
+    class const_bidirectional_iterator : public std::iterator<std::bidirectional_iterator_tag, T>
+    {
     public:
-
         typedef typename T::reference reference;
         typedef typename T::pointer pointer;
 
-
-
-
-
-
-        const_bidirectional_iterator() 
+        const_bidirectional_iterator()
         {
-            this->_node = nullptr;
+            this->_node = NULL;
         }
 
-        const_bidirectional_iterator(T *node,  T *root) 
+        const_bidirectional_iterator(T *node, T *root)
         {
             this->_node = node;
             this->root = root;
@@ -150,33 +143,29 @@ class const_bidirectional_iterator  : public std::iterator<std::bidirectional_it
             return (*this);
         }
 
-        const_bidirectional_iterator(const const_bidirectional_iterator  &n) : _node(n._node)
+        const_bidirectional_iterator(const const_bidirectional_iterator &n) : _node(n._node)
         {
             this->_node = n._node;
         }
 
-
-        const_bidirectional_iterator(const bidirectional_iterator<T>& n) : _node(n._node)
+        const_bidirectional_iterator(const bidirectional_iterator<T> &n) : _node(n._node)
         {
             // this->_node = n._node;
         }
-
 
         reference operator*() const
         {
             return _node->value;
         }
 
- 
-
         pointer operator->()
         {
             return &(_node->value);
         }
-        
+
         const_bidirectional_iterator operator++(void)
         {
-            T *tmp   = _node->findNextNode(_node);
+            T *tmp = _node->findNextNode(_node);
             _node = tmp;
             return *this;
         }
@@ -187,15 +176,14 @@ class const_bidirectional_iterator  : public std::iterator<std::bidirectional_it
             ++(*this);
             return copy;
         }
-        
+
         const_bidirectional_iterator operator--(void)
         {
-            T *tmp   = _node->findPrevious(_node);
-            if (tmp != nullptr)
+            T *tmp = _node->findPrevious(_node);
+            if (tmp != NULL)
                 _node = tmp;
             return *this;
         }
-
 
         const_bidirectional_iterator operator=(const_bidirectional_iterator b)
         {
@@ -209,43 +197,42 @@ class const_bidirectional_iterator  : public std::iterator<std::bidirectional_it
             return (*this);
         }
 
-      friend  bool  operator==(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
-      {
-          return (lhr._node) == rhr._node; 
-      }
-
-        friend  bool  operator!=(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
+        friend bool operator==(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
         {
-            return (lhr._node) != rhr._node; 
+            return (lhr._node) == rhr._node;
+        }
+
+        friend bool operator!=(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
+        {
+            return (lhr._node) != rhr._node;
         }
 
         const_bidirectional_iterator operator--(int)
         {
-         const_bidirectional_iterator copy(this->_node, root);
+            const_bidirectional_iterator copy(this->_node, root);
             --(*this);
             return copy;
         }
-
 
         T *base()
         {
             return _node;
         }
 
-        operator  const_bidirectional_iterator<const T> () 
+        operator const_bidirectional_iterator<const T>()
         {
-                return const_bidirectional_iterator<const T>(_node);
+            return const_bidirectional_iterator<const T>(_node);
         }
 
-        operator  const_bidirectional_iterator<const T> () const
+        operator const_bidirectional_iterator<const T>() const
         {
-                return const_bidirectional_iterator<const T>(_node);
+            return const_bidirectional_iterator<const T>(_node);
         }
 
         T *_node;
         T *root;
 
     private:
-};
+    };
 
 };

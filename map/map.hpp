@@ -40,8 +40,13 @@ template<
              
              typedef const  T *  const_pointer;
 
-             typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
+            typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
             typedef ft::const_bidirectional_iterator<node <ft::pair< Key, T> > > const_iterator; 
+            typedef ft::reverse_bidirection_iterator<iterator>  reverse_iterator;
+            typedef ft::reverse_bidirection_iterator<const_iterator>  const_reverse_iterator;
+ 
+
+
 
             typedef  Compare   key_compare;
             typedef    Allocator   allocator_type;
@@ -61,11 +66,10 @@ template<
               const key_compare& comp = key_compare(),
               const allocator_type& alloc = allocator_type())
             {
-              std::cout << "range constractuor called " << std::endl;
                 while (first != last)
                 {
-                  this->insert(*first);
-                  ++first;
+                  // std::cout << "insetring "   <<  *(++first) << std::endl;
+                  this->insert(*(++first));
                 }
             }
 
@@ -104,9 +108,27 @@ template<
 //findBigger
               iterator begin()
               {
-                  std::cout << "root adress is " << this->tree.root << std::endl;
                   return iterator( tree.findSamllest(this->tree.root), tree.root);
                 //   return iterator((this->tree.root));
+              }
+
+              reverse_iterator rbegin()
+              {
+                return reverse_iterator(this->end());
+              }
+
+              const_reverse_iterator rbegin() const
+              {
+                  return  const_reverse_iterator(this->end());
+              }
+
+              reverse_iterator rend()
+              {
+                 return reverse_iterator(this->begin());
+              }
+              const_reverse_iterator rend() const
+              {
+                  return const_reverse_iterator(this->begin());
               }
 
                const_iterator begin() const
@@ -125,7 +147,7 @@ template<
 
               const_iterator end() const 
             {
-                return const_iterator(NULL, this->tree.root);
+                return const_iterator(NULL, tree.root);
             }  
 
 
