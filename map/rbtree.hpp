@@ -10,7 +10,8 @@ enum Color {
 };
 
 template<
-    class T
+    class T,
+    class Allocator = std::allocator<T>
 > 
 class  node {
 
@@ -20,16 +21,24 @@ class  node {
         node *parent;
         T value;
         Color color;
+
         typedef  T& reference;
         typedef const T& const_reference;
         typedef T* pointer;
+
+        typedef    Allocator   allocator_type;
+
+        allocator_type my_alloc;
+
+
         bool isRight ;
 
             node (T &value)
             {
                 this->left = NULL;
                 this->right = NULL;
-                this->value = value;
+                // this->value = value;
+                my_alloc.construct(&(this->value), value);
                 this->color = Red;
                 this->parent = NULL;
                 isRight = false;
@@ -161,32 +170,32 @@ class  node {
 } ;
 // :()
 template<
-    class T
+    class T,
+    class Allocator = std::allocator<T>
 > class RBtree
 {
 
         public :
                 typedef T& reference;
                 typedef typename  T::Key Key;
-                
+                typedef    Allocator   allocator_type;
 
-    int created;
+                
             RBtree()
             {
+                std::cout << "tree craeted " << std::endl;
                 this->root = NULL;
                 this->last = NULL;
                 this->_size = 0;
             }
-         
+
+
+            //Allocator 
+             
             void insert(T value)
             {
-                this->_size ++;
-                 insert2(this->root, value);
-            }
-
-            int getCreated()
-            {
-                return created ;
+                this->_size += 1;
+                insert2(this->root, value);
             }
 
             void _print(node<T> *n)
@@ -234,42 +243,42 @@ template<
             }
 
 
-            size_t size()
+            size_t size() const
             {
                 return _size;
             }
 
 
 
-            
-                node<T> *_find(node<T> *n , T val)
-                {
-                        if (n == NULL)
-                            return  NULL;
-                        if (n->value == val)
-                            return n;
-                    
-                        if (val < n->value)
-                            return   _find(n->left, val);
-                        return    _find(n->right, val);
-                }
+        
+            node<T> *_find(node<T> *n , T val)
+            {
+                    if (n == NULL)
+                        return  NULL;
+                    if (n->value == val)
+                        return n;
+                
+                    if (val < n->value)
+                        return   _find(n->left, val);
+                    return    _find(n->right, val);
+            }
 
-                node<T> *find(T val)
-                {
-                    if (this->root == NULL)
-                        return NULL;
-                    return _find(root, val);
-                }
+            node<T> *find(T val)
+            {
+                if (this->root == NULL)
+                    return NULL;
+                return _find(root, val);
+            }
 
-                bool exist(T val)
-                {
-                    return find(val) != NULL;
-                }
+            bool exist(T val)
+            {
+                return find(val) != NULL;
+            }
 
-                bool isNullLeaf(node<T> *n)
-                {
-                    return n == NULL;
-                }
+            bool isNullLeaf(node<T> *n) const
+            {
+                return n == NULL;
+            }
 
                 void _delete(node<T> *n , T val)
                 {
@@ -292,7 +301,19 @@ template<
                             _delete(n->left, val);
                 }
 
-                node<T> *findSamllest(node<T> *n)
+                node<T> *findSamllest(node<T> *n) const
+                {
+                    node<T> *temp = NULL;
+
+                    while (n != NULL && !isNullLeaf(n))
+                    {
+                        temp = n;
+                        n = n->left;
+                    }
+                    return temp != NULL ? temp : n;
+                }
+
+                                node<T> *findSamllest(node<T> *n) 
                 {
                     node<T> *temp = NULL;
 
@@ -432,6 +453,7 @@ template<
         private :
                 node<T> *last;
                 size_t _size;
+                Allocator my_alloc;
 
             void rightRotate(node<T> *n)
             {
@@ -621,7 +643,6 @@ template<
                 tmp1 = tmp;
                 if (root == NULL)
                 {
-                    this->created++;
                     this->root = new node<T>(value);
                     root->color = Black;
                     return this->root;

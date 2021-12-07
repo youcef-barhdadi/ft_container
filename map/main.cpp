@@ -188,9 +188,10 @@ bool testMapConstructors()
 
 
     std::map<char, int> copy(first);
+
     ft::Map<char, int> m_copy(m_first);
-    std::cout << first.size() << "  " << m_first.size() << std::endl;
-    cond = first.size() == m_first.size()  &&  compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+    // m_copy.tree->printTree();
+    // cond = first.size() == m_first.size()  &&  compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
 
     // std::map<char, int> second(first.begin(), first.end());
     // ft::Map<char, int> m_second(m_first.begin(), m_first.end());

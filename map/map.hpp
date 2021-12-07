@@ -46,18 +46,16 @@ template<
             typedef  Compare   key_compare;
             typedef    Allocator   allocator_type;
 
-            // Map()
-            // {
-            //     tree = new RBtree <pair< Key,T> >();
-
-            // }
-
             explicit Map (const key_compare& comp = key_compare(),
               const allocator_type& alloc = allocator_type())
             {
-                this->tree = new RBtree<value_type>();
+
+                // this->tree = new RBtree<value_type>();
+            
+                // alloc.construct(tree,  new RBtree<value_type>());
               
             }
+
             template <class InputIterator>
             Map (InputIterator first, InputIterator last,
               const key_compare& comp = key_compare(),
@@ -70,7 +68,7 @@ template<
                 }
             }
 
-            Map (const Map& x)
+            Map (const Map& x) : Map()
             {
                 const_iterator c =   x.begin();
                 size_t size = x.size();
@@ -86,46 +84,46 @@ template<
 
             void insert (const value_type val)
             {
-                    tree->insert(val);
+                    tree.insert(val);
             }
 
             //Capacity 
 
 
             bool empty()  const {
-                return tree->size() == 0;
+                return tree.size() == 0;
             }
-            size_type size() const
+            size_t size() const
             {
-                return  tree->size();
+                return  tree.size();
             }   
 
 
 //findBigger
               iterator begin()
               {
-                  std::cout << "root adress is " << this->tree->root << std::endl;
-                  return iterator( tree->findSamllest(this->tree->root), tree->root);
-                //   return iterator((this->tree->root));
+                  std::cout << "root adress is " << this->tree.root << std::endl;
+                  return iterator( tree.findSamllest(this->tree.root), tree.root);
+                //   return iterator((this->tree.root));
               }
 
                const_iterator begin() const
               {
-                //   std::cout << "root adress is " << this->tree->root << std::endl;
-                  return const_iterator( tree->findSamllest(this->tree->root), tree->root);
-                //   return iterator((this->tree->root));
+                //   std::cout << "root adress is " << this->tree.root << std::endl;
+                  return const_iterator( this->tree.findSamllest(tree.root), tree.root);
+                //   return iterator((this->tree.root));
               }
 
 
             iterator end()
             {
-                return iterator(NULL, tree->root);
+                return iterator(NULL, tree.root);
             } 
 
 
               const_iterator end() const 
             {
-                return const_iterator(NULL, this->tree->root);
+                return const_iterator(NULL, this->tree.root);
             }  
 
 
@@ -143,13 +141,14 @@ template<
             }
              iterator find (const key_type& k)
              {
-                   return iterator(this->tree->find( ft::pair<key_type, mapped_type>(k, mapped_type()) ), tree->root);
+                   return iterator(this->tree.find( ft::pair<key_type, mapped_type>(k, mapped_type()) ), tree.root);
              }
 
 
-           ft::RBtree <ft::pair< Key,T> > *tree;
 
+           ft::RBtree <ft::pair< Key,T> > tree;
         private :
+        allocator_type  my_alloc;
 };
 
 };
