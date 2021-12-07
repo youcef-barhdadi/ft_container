@@ -2,7 +2,7 @@
 #include "rbtree.hpp"
 #include "pair.hpp"
 #include "bidirectional_iterator.hpp"
-#include "const_bidirection_iterator.hpp"
+#include "reverse_bidirection_iterator.hpp"
 #include<iostream>
 #include<ctime> // used to work with date and time
 // using namespace std;
@@ -149,7 +149,6 @@ template<
 
             void erase (iterator position)
             {
-                // tree._delete()
                 tree.remove(*position);
             }
 
@@ -166,6 +165,70 @@ template<
                     ++first;
                   }
               }
+
+              void clear()
+              {
+                  erase(this->begin(), this->end());
+              }
+
+              void swap (Map& x)
+              {
+
+              }
+
+            size_type count (const key_type& k) const
+            {
+              return 0;
+            }
+
+            iterator lower_bound (const key_type& k)
+            {
+              // return iterator()
+            }
+            const_iterator lower_bound (const key_type& k) const
+            {
+
+            }
+            iterator upper_bound (const key_type& k)
+            {
+              
+            }
+            const_iterator upper_bound (const key_type& k) const
+            {
+
+            }
+
+          pair<const_iterator,const_iterator> equal_range (const key_type& k) const
+          {
+
+          }
+
+          pair<iterator,iterator>             equal_range (const key_type& k)
+          {
+
+          }
+
+          allocator_type get_allocator() const
+          {
+            return this->my_alloc;
+          }
+          key_compare key_comp() const
+          {
+
+          }
+
+          // value_compare value_comp() const
+          // {
+
+          // }
+          size_type max_size() const
+          {
+
+          }
+
+      
+
+
 
            ft::RBtree <ft::pair< Key,T> > tree;
         private :
