@@ -20,7 +20,7 @@ template<
     class Key,
     class T,
     class Compare = std::less<Key>,
-    class Allocator = std::allocator<pair<const Key, T>>
+    class Allocator = std::allocator<pair<const Key, T> >
 > class Map
 {
 
@@ -61,6 +61,7 @@ template<
               const key_compare& comp = key_compare(),
               const allocator_type& alloc = allocator_type())
             {
+              std::cout << "range constractuor called " << std::endl;
                 while (first != last)
                 {
                   this->insert(*first);
@@ -68,15 +69,16 @@ template<
                 }
             }
 
-            Map (const Map& x) : Map()
+            Map (const Map& x)
             {
                 const_iterator c =   x.begin();
                 size_t size = x.size();
-                while (--size)
+              
+                while (size)
                 {
                   this->insert(*c);
-                  std::cout << *c << std::endl;
                   ++c;
+                  size--;
                 }
             }
 
@@ -145,6 +147,25 @@ template<
              }
 
 
+            void erase (iterator position)
+            {
+                // tree._delete()
+                tree.remove(*position);
+            }
+
+            size_type erase (const key_type& k)
+            {
+                tree.remove(ft::make_pair<Key, T> (k, T()));
+            }
+
+              void erase (iterator first, iterator last)
+              {
+                  while (first != last)
+                  {
+                    tree.remove(*first);
+                    ++first;
+                  }
+              }
 
            ft::RBtree <ft::pair< Key,T> > tree;
         private :

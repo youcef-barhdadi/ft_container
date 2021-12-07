@@ -177,7 +177,6 @@ template<
 
         public :
                 typedef T& reference;
-                typedef typename  T::Key Key;
                 typedef    Allocator   allocator_type;
 
                 
@@ -285,9 +284,10 @@ template<
                         if (root == NULL || isNullLeaf(n))
                             return ;
                         if (n->value == val)
-                        {
+                        { 
                             if (isNullLeaf(n->right) || isNullLeaf(n->left)){
                                             deleteOneChild(n);
+                                return ;
                             
                             }else {
                                 node<T> *next = findSamllest(n->right);
@@ -337,25 +337,33 @@ template<
                     }
                     return temp != NULL ? temp : n;
                 }
-                void deleteOneChild(node<T> *n)
+                void remove(T val)
                 {
-                    if (n == NULL)
+                    node<T> *n = this->find(val);
+                    _delete(this->root, val);
+                }
+                
+                 void deleteOneChild(node<T> *nodeTodelete)
+                {
+                    if (nodeTodelete == NULL)
                     {
                         std::cout << "null node " << std::endl;
                         return ;
                     }
-                    node<T> *toDelete = isNullLeaf(n->right) ? n->left : n->right;
+                    node<T> *child = isNullLeaf(nodeTodelete->right) ? nodeTodelete->left : nodeTodelete->right;
+                    
+                    // if (child != NULL)
+                        replaceNode(nodeTodelete, child);
 
-                    replaceNode(n, toDelete);
-
-                    if (toDelete->color == Black)
+                    if (nodeTodelete->color == Black)
                     {
-                        if (toDelete->color == Red)
+                        if (child && child->color == Red)
                         {
-                            toDelete->color = Black;
+                            child->color = Black;
                         }
                         else {
-                            deleteCase1(toDelete);
+                            if (child != nullptr)
+                                deleteCase1(child);
                         }
                     }
                 }
@@ -369,6 +377,34 @@ template<
                     }
                     deleteCase2(n);
                 }
+
+
+                void replaceNode(node<T> *r, node<T> *child)
+                {
+                    if (child != NULL)
+                        child->parent = r->parent;
+                    if (r->parent == nullptr)
+                    {
+                        this->root = child;
+                    }
+                    else {
+                        if (r->isRight == false)
+                        {
+                            r->parent->left = child;;
+                        }
+                        else {
+                                 r->parent->right = child;;
+                        }
+                    }
+                } 
+                
+                node<T> *findSiblingNode(node<T> *n)
+                {
+                    if (n->isRight)
+                        return n->parent->left;
+                    else
+                        return n->parent->right;
+                }
                 void deleteCase2(node<T> *n)
                 {
                     node<T> *siblingNode = findSiblingNode(n);
@@ -378,7 +414,7 @@ template<
                         {
                             rightRotate(siblingNode);
                         }else {
-                            leftRotate(siblingNode);
+                            leftRoutate(siblingNode);
                         }
 
                         if (siblingNode == root)
@@ -446,7 +482,6 @@ template<
                     {
                         root = sibling;
                     }
-
                 }
 
                 node<T>  *root;

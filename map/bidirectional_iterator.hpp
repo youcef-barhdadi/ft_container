@@ -177,7 +177,6 @@ class const_bidirectional_iterator  : public std::iterator<std::bidirectional_it
         
         const_bidirectional_iterator operator++(void)
         {
-            std::cout << "why" << std::endl;
             T *tmp   = _node->findNextNode(_node);
             _node = tmp;
             return *this;

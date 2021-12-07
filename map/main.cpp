@@ -1,4 +1,4 @@
-// #include "rbtree.hpp"
+#include "rbtree.hpp"
 #include "map.hpp"
 #include<utility>
 #include "pair.hpp"
@@ -61,12 +61,12 @@ int printtime() {
 template <typename Iter1, typename Iter2>
 bool compareMaps(Iter1 first1, Iter1 last1, Iter2 first2, Iter2 last2)
 {
-        std::cout << "this is good "  << std::endl;
-    // for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
-    // {
-    //     if (first1->first != first2->first || first1->second != first2->second)
-    //         return false;
-    // }
+        // std::cout << "this is good "  << std::endl;
+    for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
+    {
+        if (first1->first != first2->first || first1->second != first2->second)
+            return false;
+    }
     return true;
 }
 
@@ -88,9 +88,19 @@ void const_iterator_tests(void);
 
 int main()
 {
-        //  const_iterator_tests();
 
-        testMapConstructors();
+            ft::RBtree<int> c;
+
+            for(int i = 0;i <100; i++)
+            {
+                c.insert(i);
+            }
+            
+
+            c.printTree();
+            c.remove(47);
+            std::cout << "=================" << std::endl;
+            c.printTree();
 }
 
 
@@ -190,33 +200,31 @@ bool testMapConstructors()
     std::map<char, int> copy(first);
 
     ft::Map<char, int> m_copy(m_first);
-    // m_copy.tree->printTree();
-    // cond = first.size() == m_first.size()  &&  compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+    cond = first.size() == m_first.size()  &&  compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
 
-    // std::map<char, int> second(first.begin(), first.end());
-    // ft::Map<char, int> m_second(m_first.begin(), m_first.end());
+    std::map<char, int> second(first.begin(), first.end());
+    ft::Map<char, int> m_second(m_first.begin(), m_first.end());
+    cond = cond && second.size() == m_second.size() && compareMaps(second.begin(), second.end(), m_second.begin(), m_second.end());
+    std::map<char, int> third(second);
+    ft::Map<char, int> m_third(m_second);
+    std::cout << "size ==> " << ( m_third.size()) << std::endl;
+    cond = cond && third.size() == m_third.size() && compareMaps(third.begin(), third.end(), m_third.begin(), m_third.end());
 
-    // cond = cond && second.size() == m_second.size() && compareMaps(second.begin(), second.end(), m_second.begin(), m_second.end());
-    // std::map<char, int> third(second);
-    // ft::Map<char, int> m_third(m_second);
+    std::map<char, int, classcomp> fourth;  // class as Compare
+    ft::Map<char, int, classcomp> m_fourth; // class as Compare
 
-    // cond = cond && third.size() == m_third.size() && compareMaps(third.begin(), third.end(), m_third.begin(), m_third.end());
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
 
-    // std::map<char, int, classcomp> fourth;  // class as Compare
-    // ft::Map<char, int, classcomp> m_fourth; // class as Compare
+    bool (*fn_pt)(char, char) = fncomp;
+    std::map<char, int, bool (*)(char, char)> fifth(fn_pt);  // function pointer as Compare
+    ft::Map<char, int, bool (*)(char, char)> m_fifth(fn_pt); // function pointer as Compare
 
-    // cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
 
-    // bool (*fn_pt)(char, char) = fncomp;
-    // std::map<char, int, bool (*)(char, char)> fifth(fn_pt);  // function pointer as Compare
-    // ft::Map<char, int, bool (*)(char, char)> m_fifth(fn_pt); // function pointer as Compare
+    first = std::map<char, int>();
+    m_first = ft::Map<char, int>();
 
-    // cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
-
-    // first = std::map<char, int>();
-    // m_first = ft::Map<char, int>();
-
-    // cond = copy.size() == m_copy.size() && cond && compareMaps(copy.begin(), copy.end(), m_copy.begin(), m_copy.end());
+    cond = copy.size() == m_copy.size() && cond && compareMaps(copy.begin(), copy.end(), m_copy.begin(), m_copy.end());
 
     return cond;
 }
