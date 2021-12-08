@@ -13,7 +13,7 @@ namespace ft
 
     template <
         class T,
-        class Allocator = std::allocator<T>>
+        class Allocator = std::allocator<T> >
     class node
     {
 
@@ -170,7 +170,7 @@ namespace ft
     // :()
     template <
         class T,
-        class Allocator = std::allocator<T>>
+        class Allocator = std::allocator<T> >
     class RBtree
     {
 
@@ -262,6 +262,7 @@ namespace ft
                 return NULL;
             return _find(root, val);
         }
+
 
         bool exist(T val)
         {

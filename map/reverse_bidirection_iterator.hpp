@@ -30,14 +30,14 @@ namespace ft {
                 reference operator*() 
                 {
                     iterator_type  pre = iter;
-                    pre--;
+                    --pre;
                     return  (*pre);
                 }
 
                 pointer operator->()
                 {
                     iterator_type  pre(iter);
-                    pre--;
+                    --pre;
                     return  &(*pre);
                 }
                         

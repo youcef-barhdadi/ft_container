@@ -68,8 +68,8 @@ template<
             {
                 while (first != last)
                 {
-                  std::cout << "insetring "   <<  *(++first)  << *last << std::endl;
-                  this->insert(*(++first));
+                  this->insert(*first);
+                  ++first;
                 }
             }
 
@@ -86,12 +86,43 @@ template<
                 }
             }
 
-
-
-            void insert (const value_type val)
+            pair<iterator,bool> insert (const value_type& val);
             {
-                    tree.insert(val);
+                  node<T> *n =  tree.find(value);
+                  if ( n != NULL)
+                  {
+                      return make_pair<iterator, bool>(iterator(n, tree.root), false);
+                  }
+                  else {
+                        tree.insert(val);
+                       *n =  tree.find(value);
+                        return make_pair<iterator, bool>(iterator(n, tree.root), true);
+                  }
             }
+
+
+            iterator insert (iterator position, const value_type& val)
+            {
+
+            }
+
+            template <class InputIterator>
+            void insert (InputIterator first, InputIterator last)
+            {
+              
+            }
+
+
+
+
+
+
+
+
+            // void insert (const value_type val)
+            // {
+            //         tree.insert(val);
+            // }
 
             //Capacity 
 
