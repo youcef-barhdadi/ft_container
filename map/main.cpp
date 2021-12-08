@@ -198,11 +198,9 @@ void testModifiers()
 
         ft_m.insert(ft_it, ft::pair<char, int>('b', 300));
         ft_m.insert(ft_it, ft::pair<char, int>('c', 400));
-        std::cout << std::endl;
         ft_m.tree.printTree();
 
         cond = cond && (m.size() == ft_m.size() && m.empty() == ft_m.empty());
-
 
         // third insert function version (range insertion):
         std::map<char, int> anothermap;
