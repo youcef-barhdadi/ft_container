@@ -22,17 +22,10 @@ int main()
    }
    // ft::Map<int, std::string>   ft_m2(ft_m1.rbegin(), ft_m1.rend());
 
-   std::map<int , std::string>::iterator  c  = m1.end();
-   // c++;
-   // c++;
-   c++;
-   std::cout << c->first << std::endl; 
+   ft::Map<int , std::string>::iterator  c  = ft_m1.find(-1);
 
-   
-   // for (ft::Map<int, std::string>::reverse_iterator cit  = ft_m1.rbegin(); cit !=  ft_m1.rend(); ++cit)
-   // {
-   //    std::cout << *cit << std::endl;
-   // }
+   std::cout << *c << std::endl;
+
 
 
 }

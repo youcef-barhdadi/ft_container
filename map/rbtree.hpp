@@ -114,18 +114,18 @@ namespace ft
             return temp != NULL ? temp : n;
         }
 
-        node<T> *find(node<T> *n)
-        {
-            node<T> *temp;
+        // node<T> *find(node<T> *n)
+        // {
+        //     node<T> *temp;
 
-            temp = NULL;
-            while (n != NULL)
-            {
-                temp = n;
-                n = n->right;
-            }
-            return temp != NULL ? temp : n;
-        }
+        //     temp = NULL;
+        //     while (n != NULL)
+        //     {
+        //         temp = n;
+        //         n = n->right;
+        //     }
+        //     return temp != NULL ? temp : n;
+        // }
 
         bool operator==(node &n)
         {
@@ -191,6 +191,14 @@ namespace ft
         {
             this->_size += 1;
             insert2(this->root, value);
+        }
+
+        void insertAt(node<T> *n,T value)
+        {
+            this->_size += 1;
+            if (n == NULL)
+                n = root;
+            insert2(n, value);
         }
 
         void _print(node<T> *n) const
@@ -736,25 +744,23 @@ namespace ft
                 }
                 else
                 {
-                    // _node->left = temp;
+                    _node->left = temp;
                 }
             }
             else
             {
-                // std::cout << "in right" << std::endl;
                 node<T> *temp = _insert(_node->right, value);
                 if (_node->right == NULL)
                 {
 
                     temp->isRight = true;
                     _node->right = temp;
-                    // std::cout <<  << temp->isRight << std::endl;
                     temp->parent = _node;
                     last = temp;
                 }
                 else
                 {
-                    // _node->right = temp;
+                    _node->right = temp;
                 }
             }
             return _node;

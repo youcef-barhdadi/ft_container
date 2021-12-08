@@ -56,6 +56,10 @@ namespace ft
         {
             return &(_node->value);
         }
+                pointer operator->() const
+        {
+            return &(_node->value);
+        }
 
         bidirectional_iterator operator++(void)
         {

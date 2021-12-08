@@ -60,7 +60,6 @@ template<
                 // alloc.construct(tree,  new RBtree<value_type>());
               
             }
-
             template <class InputIterator>
             Map (InputIterator first, InputIterator last,
               const key_compare& comp = key_compare(),
@@ -86,30 +85,42 @@ template<
                 }
             }
 
-            pair<iterator,bool> insert (const value_type& val);
+            pair<iterator,bool> insert (const value_type& val)
             {
-                  node<T> *n =  tree.find(value);
+                  node<value_type> *n =  tree.find(val);
                   if ( n != NULL)
                   {
-                      return make_pair<iterator, bool>(iterator(n, tree.root), false);
+                      return ft::make_pair<iterator, bool>(iterator(n, tree.root), false);
                   }
                   else {
                         tree.insert(val);
-                       *n =  tree.find(value);
-                        return make_pair<iterator, bool>(iterator(n, tree.root), true);
+                        n =  tree.find(val);
+                        return ft::make_pair<iterator, bool>(iterator(n, tree.root), true);
                   }
             }
 
 
             iterator insert (iterator position, const value_type& val)
             {
-
+                  node<value_type> *n =  tree.find(*position);
+       
+                  if (n == NULL)
+                    this->insert(val);
+                  else
+                    tree.insertAt(n, val);
+                  return iterator(n, tree.root);
             }
 
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last)
             {
-              
+                  //  std::cout << "insert fuck3" << *last << std::endl;
+                  // std::cout << (n->value).first << std::endl;
+                while (first != last)
+                {
+                  this->insert(*first);
+                  ++first;
+                }
             }
 
 
@@ -196,7 +207,7 @@ template<
             }
              iterator find (const key_type& k)
              {
-                   return iterator(this->tree.find( ft::pair<key_type, mapped_type>(k, mapped_type()) ), tree.root);
+                   return iterator(this->tree.find(ft::pair<key_type, mapped_type>(k, mapped_type()) ), tree.root);
              }
 
 
@@ -208,6 +219,7 @@ template<
             size_type erase (const key_type& k)
             {
                 tree.remove(ft::make_pair<Key, T> (k, T()));
+                return (1);
             }
 
               void erase (iterator first, iterator last)
