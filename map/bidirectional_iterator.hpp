@@ -143,14 +143,16 @@ namespace ft
             return (*this);
         }
 
-        const_bidirectional_iterator(const const_bidirectional_iterator &n) : _node(n._node)
+        const_bidirectional_iterator(const const_bidirectional_iterator &n)
         {
             this->_node = n._node;
+            this->root = n.root;
         }
 
-        const_bidirectional_iterator(const bidirectional_iterator<T> &n) : _node(n._node)
+        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
         {
-            // this->_node = n._node;
+            this->_node = n._node;
+            this->root = n.root;
         }
 
         reference operator*() const
@@ -179,21 +181,31 @@ namespace ft
 
         const_bidirectional_iterator operator--(void)
         {
-            T *tmp = _node->findPrevious(_node);
-            if (tmp != NULL)
-                _node = tmp;
+             T *tmp;
+
+            if (_node != NULL && *(this->_node) == *(root->findSmallest(root)))
+                return (*this);
+            if (_node == NULL)
+            {
+                tmp = root->findBigger(root);
+            }
+            else
+                tmp = _node->findPrevious(_node);
+            _node = tmp;
             return *this;
         }
 
         const_bidirectional_iterator operator=(const_bidirectional_iterator b)
         {
             this->_node = b._node;
+            this->root = b.root;
             return (*this);
         }
 
         const_bidirectional_iterator operator=(bidirectional_iterator<T> b)
         {
             this->_node = b._node;
+            this->root = b.root;
             return (*this);
         }
 
@@ -204,13 +216,13 @@ namespace ft
 
         friend bool operator!=(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
         {
-            return (lhr._node) != rhr._node;
+            return lhr._node != rhr._node;
         }
 
         const_bidirectional_iterator operator--(int)
         {
-            const_bidirectional_iterator copy(this->_node, root);
-            --(*this);
+            const_bidirectional_iterator copy(this->_node, this->root);
+            operator--();
             return copy;
         }
 

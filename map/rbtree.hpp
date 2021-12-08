@@ -193,7 +193,7 @@ namespace ft
             insert2(this->root, value);
         }
 
-        void _print(node<T> *n)
+        void _print(node<T> *n) const
         {
             if (n == NULL)
                 return;
@@ -202,13 +202,13 @@ namespace ft
             _print(n->right);
         }
 
-        void print()
+        void print() const
         {
             std::cout << "print" << std::endl;
             _print(this->root);
         }
 
-        void printTree()
+        void printTree() const
         {
             if (this->root)
             {
@@ -216,7 +216,7 @@ namespace ft
             }
         }
 
-        void printHelper(node<T> *_node, std::string indent, bool last)
+        void printHelper(node<T> *_node, std::string indent, bool last) const
         {
             if (_node != NULL)
             {

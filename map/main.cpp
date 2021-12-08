@@ -89,7 +89,9 @@ void testIterators();
 int main()
 {
 
-        testIterators();
+    // const_iterator_tests();
+    testIterators();
+     
     return (0);
             
 }
@@ -208,8 +210,8 @@ void testIterators()
             ft_m1.insert(ft::make_pair<int, std::string>(i, "string2"));
         }
 
-        std::map<int, std::string> const m2(m1.rbegin(), m1.rend());
-        ft::Map<int, std::string>  const ft_m2(ft_m1.rbegin(), ft_m1.rend());
+        // std::map<int, std::string> const m2(m1.rbegin(), m1.rend());
+        // ft::Map<int, std::string>  const ft_m2(ft_m1.rbegin(), ft_m1.rend());
 
         /*-----------------------------------------------------*/
         /*------------------ ft::Maps ---------------------*/
@@ -224,11 +226,14 @@ void testIterators()
 
         // for (ft::Map<int, std::string>::reverse_iterator it = ft_m1.rbegin(); it != ft_m1.rend(); ++it) // fill ft_res from ft_m1
         //     ft_res += it->second;
-        for (ft::Map<int, std::string>::const_reverse_iterator rit = ft_m2.rbegin(); rit != ft_m2.rend(); ++rit) // fill c_ft_res from const ft_m1
-        {
-            // std::cout << "==>>>" << std::endl; 
-            c_ft_res += rit->second;
-        }
+
+        // ft_m2.tree.printTree();
+
+        // for (ft::Map<int, std::string>::const_reverse_iterator rit = ft_m2.rbegin(); rit != ft_m2.rend(); ++rit) // fill c_ft_res from const ft_m1
+        // {
+        //     // std::cout <<   "=="   << rit->second << std::endl; 
+        //     c_ft_res += rit->second;
+        // }
     //     int arr[] = {12, 82, 37, 64, 15};
     //     ft::Map<int, int> end_test;
     //     for(size_t i = 0; i < 5; ++i)

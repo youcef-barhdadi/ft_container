@@ -68,7 +68,7 @@ template<
             {
                 while (first != last)
                 {
-                  // std::cout << "insetring "   <<  *(++first) << std::endl;
+                  std::cout << "insetring "   <<  *(++first)  << *last << std::endl;
                   this->insert(*(++first));
                 }
             }

@@ -37,7 +37,6 @@ namespace ft {
                 pointer operator->()
                 {
                     iterator_type  pre(iter);
-                    std::cout << pre.base() << std::endl;
                     pre--;
                     return  &(*pre);
                 }
