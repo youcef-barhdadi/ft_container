@@ -344,7 +344,14 @@ namespace ft
         void remove(T val)
         {
             node<T> *n = this->find(val);
+            this->_size --;
             _delete(this->root, val);
+            if (n)
+            {
+            n->left = NULL;
+            n->right = NULL;
+            // delete n;
+            }
         }
 
         void deleteOneChild(node<T> *nodeTodelete)
@@ -413,6 +420,13 @@ namespace ft
             else
                 return n->parent->right;
         }
+
+        int isBlack(node<T> *n)
+        {
+            if (n == NULL)
+                return 1;
+            return n->color == Black;
+        }
         void deleteCase2(node<T> *n)
         {
             node<T> *siblingNode = findSiblingNode(n);
@@ -432,14 +446,14 @@ namespace ft
                     root = siblingNode;
                 }
             }
-
-            deleteCase3(n);
+            // if (n)
+                deleteCase3(n);
         }
 
         void deleteCase3(node<T> *n)
         {
             node<T> *sibling = findSiblingNode(n);
-            if (n->parent->color == Black && sibling->color == Black && sibling->left->color == Black && sibling->right->color == Black)
+            if (n->parent->color == Black && sibling->color == Black &&  isBlack(sibling->left) &&  isBlack(sibling->right) )
             {
                 sibling->color = Red;
                 deleteCase1(n->parent);
@@ -452,7 +466,7 @@ namespace ft
         void deleteCase4(node<T> *n)
         {
             node<T> *sibling = findSiblingNode(n);
-            if (n->parent->color == Red && sibling->color == Black && sibling->left->color == Black && sibling->right->color == Black)
+            if (n->parent->color == Red && sibling->color == Black &&  isBlack(sibling->left) &&  isBlack(sibling->right))
             {
                 sibling->color = Red;
                 n->color = Black;
@@ -468,11 +482,11 @@ namespace ft
 
             if (sibling->color == Black)
             {
-                if (n->isRight == false && sibling->right->color == Black && sibling->left->color == Red)
+                if (n->isRight == false &&  isBlack(sibling->right) &&  !isBlack(sibling->left))
                 {
                     rightRotate(sibling->left);
                 }
-                else if (n->isRight && sibling->left->color == Black && sibling->right->color == Black)
+                else if (n->isRight &&  isBlack(sibling->left)  && !isBlack(sibling->right))
                 {
                     leftRoutate(sibling->right);
                 }
@@ -491,7 +505,8 @@ namespace ft
             }
             else
             {
-                sibling->left->color = Black;
+                if (sibling->left)
+                    sibling->left->color = Black;
                 rightRotate(sibling);
             }
             if (sibling->parent == NULL)
@@ -512,8 +527,10 @@ namespace ft
             // if (n == NULL)
             //         return ;
             node<T> *temp;
+            if (n == NULL || n->left  == NULL)
+                return ;
 
-            temp = n->left;
+            temp = n->left;           
             n->left = temp->right;
             if (n->left != NULL)
             {

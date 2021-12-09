@@ -100,14 +100,20 @@ template<
             }
 
 
+            /*
+              coorect this function
+            */
+
             iterator insert (iterator position, const value_type& val)
             {
-                  node<value_type> *n =  tree.find(*position);
+                  // node<value_type> *n =  tree.find(*position);
        
-                  if (n == NULL)
+                  // if (n == NULL)
                     this->insert(val);
-                  else
-                    tree.insertAt(n, val);
+                  // else
+                  //   tree.insertAt(n, val);
+                                    node<value_type> *n =  tree.find(*position);
+
                   return iterator(n, tree.root);
             }
 

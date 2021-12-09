@@ -198,7 +198,7 @@ void testModifiers()
 
         ft_m.insert(ft_it, ft::pair<char, int>('b', 300));
         ft_m.insert(ft_it, ft::pair<char, int>('c', 400));
-        ft_m.tree.printTree();
+        
 
         cond = cond && (m.size() == ft_m.size() && m.empty() == ft_m.empty());
 
@@ -208,13 +208,14 @@ void testModifiers()
         anothermap.insert(m.begin(), m.find('c'));
         ft_anothermap.insert(ft_m.begin(), ft_m.find('c'));
         ft::Map<char, int>::iterator cccc = ft_m.find('c');
+        ft_m.tree.printTree();
+        ft::Map<char, int>::iterator iter = ft_m.find('c');
+    
 
         cond = cond && (anothermap.size() == ft_anothermap.size() && anothermap.empty() == ft_anothermap.empty());
         // std::cout << "==>|>" <<   *(ft_m.find('c')) << std::endl;
 
         cond = cond && compareMaps(ft_m.begin(), ft_m.end(), m.begin(), m.end()) && compareMaps(ft_anothermap.begin(), ft_anothermap.end(), anothermap.begin(), anothermap.end());
-        std::cout << cond << std::endl;
-        exit(0);
         EQUAL(cond);
     }
 
@@ -244,6 +245,7 @@ void testModifiers()
             /*------------------ ft::Maps ---------------------*/
             ualarm(diff * 1e3, 0);
             ft_m1.erase(ft_m1.begin(), ft_m1.end());
+            ft_m1.tree.printTree();
             ualarm(0, 0);
             /*----------------------------------------------------*/
         }
@@ -253,12 +255,15 @@ void testModifiers()
         ft::Map<char, int>::iterator ft_it;
 
         // insert some values:
+        std::cout <<  "====>" << cond << std::endl;
+
         ft_m['a'] = 10;
         ft_m['b'] = 20;
         ft_m['c'] = 30;
         ft_m['d'] = 40;
         ft_m['e'] = 50;
         ft_m['f'] = 60;
+        std::cout <<  "====>1" << cond << std::endl;
 
         m['a'] = 10;
         m['b'] = 20;
@@ -268,7 +273,7 @@ void testModifiers()
         m['f'] = 60;
 
         cond = m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
-
+        std::cout <<  "====>" << cond << std::endl;
         it = m.find('b');
         ft_it = ft_m.find('b');
 

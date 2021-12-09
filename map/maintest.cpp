@@ -12,20 +12,23 @@ int printtime() {
 }
 int main()
 {
-   std::map<int, std::string> m1;
-   ft::Map<int, std::string>  ft_m1;
+
+   ft::RBtree<int> c;
 
    for (size_t i = 0; i < 100; i++)
    {
-      m1.insert(std::make_pair(i, "string2"));
-      ft_m1.insert(ft::make_pair<int, std::string>(i, "string2"));
+      c.insert(i);
    }
-   // ft::Map<int, std::string>   ft_m2(ft_m1.rbegin(), ft_m1.rend());
 
-   ft::Map<int , std::string>::iterator  c  = ft_m1.find(-1);
+      for (size_t i = 30; i < 44; i++)
+   {
+      c.remove(i);
+   }
 
-   std::cout << *c << std::endl;
-
-
+   // c.remove(34);
+   // c.remove(89);
+   // c.printTree();
+   std::cout << c.size() << std::endl;
+    
 
 }
