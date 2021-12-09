@@ -87,6 +87,7 @@ void testIterators();
 void testCapacityMethods();
 void testElementAccess();
 void testModifiers();
+void testAllocatorMethodes();
 int main()
 {
 
@@ -95,13 +96,178 @@ int main()
     // EQUAL(testMapConstructors());
     // testCapacityMethods();
     // testElementAccess();
-      testModifiers();
+      testAllocatorMethodes();
     return (0);
             
 }
 
 
 
+void testRetionalOperators()
+{
+
+    /* ---------------  pretty simple tests --------------- */
+    std::map<char, int> foo, bar;
+    ft::Map<char, int> ft_foo, ft_bar;
+    bool res;
+    bool ft_res;
+    foo['a'] = 100;
+    foo['b'] = 200;
+    bar['a'] = 10;
+    bar['z'] = 1000;
+
+    ft_foo['a'] = 100;
+    ft_foo['b'] = 200;
+    ft_bar['a'] = 10;
+    ft_bar['z'] = 1000;
+
+    std::map<int, std::string> m, m1;
+    ft::Map<int, std::string> ft_m, ft_m1;
+    for (size_t i = 0; i < 1e6; ++i)
+    {
+        m.insert(std::make_pair(i, "value"));
+        ft_m.insert(ft::make_pair<int , std::string>(i, "value"));
+    }
+    for (size_t i = 0; i < 1e6; ++i)
+    {
+        m1.insert(std::make_pair(i + 1, "value1"));
+        ft_m1.insert(ft::make_pair<int, std::string>(i + 1, "value1"));
+    }
+
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator == "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    {
+        time_t start, end, diff;
+        start = get_time();
+        res = m == m1;
+        end = get_time();
+        diff = end - start;
+        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+
+        ualarm(diff * 1e3, 0);
+        ft_res = ft_m == ft_m1;
+        ualarm(0, 0);
+    }
+
+    EQUAL(((foo == bar) == (ft_foo == ft_bar)) && res == ft_res);
+
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator != "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    {
+        time_t start, end, diff;
+
+        start = get_time();
+        res = m != m1;
+        end = get_time();
+        diff = end - start;
+        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+
+        ualarm(diff * 1e3, 0);
+        ft_res = ft_m != ft_m1;
+        ualarm(0, 0);
+    }
+    EQUAL((foo != bar) == (ft_foo != ft_bar) && res == ft_res);
+
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator > "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    {
+        time_t start, end, diff;
+        start = get_time();
+        res = m > m1;
+        end = get_time();
+        diff = end - start;
+        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+
+        ualarm(diff * 1e3, 0);
+        ft_res = ft_m > ft_m1;
+        ualarm(0, 0);
+    }
+    EQUAL(((foo > bar) == (ft_foo > ft_bar)) && (res == ft_res));
+
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator >= "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    {
+        time_t start, end, diff;
+
+        start = get_time();
+        res = m >= m1;
+        end = get_time();
+        diff = end - start;
+        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+
+        ualarm(diff * 1e3, 0);
+        ft_res = ft_m >= ft_m1;
+        ualarm(0, 0);
+    }
+    EQUAL(((foo >= bar) == (ft_foo >= ft_bar)) && (res == ft_res));
+
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator < "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    {
+        time_t start, end, diff;
+
+        start = get_time();
+        res = m < m1;
+        end = get_time();
+        diff = end - start;
+        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+
+        ualarm(diff * 1e3, 0);
+        ft_res = ft_m < ft_m1;
+        ualarm(0, 0);
+    }
+    EQUAL(((foo < bar) == (ft_foo < ft_bar)) && (res == ft_res));
+
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator <= "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    {
+        time_t start, end, diff;
+
+        start = get_time();
+        res = m <= m1;
+        end = get_time();
+        diff = end - start;
+        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+
+        ualarm(diff * 1e3, 0);
+        ft_res = ft_m <= ft_m1;
+        ualarm(0, 0);
+    }
+    EQUAL(((foo <= bar) == (ft_foo <= ft_bar)) && (res == ft_res));
+}
+
+
+
+
+
+
+
+
+
+
+void testAllocatorMethodes()
+{
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " get_allocator method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        int psize;
+        ft::Map<char, int> mymap;
+        ft::pair<const char, int> *p;
+
+        // allocate an array of 5 elements using mymap's allocator:
+        p = mymap.get_allocator().allocate(5);
+
+        psize = sizeof(std::map<char, int>::value_type) * 5;
+        EQUAL(psize == 40);
+        mymap.get_allocator().deallocate(p, 5);
+    }
+}
 
 void testModifiers()
 {
