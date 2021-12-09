@@ -14,20 +14,19 @@ int main()
 {
 
    ft::RBtree<int> c;
+   ft::RBtree<int> c1;
 
    for (size_t i = 0; i < 100; i++)
    {
       c.insert(i);
    }
 
-      for (size_t i = 30; i < 44; i++)
+      for (size_t i =110; i < 2000; i++)
    {
       c.remove(i);
    }
 
-   // c.remove(34);
-   // c.remove(89);
-   // c.printTree();
+   c.printTree();
    std::cout << c.size() << std::endl;
     
 

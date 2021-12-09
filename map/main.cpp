@@ -245,7 +245,7 @@ void testModifiers()
             /*------------------ ft::Maps ---------------------*/
             ualarm(diff * 1e3, 0);
             ft_m1.erase(ft_m1.begin(), ft_m1.end());
-            ft_m1.tree.printTree();
+            // ft_m1.tree.printTree();
             ualarm(0, 0);
             /*----------------------------------------------------*/
         }
@@ -255,7 +255,6 @@ void testModifiers()
         ft::Map<char, int>::iterator ft_it;
 
         // insert some values:
-        std::cout <<  "====>" << cond << std::endl;
 
         ft_m['a'] = 10;
         ft_m['b'] = 20;
@@ -263,7 +262,6 @@ void testModifiers()
         ft_m['d'] = 40;
         ft_m['e'] = 50;
         ft_m['f'] = 60;
-        std::cout <<  "====>1" << cond << std::endl;
 
         m['a'] = 10;
         m['b'] = 20;
@@ -273,16 +271,15 @@ void testModifiers()
         m['f'] = 60;
 
         cond = m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
-        std::cout <<  "====>" << cond << std::endl;
         it = m.find('b');
         ft_it = ft_m.find('b');
 
         cond = cond && (it->first == ft_it->first) && (it->second == ft_it->second);
+
         m.erase(it);       // erasing by iterator
         ft_m.erase(ft_it); // erasing by iterator
 
         cond = cond && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
-
         int ret = m.erase('c');       // erasing by key
         int ft_ret = ft_m.erase('c'); // erasing by key
 
@@ -292,7 +289,6 @@ void testModifiers()
         ft_it = ft_m.find('e');
 
         cond = cond && (it->first == ft_it->first) && (it->second == ft_it->second) && m.size() == ft_m.size();
-
         m.erase(it, m.end());          // erasing by range
         ft_m.erase(ft_it, ft_m.end()); // erasing by range
 
@@ -349,6 +345,9 @@ void testModifiers()
             }
         }
 
+
+
+
         if (!m3.empty())
         {
             m3.erase(m3.begin(), m3.end());
@@ -359,6 +358,7 @@ void testModifiers()
             ft_m3.erase(ft_m3.begin(), ft_m3.end());
             ft_m3.erase(ft_m3.begin(), ft_m3.end());
         }
+
         cond = cond && (m3.size() == ft_m3.size() && compareMaps(m3.begin(), m3.end(), ft_m3.begin(), ft_m3.end()));
 
         EQUAL(cond);
@@ -366,7 +366,6 @@ void testModifiers()
 
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " swap method "
               << "] --------------------]\t\t\033[0m";
-
     {
         {
             time_t start, end, diff;
@@ -481,12 +480,15 @@ void testModifiers()
         //           << "m1: " << m1 << "m2: " << m2 << "ref: " << ref
         //           << "\niter: " << *iter << '\n';
 
+
         cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
+        std::cout << std::endl <<"[=>>" <<   ref.first << "|" <<   ft_ref.first << "]" << std::endl;
 
         m1.swap(m2);
         ft_m1.swap(ft_m2);
 
         // _---------------_ << ──────── after swap ──────── >> _---------------_
+        std::cout << std::endl <<"[=>>" <<   ref.first << "|" <<   ft_ref.first  << "]" << std::endl;
 
         cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
 

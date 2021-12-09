@@ -30,26 +30,33 @@ template<
            typedef pair< Key, T>   value_type   ;
            typedef Key   key_type   ;
             //  typedef Allocator allocator_type  ;
-             typedef size_t size_type  ;
+            typedef size_t size_type  ;
 
-             typedef      T& reference;
+            typedef      T& reference;
              
-             typedef  const T& const_refernce ;
+            typedef  const T& const_refernce ;
 
-             typedef T *  pointer;
+            typedef T *  pointer;
              
-             typedef const  T *  const_pointer;
+            typedef const  T *  const_pointer;
 
-            typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator; 
+            typedef ft::bidirectional_iterator<node <ft::pair<Key, T> > >    iterator;
+            
             typedef ft::const_bidirectional_iterator<node <ft::pair< Key, T> > > const_iterator; 
+
             typedef ft::reverse_bidirection_iterator<iterator>  reverse_iterator;
+
             typedef ft::reverse_bidirection_iterator<const_iterator>  const_reverse_iterator;
- 
-
-
-
+          
             typedef  Compare   key_compare;
+
             typedef    Allocator   allocator_type;
+
+
+            
+
+
+
 
             explicit Map (const key_compare& comp = key_compare(),
               const allocator_type& alloc = allocator_type())
@@ -221,11 +228,11 @@ template<
             {
                 tree.remove(*position);
             }
-
+            // this is need to optimize
             size_type erase (const key_type& k)
             {
-                tree.remove(ft::make_pair<Key, T> (k, T()));
-                return (1);
+                //  node<T *n = this->tree.  ( ft::make_pair<Key, T> (k, T()));
+               return  tree.remove(ft::make_pair<Key, T> (k, T()));
             }
 
               void erase (iterator first, iterator last)
@@ -244,7 +251,15 @@ template<
 
               void swap (Map& x)
               {
+                  node<value_type> *r1 = x.tree.root; 
+                  // node<T> *r1 = x.tree.root;
+                  size_t  size1 = x.tree._size;
 
+                  x.tree.root = this->tree.root;
+                  this->tree.root  = r1;
+                  
+                  x.tree._size = this->tree._size;
+                  this->tree._size = size1;
               }
 
             size_type count (const key_type& k) const
@@ -296,10 +311,6 @@ template<
           {
 
           }
-
-      
-
-
 
            ft::RBtree <ft::pair< Key,T> > tree;
         private :

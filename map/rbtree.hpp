@@ -11,9 +11,7 @@ namespace ft
         Black = 2
     };
 
-    template <
-        class T,
-        class Allocator = std::allocator<T> >
+    template < class T, class Allocator = std::allocator<T> , class Compare = std::less<T> >
     class node
     {
 
@@ -170,7 +168,7 @@ namespace ft
     // :()
     template <
         class T,
-        class Allocator = std::allocator<T> >
+        class Allocator = std::allocator<T> ,  class Compare = std::less<T> >
     class RBtree
     {
 
@@ -341,17 +339,19 @@ namespace ft
             }
             return temp != NULL ? temp : n;
         }
-        void remove(T val)
+        int remove(T val)
         {
             node<T> *n = this->find(val);
+
+            
+            if (this->_size != 0)
             this->_size --;
-            _delete(this->root, val);
-            if (n)
-            {
-            n->left = NULL;
-            n->right = NULL;
-            // delete n;
+            else {
+
+                this->root = NULL;
             }
+            _delete(this->root, val);
+            return n != NULL;
         }
 
         void deleteOneChild(node<T> *nodeTodelete)
@@ -403,12 +403,14 @@ namespace ft
                 if (r->isRight == false)
                 {
                     r->parent->left = child;
-                    ;
+                    if (r->parent->left)
+                        r->parent->left->isRight = false;
                 }
                 else
                 {
                     r->parent->right = child;
-                    ;
+                    if (r->parent->right)
+                        r->parent->right->isRight = true;
                 }
             }
         }
@@ -430,6 +432,8 @@ namespace ft
         void deleteCase2(node<T> *n)
         {
             node<T> *siblingNode = findSiblingNode(n);
+            if (siblingNode == NULL)
+                return ;
             if (siblingNode->color == Red)
             {
                 if (siblingNode->isRight == false)
@@ -453,6 +457,8 @@ namespace ft
         void deleteCase3(node<T> *n)
         {
             node<T> *sibling = findSiblingNode(n);
+            if (sibling == NULL)
+                return ;
             if (n->parent->color == Black && sibling->color == Black &&  isBlack(sibling->left) &&  isBlack(sibling->right) )
             {
                 sibling->color = Red;
@@ -499,8 +505,8 @@ namespace ft
             sibling->color = sibling->parent->color;
             sibling->parent->color = Black;
             if (n->isRight == false)
-            {
-                sibling->right->color = Black;
+            {   if (sibling->right)
+                    sibling->right->color = Black;
                 leftRoutate(sibling);
             }
             else
@@ -516,10 +522,10 @@ namespace ft
         }
 
         node<T> *root;
+        size_t _size;
 
     private:
         node<T> *last;
-        size_t _size;
         Allocator my_alloc;
 
         void rightRotate(node<T> *n)

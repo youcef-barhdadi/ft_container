@@ -1,1 +1,11 @@
-86
+R----97(BLACK)
+   L----95(BLACK)
+   |  L----91(BLACK)
+   |  |  L----90(BLACK)
+   |  |  R----94(BLACK)
+   |  |     L----92(BLACK)
+   |  |     |  R----93(RED)
+   |  R----96(BLACK)
+   R----98(BLACK)
+      R----99(RED)
+10
