@@ -92,12 +92,12 @@ void testRetionalOperators();
 int main()
 {
 
-    const_iterator_tests();
-    testIterators();
-    EQUAL(testMapConstructors());
-    testCapacityMethods();
-    testElementAccess();
-    testAllocatorMethodes();
+    // const_iterator_tests();
+    // testIterators();
+    // EQUAL(testMapConstructors());
+    // testCapacityMethods();
+    // testElementAccess();
+    // testAllocatorMethodes();
     testRetionalOperators();
     return (0);
             
@@ -145,8 +145,7 @@ void testRetionalOperators()
         res = m == m1;
         end = get_time();
         diff = end - start;
-        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-
+        diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;    
         ualarm(diff * 1e3, 0);
         ft_res = ft_m == ft_m1;
         ualarm(0, 0);

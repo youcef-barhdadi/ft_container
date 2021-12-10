@@ -312,6 +312,9 @@ namespace ft
 
     friend  bool operator ==(const Map & lhr, const Map &rhr)
     {
+
+      if (&lhr == &rhr)
+        return true;
       if (lhr.size() !=  rhr.size())
         return (false);
 
@@ -319,8 +322,7 @@ namespace ft
         const_iterator r = lhr.begin();
         while (true)
         {
-          std::cout << "ok" << std::endl;
-            if (l == lhr.end() && r  == rhr.end())
+          if (l == lhr.end() && r  == rhr.end())
           {
             return (true);
           }
@@ -328,9 +330,9 @@ namespace ft
           {
             return (false);
           }
-          if (*l != *r)
+          if (l != r)
             return false;
-          
+          // return true;
           ++l;
           ++r;
         }

@@ -1,15 +1,23 @@
-#include <iostream>     // std::cout
-#include <functional>   // std::less
-#include <algorithm>  
-
-
-
+#include "rbtree.hpp"
+#include <map>
+# include "map.hpp"
+using namespace std;
+int printtime() {
+   time_t t; // t passed as argument in function time()
+   struct tm * tt; // decalring variable for localtime()
+   time (&t); //passing argument to time()
+   tt = localtime(&t);
+   cout << "Current Day, Date and Time is = "<< asctime(tt);
+   return 0;
+}
 int main()
 {
-   int foo[] ={10, 20, 5, 15, 25};
-  int bar[]={15,10,20};
-   std::sort(foo, foo+5, std::less<int>());
 
+      ft::Map<int, int> c;
 
+      c.insert(ft::make_pair(1,2));
+
+   std::cout << c[1] << std::endl;
+      // c[1];
 
 }
