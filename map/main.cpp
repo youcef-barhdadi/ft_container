@@ -88,15 +88,17 @@ void testCapacityMethods();
 void testElementAccess();
 void testModifiers();
 void testAllocatorMethodes();
+void testRetionalOperators();
 int main()
 {
 
-    // const_iterator_tests();
-    // testIterators();
-    // EQUAL(testMapConstructors());
-    // testCapacityMethods();
-    // testElementAccess();
-      testAllocatorMethodes();
+    const_iterator_tests();
+    testIterators();
+    EQUAL(testMapConstructors());
+    testCapacityMethods();
+    testElementAccess();
+    testAllocatorMethodes();
+    testRetionalOperators();
     return (0);
             
 }
