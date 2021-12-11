@@ -566,6 +566,12 @@ namespace ft
             n->parent = temp;
         }
 
+
+        // bool  operator==(node<T> node)
+        // {
+        //     node 
+        // }
+
         void leftRoutate(node<T> *n)
         {
             // if (n == NULL)

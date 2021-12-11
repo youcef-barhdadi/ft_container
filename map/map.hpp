@@ -319,7 +319,7 @@ namespace ft
         return (false);
 
         const_iterator l = lhr.begin();
-        const_iterator r = lhr.begin();
+        const_iterator r = rhr.begin();
         while (true)
         {
           if (l == lhr.end() && r  == rhr.end())
@@ -330,9 +330,10 @@ namespace ft
           {
             return (false);
           }
-          if (l != r)
+          if (l->first != r->first   ||  l->second != r->second)
+          {
             return false;
-          // return true;
+          }
           ++l;
           ++r;
         }
@@ -349,7 +350,32 @@ namespace ft
     friend  bool operator >(const Map & lhr, const Map &rhr)
     {
 
-        return !(lhr == rhr);
+            if (&lhr == &rhr)
+        return true;
+      if (lhr.size() !=  rhr.size())
+        return (false);
+
+        const_iterator l = lhr.begin();
+        const_iterator r = rhr.begin();
+        while (true)
+        {
+          if (l == lhr.end() && r  == rhr.end())
+          {
+            return (false);
+          }
+          if (l == lhr.end())
+          {
+            return (false);
+          }
+          else if (r ==   rhr.end())
+          return true;
+            if (l->first > r->first   ||  l->second > r->second)
+            {
+              return true;
+            }
+          ++l;
+          ++r;
+        }
     }
     friend  bool operator <(const Map & lhr, const Map &rhr)
     {

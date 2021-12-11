@@ -143,7 +143,7 @@ void testRetionalOperators()
         time_t start, end, diff;
         start = get_time();
         res = m == m1;
-        end = get_time();
+        end = get_time(); 
         diff = end - start;
         diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;    
         ualarm(diff * 1e3, 0);
