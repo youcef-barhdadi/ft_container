@@ -262,21 +262,12 @@ namespace ft
             return _find(n->right, val);
         }
 
-         node<T> *find(const T val) 
+         node<T> *find(const T val) const
         {
             if (this->root == NULL)
                 return NULL;
             return _find(root, val);
         }
-        const   node<T> *find(const T val) const
-        {
-            if (this->root == NULL)
-                return NULL;
-            return _find(root, val);
-        }
-
-
-
 
         bool exist(T val)
         {

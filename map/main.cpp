@@ -106,7 +106,8 @@ int main()
     // testRetionalOperators();
     // testNonMemberSwap();
     // testNonMemberSwap();
-    testOperations();
+    // testOperations();
+    testModifiers();
     return (0);
             
 }
