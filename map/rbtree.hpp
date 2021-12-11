@@ -250,7 +250,7 @@ namespace ft
             return _size;
         }
 
-        node<T> *_find(node<T> *n, T val)
+        node<T> *_find(node<T> *n, T val) const
         {
             if (n == NULL)
                 return NULL;
@@ -262,12 +262,20 @@ namespace ft
             return _find(n->right, val);
         }
 
-        node<T> *find(T val)
+         node<T> *find(const T val) 
         {
             if (this->root == NULL)
                 return NULL;
             return _find(root, val);
         }
+        const   node<T> *find(const T val) const
+        {
+            if (this->root == NULL)
+                return NULL;
+            return _find(root, val);
+        }
+
+
 
 
         bool exist(T val)

@@ -209,9 +209,15 @@ namespace ft
       iter = this->find(k);
       return (*iter).second;
     }
+
     iterator find(const key_type &k)
     {
       return iterator(this->tree.find(ft::pair<key_type, mapped_type>(k, mapped_type())), tree.root);
+    }
+    const_iterator find(const key_type &k) const
+    {
+      
+      return const_iterator(this->tree.find(ft::pair<key_type, mapped_type>(k, mapped_type()), tree.root));
     }
 
     void erase(iterator position)
@@ -252,23 +258,30 @@ namespace ft
 
     size_type count(const key_type &k) const
     {
-      return 0;
+      const_iterator c = this->find(k);
+      // if (c == this->end())
+      //     return (0);
+      return (1);
     }
 
     iterator lower_bound(const key_type &k)
     {
+
     }
 
     const_iterator lower_bound(const key_type &k) const
     {
+
     }
 
     iterator upper_bound(const key_type &k)
     {
+
     }
 
     const_iterator upper_bound(const key_type &k) const
     {
+
     }
 
     pair<const_iterator, const_iterator> equal_range(const key_type &k) const
@@ -350,7 +363,7 @@ namespace ft
     friend  bool operator >(const Map & lhr, const Map &rhr)
     {
 
-            if (&lhr == &rhr)
+        if (&lhr == &rhr)
         return true;
       if (lhr.size() !=  rhr.size())
         return (false);
@@ -359,20 +372,14 @@ namespace ft
         const_iterator r = rhr.begin();
         while (true)
         {
-          if (l == lhr.end() && r  == rhr.end())
-          {
+          if (l == lhr.end() && r == rhr.end())
             return (false);
-          }
           if (l == lhr.end())
-          {
             return (false);
-          }
-          else if (r ==   rhr.end())
-          return true;
-            if (l->first > r->first   ||  l->second > r->second)
-            {
+          if (r ==   rhr.end())
+            return true;
+          if (l->first > r->first || l->second >  r->second)
               return true;
-            }
           ++l;
           ++r;
         }
@@ -380,7 +387,7 @@ namespace ft
     friend  bool operator <(const Map & lhr, const Map &rhr)
     {
 
-        return !(lhr == rhr);
+        return !(lhr > rhr);
     }
 
     friend  bool operator >=(const Map & lhr, const Map &rhr)
