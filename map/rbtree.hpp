@@ -22,6 +22,8 @@ namespace ft
         T value;
         Color color;
 
+        Compare _comp;
+
         typedef T &reference;
         typedef const T &const_reference;
         typedef T *pointer;
@@ -298,7 +300,7 @@ namespace ft
                     _delete(n->right, next->value);
                 }
             }
-            if (n->value < val)
+            if (_cmp(n->value.first , val.first))
                 _delete(n->right, val);
             else
                 _delete(n->left, val);
@@ -345,11 +347,9 @@ namespace ft
 
             
             if (this->_size != 0)
-            this->_size --;
-            else {
-
+                this->_size --;
+            else
                 this->root = NULL;
-            }
             _delete(this->root, val);
             return n != NULL;
         }
@@ -729,11 +729,11 @@ namespace ft
             while (tmp1 != NULL)
             {
                 tmp = tmp1;
-                tmp1 =  (_cmp(value.first ,  tmp1->value.first)) ? tmp1->left : tmp1->right;
+                tmp1 =  (!_cmp(tmp1->value.first,value.first )) ? tmp1->left : tmp1->right;
             }
             // _cmp÷
             // if (   value < tmp->value)
-            if (   _cmp (value.first , tmp->value.first))
+            if (   _cmp (value.first, tmp->value.first  ))
             {
                 tmp->left = new node<T>(value);
                 tmp->left->parent = tmp;

@@ -16,8 +16,14 @@ int main()
       ft::Map<int, int> c;
 
       c.insert(ft::make_pair(1,2));
+      c.insert(ft::make_pair(2,2));
+      c.insert(ft::make_pair(-5,2));
+      c.insert(ft::make_pair(0,2));
 
-   std::cout << c[1] << std::endl;
+      c.tree.printTree();
+
+      
+
       // c[1];
 
 }

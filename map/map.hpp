@@ -295,40 +295,61 @@ namespace ft
 
     iterator upper_bound(const key_type &k)
     {
-          iterator iter = this->begin();
+        iterator iter = this->find(k);
 
-          while (iter != this->end())
-          {
-            if (_compare(iter->first, k))
-              return iter;
-              ++iter;
-          }
-          return this->begin();
+        if (this->end() != iter)
+        {
+            ++iter;
+            return iter;
+        }
+        else
+        {
+          iter = this->begin();
+        }
+
+        while (iter != this->end())
+        {
+          if (!_compare(iter->first, k))
+            return iter;
+            ++iter;
+        }
+        return this->end();
     }
 
     const_iterator upper_bound(const key_type &k) const
     {
-        const_iterator iter = this->begin();
+        const_iterator iter = this->find(k);
 
+        if (this->end() != iter)
+        {
+            ++iter;
+            return iter;
+        }
+        else
+          iter = this->begin();
         while (iter != this->end())
         {
-          if (_compare(iter->first, k))
+          if (!_compare(iter->first, k))
             return iter;
             ++iter;
         }
-        return this->begin();
+        return this->end();
     }
 
     pair<const_iterator, const_iterator> equal_range(const key_type &k) const
     {
-        node<value_type> *to = this->tree.find(ft::make_pair<Key, T>(k, T()));
-        return ft::make_pair<const_iterator, const_iterator>(const_iterator(to, this->tree.root), const_iterator(to, this->tree.root));
+        const_iterator to = this->find(k);
+        if (this->end() == to)
+          to = upper_bound(k);
+        return ft::make_pair<const_iterator, const_iterator>(to , to);
     }
 
     pair<iterator, iterator> equal_range(const key_type &k)
     {
-        node<value_type> *to = this->tree.find(ft::make_pair<Key, T>(k, T()));
-        return ft::make_pair<iterator, iterator>(iterator(to, this->tree.root), iterator(to, this->tree.root));
+        iterator to = this->find(k);
+        if (this->end() == to)
+          to = upper_bound(k);
+        return ft::make_pair<iterator, iterator>(to , to);
     }
 
     allocator_type get_allocator() const
