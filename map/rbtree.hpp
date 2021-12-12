@@ -114,19 +114,6 @@ namespace ft
             return temp != NULL ? temp : n;
         }
 
-        // node<T> *find(node<T> *n)
-        // {
-        //     node<T> *temp;
-
-        //     temp = NULL;
-        //     while (n != NULL)
-        //     {
-        //         temp = n;
-        //         n = n->right;
-        //     }
-        //     return temp != NULL ? temp : n;
-        // }
-
         bool operator==(node &n)
         {
             return n.value == this->value;
@@ -257,7 +244,7 @@ namespace ft
         {
             if (n == NULL)
                 return NULL;
-            if (n->value == val)
+            if (n->value.first == val.first)
                 return n;
 
             if (_cmp(val.first , n->value.first))
@@ -286,7 +273,7 @@ namespace ft
         {
             if (root == NULL || isNullLeaf(n))
                 return;
-            if (n->value == val)
+            if (n->value.first == val.first)
             {
                 if (isNullLeaf(n->right) || isNullLeaf(n->left))
                 {
@@ -344,8 +331,6 @@ namespace ft
         int remove(T val)
         {
             node<T> *n = this->find(val);
-
-            
             if (this->_size != 0)
                 this->_size --;
             else

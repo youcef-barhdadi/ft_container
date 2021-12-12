@@ -371,18 +371,12 @@ namespace ft
 
     pair<const_iterator, const_iterator> equal_range(const key_type &k) const
     {
-        const_iterator to = this->find(k);
-        if (this->end() == to)
-          to = upper_bound(k);
-        return ft::make_pair<const_iterator, const_iterator>(to , to);
+        return ft::make_pair<const_iterator, const_iterator>(lower_bound(k) , upper_bound(k));
     }
 
     pair<iterator, iterator> equal_range(const key_type &k)
     {
-        iterator to = this->find(k);
-        if (this->end() == to)
-          to = upper_bound(k);
-        return ft::make_pair<iterator, iterator>(to , to);
+      return ft::make_pair<iterator, iterator>(lower_bound(k) , upper_bound(k));
     }
 
     allocator_type get_allocator() const
