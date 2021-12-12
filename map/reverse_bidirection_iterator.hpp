@@ -7,7 +7,7 @@
 
 namespace ft {
 	template <class Iterator> 
-    class reverse_bidirection_iterator {
+    class reverse_iterator {
         public: 
                 typedef Iterator	iterator_type;
 
@@ -17,11 +17,11 @@ namespace ft {
                 Iterator iter;
 
 
-                reverse_bidirection_iterator()
+                reverse_iterator()
                 {
 
                 }
-                reverse_bidirection_iterator(const Iterator  & iter)
+                reverse_iterator(const Iterator  & iter)
                 {
                     // std::cout << "iter" << iter < std::endl;
                     this->iter = iter;
@@ -41,46 +41,74 @@ namespace ft {
                     return  &(*pre);
                 }
                         
-                reverse_bidirection_iterator operator++(void)
+                reverse_iterator operator++(void)
                 {
                     --iter;
                     return *this;
                 }
 
 
-                reverse_bidirection_iterator operator++(int)
+                reverse_iterator operator++(int)
                 {
-                    reverse_bidirection_iterator copy(iter);
+                    reverse_iterator copy(iter);
                     operator++();
                     return copy;
                 }
 
 
 
-                reverse_bidirection_iterator operator--(void)
+                reverse_iterator operator--(void)
                 {   
                     ++iter;
                     return *this;
                 }
 
                 
-                reverse_bidirection_iterator operator--(int)
+                reverse_iterator operator--(int)
                 {
-                    reverse_bidirection_iterator copy(iter);
+                    reverse_iterator copy(iter);
                     operator--();
                     return copy;
                 }
 
-                friend  bool  operator==( reverse_bidirection_iterator &lhr,  reverse_bidirection_iterator  &rhr)
+
+                                
+                reverse_iterator& operator=(reverse_iterator  &s)
+                {
+                    this->iter = s.iter;
+                    return  (*this);
+                }
+
+                // void    operator=(const Iterator &s)
+                // {
+                //     this->iter = s;
+                //     return  (*this);
+                // }
+
+                friend  bool  operator==( reverse_iterator &lhr,  reverse_iterator  &rhr)
                 {
                     return lhr.iter == rhr.iter; 
                 }
 
 
-                friend  bool  operator!=(const reverse_bidirection_iterator &lhr, const reverse_bidirection_iterator  &rhr)
+                friend  bool  operator!=(const reverse_iterator &lhr, const reverse_iterator  &rhr)
                 {
                     return lhr.iter != rhr.iter; 
                 }
+
+                Iterator base()
+                {
+                    return this->iter;
+                }
+
+                operator  const reverse_iterator<const Iterator>()
+                {
+                    return reverse_iterator<const Iterator>(this->base());
+                }
+
+          
+
+    
 
 
         private:

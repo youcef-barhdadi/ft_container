@@ -117,6 +117,11 @@ namespace ft
             return _node;
         }
 
+        operator  const_bidirectional_iterator<T> ()
+        {
+            return const_bidirectional_iterator<T>(this->_node,this->root);
+        }
+
         T *_node;
         T *root;
 
@@ -230,19 +235,15 @@ namespace ft
             return copy;
         }
 
+
+        operator  bidirectional_iterator<T>()
+        {
+            return bidirectional_iterator<T>(this->_node, this->root);
+        }
+
         T *base()
         {
             return _node;
-        }
-
-        operator const_bidirectional_iterator<const T>()
-        {
-            return const_bidirectional_iterator<const T>(_node);
-        }
-
-        operator const_bidirectional_iterator<const T>() const
-        {
-            return const_bidirectional_iterator<const T>(_node);
         }
 
         T *_node;
