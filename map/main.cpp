@@ -106,8 +106,8 @@ int main()
     // testRetionalOperators();
     // testNonMemberSwap();
     // testNonMemberSwap();
-    // testOperations();
-    testModifiers();
+    testOperations();
+    // testModifiers();
     return (0);
             
 }
@@ -796,7 +796,6 @@ void testModifiers()
         anothermap.insert(m.begin(), m.find('c'));
         ft_anothermap.insert(ft_m.begin(), ft_m.find('c'));
         ft::Map<char, int>::iterator cccc = ft_m.find('c');
-        ft_m.tree.printTree();
         ft::Map<char, int>::iterator iter = ft_m.find('c');
     
 
@@ -1070,13 +1069,11 @@ void testModifiers()
 
 
         cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
-        std::cout << std::endl <<"[=>>" <<   ref.first << "|" <<   ft_ref.first << "]" << std::endl;
 
         m1.swap(m2);
         ft_m1.swap(ft_m2);
 
         // _---------------_ << ──────── after swap ──────── >> _---------------_
-        std::cout << std::endl <<"[=>>" <<   ref.first << "|" <<   ft_ref.first  << "]" << std::endl;
 
         cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
 

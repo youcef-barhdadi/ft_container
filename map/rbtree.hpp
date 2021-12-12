@@ -175,6 +175,7 @@ namespace ft
     public:
         typedef T &reference;
         typedef Allocator allocator_type;
+        Compare _cmp;
 
         RBtree()
         {
@@ -257,7 +258,7 @@ namespace ft
             if (n->value == val)
                 return n;
 
-            if (val < n->value)
+            if (_cmp(val.first , n->value.first))
                 return _find(n->left, val);
             return _find(n->right, val);
         }
@@ -728,9 +729,11 @@ namespace ft
             while (tmp1 != NULL)
             {
                 tmp = tmp1;
-                tmp1 = (value < tmp1->value) ? tmp1->left : tmp1->right;
+                tmp1 =  (_cmp(value.first ,  tmp1->value.first)) ? tmp1->left : tmp1->right;
             }
-            if (value < tmp->value)
+            // _cmp÷
+            // if (   value < tmp->value)
+            if (   _cmp (value.first , tmp->value.first))
             {
                 tmp->left = new node<T>(value);
                 tmp->left->parent = tmp;

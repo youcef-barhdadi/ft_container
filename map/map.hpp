@@ -21,7 +21,7 @@ namespace ft
       class Key,
       class T,
       class Compare = std::less<Key>,
-      class Allocator = std::allocator<pair<const Key, T>>>
+      class Allocator = std::allocator<pair<const Key, T> > >
   class Map
   {
 
@@ -43,9 +43,9 @@ namespace ft
 
     typedef const T *const_pointer;
 
-    typedef ft::bidirectional_iterator<node<ft::pair<Key, T>>> iterator;
+    typedef ft::bidirectional_iterator<node<ft::pair<Key, T> > > iterator;
 
-    typedef ft::const_bidirectional_iterator<node<ft::pair<Key, T>>> const_iterator;
+    typedef ft::const_bidirectional_iterator<node<ft::pair<Key, T> > > const_iterator;
 
     typedef ft::reverse_bidirection_iterator<iterator> reverse_iterator;
 
@@ -217,7 +217,7 @@ namespace ft
     const_iterator find(const key_type &k) const
     {
       
-      return const_iterator(this->tree.find(ft::pair<key_type, mapped_type>(k, mapped_type()), tree.root));
+      return const_iterator(this->tree.find(ft::pair<key_type, mapped_type>(k, mapped_type())), tree.root);
     }
 
     void erase(iterator position)
@@ -259,37 +259,76 @@ namespace ft
     size_type count(const key_type &k) const
     {
       const_iterator c = this->find(k);
-      // if (c == this->end())
-      //     return (0);
+      if (c == this->end())
+          return (0);
       return (1);
     }
 
+    /*
+      you can do it better if you search in redblack tree but haha i will not do it
+    */
     iterator lower_bound(const key_type &k)
     {
+          iterator iter = this->begin();
 
+          while (iter != this->end())
+          {
+            if (!_compare(iter->first, k))
+              return iter;
+              ++iter;
+          }
+          return iter;
     }
 
     const_iterator lower_bound(const key_type &k) const
     {
+          const_iterator iter = this->begin();
 
+          while (iter != this->end())
+          {
+            if (!_compare(iter->first, k))
+              return iter;
+              ++iter;
+          }
+          return iter;
     }
 
     iterator upper_bound(const key_type &k)
     {
+          iterator iter = this->begin();
 
+          while (iter != this->end())
+          {
+            if (_compare(iter->first, k))
+              return iter;
+              ++iter;
+          }
+          return this->begin();
     }
 
     const_iterator upper_bound(const key_type &k) const
     {
+        const_iterator iter = this->begin();
 
+        while (iter != this->end())
+        {
+          if (_compare(iter->first, k))
+            return iter;
+            ++iter;
+        }
+        return this->begin();
     }
 
     pair<const_iterator, const_iterator> equal_range(const key_type &k) const
     {
+        node<value_type> *to = this->tree.find(ft::make_pair<Key, T>(k, T()));
+        return ft::make_pair<const_iterator, const_iterator>(const_iterator(to, this->tree.root), const_iterator(to, this->tree.root));
     }
 
     pair<iterator, iterator> equal_range(const key_type &k)
     {
+        node<value_type> *to = this->tree.find(ft::make_pair<Key, T>(k, T()));
+        return ft::make_pair<iterator, iterator>(iterator(to, this->tree.root), iterator(to, this->tree.root));
     }
 
     allocator_type get_allocator() const
@@ -404,7 +443,7 @@ namespace ft
 
 
 
-    ft::RBtree<ft::pair<Key, T>> tree;
+    ft::RBtree<ft::pair<Key, T> , Allocator , Compare > tree;
 
   private:
     allocator_type my_alloc;
