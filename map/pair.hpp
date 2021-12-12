@@ -35,7 +35,7 @@ template<
 
     bool operator ==( const pair& lhs )   
     {
-        return !(this->first != lhs.first);
+        return (this->first == lhs.first);
     }
 
     // template< class T1, class T2 >
@@ -47,7 +47,7 @@ template<
 
     bool operator<( const pair& lhs)
     {
-        return  this->first < lhs.first;
+        return  this->first < lhs.first && this->second < lhs.second;
     }
 
     bool operator<=( const pair& lhs )
