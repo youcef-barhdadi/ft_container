@@ -402,6 +402,7 @@ namespace ft
 
     size_type max_size() const
     {
+      return 100;
     }
 
 

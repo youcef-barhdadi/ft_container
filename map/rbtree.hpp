@@ -729,7 +729,7 @@ namespace ft
             while (tmp1 != NULL)
             {
                 tmp = tmp1;
-                tmp1 =  (!_cmp(tmp1->value.first,value.first )) ? tmp1->left : tmp1->right;
+                tmp1 =  (_cmp( value.first , tmp1->value.first)) ? tmp1->left : tmp1->right;
             }
             // _cmp÷
             // if (   value < tmp->value)
