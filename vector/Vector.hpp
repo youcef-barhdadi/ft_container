@@ -91,7 +91,6 @@ template<
                  const allocator_type& alloc = allocator_type())
             {
                 (void) alloc;
-                std::cout << "==>" <<  n << std::endl;
                 _vec = _myallocator.allocate(n);
                 this->_capacity = n;
                 this->_size = n;
@@ -134,9 +133,6 @@ template<
                 this->_end = this->_vec + this->size();
                 this->_capacity  = x.capacity();
             }
-            ///*end constructor */
-
-            // overloading oprator
 
             Vector& operator= (const Vector& x)
             {

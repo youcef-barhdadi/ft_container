@@ -343,7 +343,7 @@ namespace ft
         {
             if (nodeTodelete == NULL)
             {
-                std::cout << "null node " << std::endl;
+                // std::cout << "null node " << std::endl;
                 return;
             }
             node<T> *child = isNullLeaf(nodeTodelete->right) ? nodeTodelete->left : nodeTodelete->right;
@@ -356,6 +356,7 @@ namespace ft
                 if (child && child->color == Red)
                 {
                     child->color = Black;
+
                 }
                 else
                 {
@@ -515,8 +516,6 @@ namespace ft
 
         void rightRotate(node<T> *n)
         {
-            // if (n == NULL)
-            //         return ;
             node<T> *temp;
             if (n == NULL || n->left  == NULL)
                 return ;
@@ -551,16 +550,8 @@ namespace ft
             n->parent = temp;
         }
 
-
-        // bool  operator==(node<T> node)
-        // {
-        //     node 
-        // }
-
         void leftRoutate(node<T> *n)
         {
-            // if (n == NULL)
-            //     return ;
             node<T> *temp;
 
             temp = n->right;
@@ -708,6 +699,9 @@ namespace ft
             if (root == NULL)
             {
                 this->root = new node<T>(value);
+
+                this->root = (node<T> *) my_alloc.allocate(sizeof(node<T>));
+                
                 root->color = Black;
                 return this->root;
             }
