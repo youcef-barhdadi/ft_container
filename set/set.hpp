@@ -6,10 +6,10 @@
 
 namespace ft {
 
-template < class T,                        // set::key_type/value_type
-		   class Compare = std::less<T>,        // set::key_compare/value_compare
-		   class Alloc = std::allocator<T>      // set::allocator_type
-		   > class set
+template < class T,                        // Set::key_type/value_type
+		   class Compare = std::less<T>,        // Set::key_compare/value_compare
+		   class Alloc = std::allocator<T>      // Set::allocator_type
+		   > class Set
 {
 	public:
 
@@ -29,9 +29,9 @@ template < class T,                        // set::key_type/value_type
 
 	typedef const T*                         const_pointer; 
 
-	typedef ft::bidirectional_iterator<T>           iterator;
+	typedef ft::bidirectional_iterator<ft::node<T> >           iterator;
 
-	typedef ft::const_bidirectional_iterator<T>     const_iterator;
+	typedef ft::const_bidirectional_iterator<ft::node<T> >     const_iterator;
 
 	typedef ft::reverse_iterator <iterator>          reverse_iterator;
 
@@ -41,6 +41,7 @@ template < class T,                        // set::key_type/value_type
 
 	typedef size_t                              size_type;
 
+	typedef		Compare								key_compare;
 
 	ft::RBtree<value_type> tree;
 
@@ -141,7 +142,7 @@ template < class T,                        // set::key_type/value_type
 
 	size_type erase (const value_type& val)
 	{
-		return tree.remove(ft::make_pair<Key, T>(k, T()));
+		return tree.remove(val);
 	}
 
 	void erase (iterator first, iterator last)
@@ -153,7 +154,7 @@ template < class T,                        // set::key_type/value_type
       }	
 	}
 
-	void swap (set& x)
+	void swap (Set& x)
 	{
 	  node<value_type> *r1 = x.tree.root;
       size_t size1 = x.tree._size;
