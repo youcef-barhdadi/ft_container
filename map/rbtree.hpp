@@ -3,6 +3,8 @@
 #include <iostream>
 #include "pair.hpp"
 
+#include "../vector/utils.hpp"
+
 namespace ft
 {
     enum Color
@@ -33,6 +35,11 @@ namespace ft
         allocator_type my_alloc;
 
         bool isRight;
+
+
+
+
+
 
         node(T &value)
         {
@@ -165,6 +172,10 @@ namespace ft
         typedef T &reference;
         typedef Allocator allocator_type;
         Compare _cmp;
+
+
+
+        typename Allocator::template rebind<node<T> >::other nodeALloc; 
 
         RBtree()
         {
@@ -700,8 +711,9 @@ namespace ft
             tmp1 = tmp;
             if (root == NULL)
             {
-                this->root = new node<T>(value);
-
+                // this->root = new node<T>(value);
+                this->root =  nodeALloc.allocate(1);
+                nodeALloc.construct(this->root, value);
                 // this->root = (node<T> *) my_alloc.allocate(sizeof(node<T>));
                 
                 root->color = Black;
@@ -716,14 +728,18 @@ namespace ft
             // if (   value < tmp->value)
             if (_cmp (value.first, tmp->value.first  ))
             {
-                tmp->left = new node<T>(value);
+                // tmp->left = new node<T>(value);
+                tmp->left =  nodeALloc.allocate(1);
+                nodeALloc.construct(tmp->left, value);
                 tmp->left->parent = tmp;
                 check(tmp->left);
                 return tmp->left;
             }
             else
             {
-                tmp->right = new node<T>(value);
+                // tmp->right = new node<T>(value);
+                tmp->right =  nodeALloc.allocate(1);
+                nodeALloc.construct(tmp->right, value);
                 tmp->right->parent = tmp;
                 tmp->right->isRight = true;
                 check(tmp->right);
