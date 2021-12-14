@@ -12,8 +12,13 @@ namespace ft
     class bidirectional_iterator : public std::iterator<std::bidirectional_iterator_tag, T>
     {
     public:
+        // #ifdef MAP
         typedef typename T::reference reference;
         typedef typename T::pointer pointer;
+        // #endif
+        // typedef typename T& reference;
+        // typedef typename T* pointer;
+
 
         bidirectional_iterator()
         {

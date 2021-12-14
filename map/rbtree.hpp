@@ -246,7 +246,9 @@ namespace ft
                 return NULL;
             if (n->value.first == val.first)
                 return n;
+            
 
+            // std::cout <<  "== " << n  << std::endl;
             if (_cmp(val.first , n->value.first))
                 return _find(n->left, val);
             return _find(n->right, val);
@@ -700,7 +702,7 @@ namespace ft
             {
                 this->root = new node<T>(value);
 
-                this->root = (node<T> *) my_alloc.allocate(sizeof(node<T>));
+                // this->root = (node<T> *) my_alloc.allocate(sizeof(node<T>));
                 
                 root->color = Black;
                 return this->root;
@@ -712,7 +714,7 @@ namespace ft
             }
             // _cmp÷
             // if (   value < tmp->value)
-            if (   _cmp (value.first, tmp->value.first  ))
+            if (_cmp (value.first, tmp->value.first  ))
             {
                 tmp->left = new node<T>(value);
                 tmp->left->parent = tmp;
