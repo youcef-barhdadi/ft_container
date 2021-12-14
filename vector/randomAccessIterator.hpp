@@ -30,7 +30,7 @@ class randomAccessIterator  : public std::iterator<std::random_access_iterator_t
         typedef   T    value_type ;
         typedef  std::ptrdiff_t  difference_type ;
         typedef T*  pointer ;
-        typedef  T&  referenc ;
+        typedef  T&  reference ;
 
     randomAccessIterator(void)
     {
