@@ -40,6 +40,11 @@ namespace ft{
 				this->second = pr.second;
 				return (*this);
 			}
+
+			operator ft::pair<const first_type, second_type>()
+			{
+				return ft::pair<const first_type, second_type>(first, second);
+			}
 	};
 
 

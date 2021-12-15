@@ -21,7 +21,7 @@ namespace ft
         node *left;
         node *right;
         node *parent;
-        T value;
+        T   value;
         Color color;
 
         Compare _comp;
@@ -41,7 +41,7 @@ namespace ft
 
 
 
-        node(T &value)
+        node(T &value) 
         {
             this->left = NULL;
             this->right = NULL;
@@ -184,6 +184,7 @@ namespace ft
             this->_size = 0;
         }
 
+
         //Allocator
 
         void insert(T value)
@@ -297,6 +298,7 @@ namespace ft
                 {
                     node<T> *next = findSamllest(n->right);
                     n->value = next->value;
+                    // my_alloc.construct(&n->value, &next->value);
                     _delete(n->right, next->value);
                 }
             }
@@ -344,10 +346,15 @@ namespace ft
         int remove(T val)
         {
             node<T> *n = this->find(val);
+
             if (this->_size != 0)
                 this->_size --;
             else
+            {
+                nodeALloc.deallocate(root, 1);
+                // my_alloc.destroy((root->value));
                 this->root = NULL;
+            }
             _delete(this->root, val);
             return n != NULL;
         }
@@ -364,12 +371,15 @@ namespace ft
             // if (child != NULL)
             replaceNode(nodeTodelete, child);
 
+            // deallocate the node and the pair
+            nodeALloc.deallocate(nodeTodelete, 1);
+            // my_alloc.destroy(&(nodeTodelete->value));
+    
             if (nodeTodelete->color == Black)
             {
                 if (child && child->color == Red)
                 {
                     child->color = Black;
-
                 }
                 else
                 {
@@ -443,7 +453,6 @@ namespace ft
                 {
                     leftRoutate(siblingNode);
                 }
-
                 if (siblingNode == root)
                 {
                     root = siblingNode;

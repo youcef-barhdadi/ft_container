@@ -39,34 +39,22 @@ time_t get_time(void)
 }
 int main()
 {
-            time_t start, end, diff;
 
-            std::map<int, std::string> m;
-            ft::Map<int, std::string> ft_m;
-            for (size_t i = 0; i < 1e6; ++i)
-            {
-                m.insert(std::make_pair(i, "value"));
-                ft_m.insert(ft::make_pair(i, "value"));
-            }
-            start = get_time();
-            std::map<int, std::string>::iterator it = --m.end();
-             printtime() ;
-            for (; it != m.begin(); --it)
-            {
-                  // std::cout << it->first << std::endl;
-            }
-             printtime() ;
-            end = get_time();
-            diff = end - start;
-            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-            std::cout << "================"<< std::endl;;
-            ualarm(diff * 1e3, 0);
-              printtime() ;
-            ft::Map<int, std::string>::iterator ft_it = --ft_m.end();
-            for (; ft_it != ft_m.begin(); --ft_it)
-                ;
-                  printtime() ;
-            ualarm(0, 0);
+  {
+      ft::Map<int, int> c;
 
+      for (size_t i = 0; i < 1e4; i++)
+      {
+        c.insert(ft::make_pair(i ,i));
+      }
+
+      for (size_t i = 0; i < 1e4; i++)
+      {
+        c.erase(i);
+      }
+      
+      system("leaks a.out");
+      
+  }
       return (0);
 }

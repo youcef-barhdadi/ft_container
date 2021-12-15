@@ -18,7 +18,7 @@ namespace ft
 			class Key,
 			class T,
 			class Compare = std::less<Key>,
-			class Allocator = std::allocator<pair<const Key, T> > >
+			class Allocator = std::allocator<pair< const Key, T> > >
 	class Map
 	{
 
@@ -86,6 +86,9 @@ namespace ft
 
 			// alloc.construct(tree,  new RBtree<value_type>());
 		}
+
+
+
 		template <class InputIterator>
 		Map(InputIterator first, InputIterator last,
 				const key_compare &comp = key_compare(),
@@ -97,6 +100,7 @@ namespace ft
 				++first;
 			}
 		}
+		
 
 		Map(const Map &x)
 		{
