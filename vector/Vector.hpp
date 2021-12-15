@@ -20,16 +20,65 @@
 
 
 namespace ft {
+
+template< class T >
+struct is_integral{const static bool value=false;};
+
+template<>
+struct is_integral<int>{const static bool value =  true;};
+
+template<>
+struct is_integral<bool>{const static bool value =  true;};
+
+template<>
+struct is_integral<float>{const static bool value =  true;};
+
+template<>
+struct is_integral<char>{const static bool value =  true;};
+
+template<>
+struct is_integral<char16_t>{const static bool value =  true;};
+template<>
+struct is_integral<char32_t>{const static bool value =  true;};
+template<>
+struct is_integral<wchar_t>{const static bool value =  true;};
+template<>
+struct is_integral<signed char>{const static bool value =  true;};
+template<>
+struct is_integral<short int>{const static bool value =  true;};
+template<>
+struct is_integral<long int>{const static bool value =  true;};
+
+template<>
+struct is_integral<unsigned char>{const static bool value =  true;};
+template<>
+struct is_integral<unsigned short int>{const static bool value =  true;};
+
+template<>
+struct is_integral<unsigned int>{const static bool value =  true;};
+
+
+template<>
+struct is_integral<unsigned long int>{const static bool value =  true;};
+
+template<>
+struct is_integral<unsigned long long int>{const static bool value =  true;};
+
 template <class T>
 struct is_sample_type : std::integral_constant <
     bool,
-    (std::is_floating_point<T>::value || std::is_integral<T>::value)> {};
+    (ft::is_integral<T>::value)> {};
 
 template<bool B, class T = void>
 struct enable_if {};
  
 template<class T>
 struct enable_if<true, T> { typedef T type; };
+
+
+
+
+
 
 template<
     class T,
@@ -60,7 +109,7 @@ template<
 
             typedef ft::reverse_iterator<randomAccessIterator<const T> > const_reverse_iterator;
 
-            typedef  ft::iterator_traits<iterator>::difference_type  difference_type;
+            typedef typename   ft::iterator_traits<iterator>::difference_type  difference_type;
 
             size_type  size() const
             {
@@ -192,7 +241,7 @@ template<
             {
                 if (n > this->max_size())
                 {
-                    throw (std::length_error(std::string("fuck"))); 
+                    throw (std::length_error(std::string("lenth"))); 
                 }
                 if (n >  this->capacity())
                 {  
@@ -308,7 +357,7 @@ template<
             reference at(size_type n) const
             {
                 if (n > this->size() )
-                    throw "ex";
+                     throw std::out_of_range("");
                 return this->_vec[n];
             }
 
@@ -344,15 +393,15 @@ template<
 
             reference operator[](size_type n)
             {
-                if (n > this->size())
-                 throw std::out_of_range("");
+                // if (n > this->size())
+                //  throw std::out_of_range("");
                 return this->_vec[n];
             }
 
             reference operator[](size_type n) const
             {
-                if (n > this->size())
-                     throw std::out_of_range("");
+                // if (n > this->size())
+                //      throw std::out_of_range("");
                 return this->_vec[n];
             }
             
