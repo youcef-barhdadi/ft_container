@@ -25,7 +25,7 @@ namespace ft
             // this->_node = NULL;
         }
 
-        bidirectional_iterator(T *node, T *&root) : root(root)
+        bidirectional_iterator(T *node, T **root) : root(root)
         {
             this->_node = node;
         }
@@ -84,11 +84,11 @@ namespace ft
         {
             T *tmp;
 
-            if (_node != NULL && *(this->_node) == *(root->findSmallest(root)))
+            if (_node != NULL && *(this->_node) == *(root->findSmallest(*root)))
                 return (*this);
             if (_node == NULL)
             {
-                tmp = root->findBigger(root);
+                tmp = root->findBigger(*root);
             }
             else
                 tmp = _node->findPrevious(_node);
@@ -124,11 +124,11 @@ namespace ft
 
         operator  const_bidirectional_iterator<T> ()
         {
-            return const_bidirectional_iterator<T>(this->_node,this->root);
+            return const_bidirectional_iterator<T>(this->_node,*(this->root));
         }
 
         T *_node;
-        T *root;
+        T **root;
 
     private:
     };

@@ -60,6 +60,8 @@ namespace ft
             if (n->right)
             {
                 tmp = n->right;
+                if (tmp == NULL)
+                    return NULL;
                 while (tmp->left)
                 {
                     tmp = tmp->left;
@@ -291,6 +293,7 @@ namespace ft
             {
                 if (isNullLeaf(n->right) || isNullLeaf(n->left))
                 {
+                
                     deleteOneChild(n);
                     return;
                 }
@@ -351,7 +354,8 @@ namespace ft
                 this->_size --;
             else
             {
-                nodeALloc.deallocate(root, 1);
+                if (this->root)
+                    nodeALloc.deallocate(root, 1);
                 // my_alloc.destroy((root->value));
                 this->root = NULL;
             }
@@ -367,14 +371,10 @@ namespace ft
                 return;
             }
             node<T> *child = isNullLeaf(nodeTodelete->right) ? nodeTodelete->left : nodeTodelete->right;
-
             // if (child != NULL)
             replaceNode(nodeTodelete, child);
-
             // deallocate the node and the pair
-            nodeALloc.deallocate(nodeTodelete, 1);
             // my_alloc.destroy(&(nodeTodelete->value));
-    
             if (nodeTodelete->color == Black)
             {
                 if (child && child->color == Red)
@@ -387,6 +387,7 @@ namespace ft
                         deleteCase1(child);
                 }
             }
+            nodeALloc.deallocate(nodeTodelete, 1);
         }
 
         void deleteCase1(node<T> *n)
@@ -403,6 +404,7 @@ namespace ft
         {
             if (child != NULL)
                 child->parent = r->parent;
+            
             if (r->parent == NULL)
             {
                 this->root = child;
