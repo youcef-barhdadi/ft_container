@@ -300,8 +300,8 @@ namespace ft
                 else
                 {
                     node<T> *next = findSamllest(n->right);
-                    n->value = next->value;
-                    // my_alloc.construct(&n->value, &next->value);
+                    // n->value = next->value;
+                    my_alloc.construct(&n->value, next->value);
                     _delete(n->right, next->value);
                 }
             }

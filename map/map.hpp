@@ -25,7 +25,7 @@ namespace ft
 	public:
 		typedef T mapped_type;
 
-		typedef pair<Key, T> value_type;
+		typedef pair<const Key, T> value_type;
 
 		typedef Key key_type;
 		//  typedef Allocator allocator_type  ;
@@ -40,9 +40,9 @@ namespace ft
 
 		typedef const T *const_pointer;
 
-		typedef ft::bidirectional_iterator<node<ft::pair<Key, T> > > iterator;
+		typedef ft::bidirectional_iterator<node<ft::pair<const Key, T> > > iterator;
 
-		typedef ft::const_bidirectional_iterator<node<ft::pair<Key, T> > > const_iterator;
+		typedef ft::const_bidirectional_iterator<node<ft::pair<const Key, T> > > const_iterator;
 
 
 		typedef ft::reverse_iterator<iterator> const_reverse_iterator;
@@ -447,7 +447,7 @@ namespace ft
 
 
 
-		ft::RBtree<ft::pair<Key, T> , Allocator , Compare > tree;
+		ft::RBtree<ft::pair<const Key, T> , Allocator , Compare > tree;
 
 	private:
 		allocator_type my_alloc;
