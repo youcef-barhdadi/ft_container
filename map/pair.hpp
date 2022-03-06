@@ -47,6 +47,12 @@ namespace ft{
 			{
 				return ft::pair<const first_type, second_type>(first, second);
 			}
+
+			// operator const ft::pair<const first_type, second_type>() const
+			//  {
+			// 	 return ft::pair<const first_type, second_type>(first, second); 
+			//  }
+
 	};
 
 

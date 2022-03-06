@@ -2,7 +2,7 @@
 #include <iostream>
 #include <memory>
 #include <iterator>
-
+#include "rbtree.hpp"
 namespace ft
 {
 
@@ -13,22 +13,31 @@ namespace ft
     {
     public:
         // #ifdef MAP
-        typedef typename T::reference reference;
-        typedef typename T::pointer pointer;
-        // #endif
-        // typedef typename T& reference;
-        // typedef typename T* pointer;
+        typedef  T& reference;
+        typedef  T* pointer;
 
+
+
+        operator bidirectional_iterator< T>  () const 
+        {
+                return bidirectional_iterator<const T>(this->_node, this->root);
+        } 
 
         bidirectional_iterator()
         {
             // this->_node = NULL;
         }
 
-        bidirectional_iterator(T *node, T **root) : root(root)
+        bidirectional_iterator(ft::node<T> *node, ft::node<T> **root) : root(root)
         {
             this->_node = node;
         }
+
+        
+        // bidirectional_iterator(ft::node<const T> *node, ft::node<const T> **root) : root(root)
+        // {
+        //     this->_node = node;
+        // }
 
         bidirectional_iterator(const bidirectional_iterator &n)
         {
@@ -68,7 +77,7 @@ namespace ft
 
         bidirectional_iterator operator++(void)
         {
-            T *tmp = _node->findNextNode(_node);
+            ft::node<T> *tmp = _node->findNextNode(_node);
             _node = tmp;
             return *this;
         }
@@ -82,7 +91,7 @@ namespace ft
 
         bidirectional_iterator operator--(void)
         {
-            T *tmp;
+            ft::node<T> *tmp;
 
             if (_node != NULL && *(this->_node) == *(root->findSmallest(*root)))
                 return (*this);
@@ -127,134 +136,145 @@ namespace ft
             return const_bidirectional_iterator<T>(this->_node,*(this->root));
         }
 
-        T *_node;
-        T **root;
-
+       ft::node<T> *_node;
+        ft::node<T> **root;
     private:
     };
 
-    template <class T>
-    class const_bidirectional_iterator : public std::iterator<std::bidirectional_iterator_tag, T>
-    {
-    public:
-        typedef typename T::reference reference;
-        typedef typename T::pointer pointer;
+    // template <class T>
+    // class const_bidirectional_iterator : public std::iterator<std::bidirectional_iterator_tag, T>
+    // {
+    // public:
+    //       typedef  T& reference;
+    //     typedef  T* pointer;
 
-        const_bidirectional_iterator()
-        {
-            this->_node = NULL;
-        }
-
-        const_bidirectional_iterator(T *node, T *root)
-        {
-            this->_node = node;
-            this->root = root;
-        }
-
-        const_bidirectional_iterator operator&=(bidirectional_iterator<T> my)
-        {
-            this->_node = my._node;
-            return (*this);
-        }
-
-        const_bidirectional_iterator(const const_bidirectional_iterator &n)
-        {
-            this->_node = n._node;
-            this->root = n.root;
-        }
-
-        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
-        {
-            this->_node = n._node;
-            this->root = n.root;
-        }
-
-        reference operator*() const
-        {
-            return _node->value;
-        }
-
-        pointer operator->()
-        {
-            return &(_node->value);
-        }
-
-        const_bidirectional_iterator operator++(void)
-        {
-            T *tmp = _node->findNextNode(_node);
-            _node = tmp;
-            return *this;
-        }
-
-        const_bidirectional_iterator operator++(int)
-        {
-            const_bidirectional_iterator copy(this->_node, this->root);
-            ++(*this);
-            return copy;
-        }
-
-        const_bidirectional_iterator operator--(void)
-        {
-             T *tmp;
-
-            if (_node != NULL && *(this->_node) == *(root->findSmallest(root)))
-                return (*this);
-            if (_node == NULL)
-            {
-                tmp = root->findBigger(root);
-            }
-            else
-                tmp = _node->findPrevious(_node);
-            _node = tmp;
-            return *this;
-        }
-
-        const_bidirectional_iterator operator=(const_bidirectional_iterator b)
-        {
-            this->_node = b._node;
-            this->root = b.root;
-            return (*this);
-        }
-
-        const_bidirectional_iterator operator=(bidirectional_iterator<T> b)
-        {
-            this->_node = b._node;
-            this->root = b.root;
-            return (*this);
-        }
-
-        friend bool operator==(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
-        {
-            return (lhr._node) == rhr._node;
-        }
-
-        friend bool operator!=(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
-        {
-            return lhr._node != rhr._node;
-        }
-
-        const_bidirectional_iterator operator--(int)
-        {
-            const_bidirectional_iterator copy(this->_node, this->root);
-            operator--();
-            return copy;
-        }
+    //     const_bidirectional_iterator()
+    //     {
+    //         this->_node = NULL;
+    //     }
 
 
-        operator  bidirectional_iterator<T>()
-        {
-            return bidirectional_iterator<T>(this->_node, this->root);
-        }
 
-        T *base()
-        {
-            return _node;
-        }
+    //         operator const_bidirectional_iterator<const T> ()
+    //         {
+    //                 // return const_bidirectional_iterator()
+    //         } 
 
-        T *_node;
-        T *root;
 
-    private:
-    };
+    //     const_bidirectional_iterator(ft::node<T> *node, ft::node<T> **root)
+    //     {
+    //         this->_node = node;
+    //         this->root = root;
+    //     }
+
+    //     const_bidirectional_iterator(const const_bidirectional_iterator &n)
+    //     {
+    //         this->_node = n._node;
+    //         this->root = n.root;
+    //     }
+
+    //     const_bidirectional_iterator(const bidirectional_iterator<T> &n)
+    //     {
+    //         this->_node = n._node;
+    //         this->root = n.root;
+    //     }
+
+    //     // const_bidirectional_iterator(const bidirectional_iterator<const T> &n)
+    //     // {
+    //     //     this->_node = n._node;
+    //     //     this->root = n.root;
+    //     // }
+
+    //     const_bidirectional_iterator operator&=(bidirectional_iterator<T> my)
+    //     {
+    //         this->_node = my._node;
+    //         return (*this);
+    //     }
+
+    //     reference operator*() const
+    //     {
+    //         return _node->value;
+    //     }
+
+    //     pointer operator->()
+    //     {
+    //         return &(_node->value);
+    //     }
+
+    //     const_bidirectional_iterator operator++(void)
+    //     {
+    //         T *tmp = _node->findNextNode(_node);
+    //         _node = tmp;
+    //         return *this;
+    //     }
+
+    //     const_bidirectional_iterator operator++(int)
+    //     {
+    //         const_bidirectional_iterator copy(this->_node, this->root);
+    //         ++(*this);
+    //         return copy;
+    //     }
+
+    //     const_bidirectional_iterator operator--(void)
+    //     {
+    //          ft::node<T> *tmp;
+
+    //         if (_node != NULL && *(this->_node) == *(root->findSmallest(root)))
+    //             return (*this);
+    //         if (_node == NULL)
+    //             tmp = root->findBigger(root);
+    //         else
+    //             tmp = _node->findPrevious(_node);
+    //         _node = tmp;
+    //         return *this;
+    //     }
+
+    //     const_bidirectional_iterator operator=(const_bidirectional_iterator b)
+    //     {
+    //         this->_node = b._node;
+    //         this->root = b.root;
+    //         return (*this);
+    //     }
+
+    //     const_bidirectional_iterator operator=(bidirectional_iterator<T> b)
+    //     {
+    //         this->_node = b._node;
+    //         this->root = b.root;
+    //         return (*this);
+    //     }
+
+    //     friend bool operator==(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
+    //     {
+    //         return (lhr._node) == rhr._node;
+    //     }
+
+    //     friend bool operator!=(const const_bidirectional_iterator &lhr, const const_bidirectional_iterator &rhr)
+    //     {
+    //         return lhr._node != rhr._node;
+    //     }
+
+    //     const_bidirectional_iterator operator--(int)
+    //     {
+    //         const_bidirectional_iterator copy(this->_node, this->root);
+    //         operator--();
+    //         return copy;
+    //     }
+
+
+    //     operator  bidirectional_iterator<T>()
+    //     {
+    //         return bidirectional_iterator<T>(this->_node, this->root);
+    //     }
+
+    //     ft::node<T> *base()
+    //     {
+    //         return _node;
+    //     }
+
+    //    ft::node<T> *_node;
+    // ft::node<T> **root;
+
+    // private:
+    // };
 
 };

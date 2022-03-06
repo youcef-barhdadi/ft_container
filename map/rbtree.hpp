@@ -37,6 +37,33 @@ namespace ft
         bool isRight;
 
 
+        operator node<const T>()  const
+        {
+            return node<const T>(this->value, this->left, this->right, this->parent, this->color , this->_comp, this->isRight, this->my_alloc);
+        }
+
+                operator node<const T>()  
+        {
+            return node<const T>(this->value, this->left, this->right, this->parent, this->color , this->_comp, this->isRight, this->my_alloc);
+        }
+
+
+        // operator node< T>()  
+        // {
+        //     return node< T>(this->value, this->left, this->right, this->parent, this->color , this->_comp, this->isRight, this->my_alloc);
+        // }
+        
+        node (T &value, node *left, node *right,node *partent, Color color, Compare _comp, bool isRight,  allocator_type my_alloc)
+        {
+            this->value = value;
+            this->right = right;
+            this->left = left;
+            this->color = color;
+            this->_comp = _comp;
+            this->isRight = isRight;
+            this->my_alloc = my_alloc;
+            this->parent = parent;
+        }
 
 
 
@@ -92,10 +119,10 @@ namespace ft
             return NULL;
         }
 
-        operator node<const T>()
-        {
-            return node<const T>(this->value);
-        }
+        // operator node<const T>()
+        // {
+        //     return node<const T>(this->value);
+        // }
 
         node<T> *findBigger(node<T> *n)
         {

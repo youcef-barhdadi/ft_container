@@ -1,0 +1,622 @@
+In file included from main.cpp:7:
+./map.hpp:219:11: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+In file included from main.cpp:7:
+./map.hpp:219:11: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+                        return iterator(this->tree.find(ft::pair<key_type, Mapped_type>(k, Mapped_type())), tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./map.hpp:208:26: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::find' requested here
+                        iterator iter = this->find(k);
+                                              ^
+main.cpp:83:16: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::operator[]' requested here
+        m_first[i - 97] = i;                        return iterator(this->tree.find(ft::pair<key_type, Mapped_type>(k, Mapped_type())), tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./map.hpp:208:26: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::find' requested here
+                        iterator iter = this->find(k);
+                                              ^
+main.cpp:83:16: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::operator[]' requested here
+        m_first[i - 97] = i;
+               ^
+
+               ^
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9:        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+ note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:125:42: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+In file included from main.cpp:7:
+./map.hpp:125:42: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+                                return ft::make_pair<iterator, bool>(iterator(n, &tree.root), false);
+                                                                     ^        ~~~~~~~~~~~~~
+                                return ft::make_pair<iterator, bool>(iterator(n, &tree.root), false);
+                                                                     ^        ~~~~~~~~~~~~~
+./map.hpp:./map.hpp:211:11: 211:11: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::insert' requested here
+note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::insert' requested here
+                                this->insert(ft::make_pair(k, Mapped_type()));
+                                      ^
+main.cpp:83:16: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::operator[]' requested here
+                                this->insert(ft::make_pair(k, Mapped_type()));
+                                      ^
+main.cpp:83:16: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::operator[]' requested here
+        m_first[i - 97] = i;
+               ^
+        m_first[i - 97] = i;
+               ^
+./bidirectional_iterator.hpp:28:9: note./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::value_type> *' (aka 'node<pair<const char, int> > *') to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+: candidate constructor not viable: no known conversion from 'node<ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::value_type> *' (aka 'node<pair<const char, int> > *') to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9:         bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:114:11: error: no matching member function for call to 'insert'
+In file included from main.cpp:7:
+./map.hpp:114:11: error: no matching member function for call to 'insert'
+                                this->insert(*c);
+                                ~~~~~~^~~~~~
+main.cpp                                this->insert(*c);
+                                ~~~~~~^~~~~~
+main.cpp:87:24::87:24: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map' requested here
+ note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map' requested here
+    ft::Map<char, int> m_copy(m_first);
+                       ^
+./map.hpp:147:8: note: candidate function template not viable: requires 2 arguments, but 1 was provided
+    ft::Map<char, int> m_copy(m_first);
+                       ^
+./map.hpp:147:8: note: candidate function template not viable: requires 2 arguments, but 1 was provided
+                void insert(InputIterator first, InputIterator last)
+                     ^
+./map.hpp:139:12: note: candidate function not viable: requires 2 arguments, but 1 was provided
+                void insert(InputIterator first, InputIterator last)
+                     ^
+./map.hpp:139:12: note: candidate function not viable: requires 2 arguments, but 1 was provided
+                iterator insert(iterator position, const value_type &val)
+                         ^
+                iterator insert(iterator position, const value_type &val)
+                         ^
+./map.hpp:192:11./map.hpp:192:11: error: : error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::const_iterator' (aka 'const_bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::const_iterator' (aka 'const_bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+                        return const_iterator(this->tree.findSamllest(tree.root), tree.root);
+                               ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                        return const_iterator(this->tree.findSamllest(tree.root), tree.root);
+                               ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./map.hpp:109:25:./map.hpp:109:25: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::begin' requested here
+ note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::begin' requested here
+                        const_iterator c = x.begin();
+                                             ^                        const_iterator c = x.begin();
+                                             ^
+
+main.cpp:87:24: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map' requested here
+    ft::Map<char, int> m_copy(m_first);
+                       ^main.cpp:87:24: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map' requested here
+    ft::Map<char, int> m_copy(m_first);
+                       ^
+
+./bidirectional_iterator.hpp:148:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+./bidirectional_iterator.hpp:148:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+        const_bidirectional_iterator(T *node, T *root)
+        ^
+        const_bidirectional_iterator(T *node, T *root)
+        ^
+./bidirectional_iterator.hpp:160:./bidirectional_iterator.hpp:160:9: note: 9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const const_bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:166:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const const_bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:166:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
+        ^
+./bidirectional_iterator.hpp:143:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
+        ^
+./bidirectional_iterator.hpp:143:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+
+        const_bidirectional_iterator()
+        ^
+        const_bidirectional_iterator()
+        ^
+./bidirectional_iterator.hpp:184:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *'
+            T *tmp = _node->findNextNode(_node);
+                                         ^~~~~
+./map.hpp./bidirectional_iterator.hpp:184:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *'
+            T *tmp = _node->findNextNode(_node);
+                                         ^~~~~
+./map.hpp:115:5: note: in instantiation of member function 'ft::const_bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >::operator++' requested here:115:5: note: in instantiation of member function 'ft::const_bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >::operator++' requested here
+
+                                ++c;
+                                ^
+                                ++c;
+                                ^
+main.cpp:87:24main.cpp:87:24: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map' requested here: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map' requested here
+
+    ft::Map<char, int> m_copy(m_first);
+                       ^
+    ft::Map<char, int> m_copy(m_first);
+                       ^
+./rbtree.hpp:55:40:./rbtree.hpp:55:40: note note: passing argument to parameter 'n' here
+: passing argument to parameter 'n' here
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+In file included from main.cpp:7:
+./map.hpp:168:11: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+In file included from main.cpp:7:
+./map.hpp:168:11: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+                        return iterator(tree.findSamllest(this->tree.root), &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                        return iterator(tree.findSamllest(this->tree.root), &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+main.cpp:main.cpp:89:94: 89:94: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::begin' requested here
+note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::begin' requested here
+    cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+                                                                                             ^
+    cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+                                                                                             ^
+./bidirectional_iterator.hpp:28:9: note./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *' for 1st argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:./bidirectional_iterator.hpp:23:9: 23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:197:11: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+In file included from main.cpp:7:
+./map.hpp:197:11: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >')
+                        return iterator(NULL, &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~
+                        return iterator(NULL, &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~
+main.cpp:89main.cpp:89:111: note:111: note: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::end' requested here
+: in instantiation of member function 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::end' requested here
+    cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+                                                                                                              ^
+    cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+                                                                                                              ^
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > **' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > **' for 2nd argument
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > **' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > **' for 2nd argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:33:9: note: 9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:101:11: error: no matching member function for call to 'insert'
+In file included from main.cpp:7:
+./map.hpp:101:11: error: no matching member function for call to 'insert'
+                                this->insert(*first);
+                                ~~~~~~^~~~~~
+                                this->insert(*first);
+                                ~~~~~~^~~~~~
+main.cpp:92:24: note: in instantiation of function template specialization 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map<ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > > >' requested here
+main.cpp:92:24: note: in instantiation of function template specialization 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::Map<ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > > >' requested here
+    ft::Map<char, int> m_second(m_first.begin(), m_first.end());
+                       ^
+./map.hpp:147:8: note: candidate function template not viable: requires 2 arguments, but 1 was provided
+    ft::Map<char, int> m_second(m_first.begin(), m_first.end());
+                       ^
+./map.hpp:147:8: note: candidate function template not viable: requires 2 arguments, but 1 was provided
+                void insert(InputIterator first, InputIterator last)
+                     ^
+                void insert(InputIterator first, InputIterator last)
+                     ^
+./map.hpp:139:./map.hpp:139:12: note: 12: note: candidate function not viable: requires 2 arguments, but 1 was provided
+candidate function not viable: requires 2 arguments, but 1 was provided
+                iterator insert(iterator position, const value_type &val)
+                         ^
+                iterator insert(iterator position, const value_type &val)
+                         ^
+./map.hpp:168:11: error: no matching constructor for initialization of 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> >')
+./map.hpp:168:11: error: no matching constructor for initialization of 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> >')
+                        return iterator(tree.findSamllest(this->tree.root), &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+main.cpp:103:107: note: in instantiation of member function 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::begin' requested here
+                        return iterator(tree.findSamllest(this->tree.root), &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+main.cpp:103:107: note: in instantiation of member function 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::begin' requested here
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+                                                                                                          ^
+                                                                                                          ^
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> *' for 1st argument
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> *' for 1st argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp./bidirectional_iterator.hpp:33:9::33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+ note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:197:11: error: no matching constructor for initialization of 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> >')
+In file included from main.cpp:7:
+./map.hpp:197:11: error: no matching constructor for initialization of 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> >')
+                        return iterator(NULL, &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~
+                        return iterator(NULL, &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~
+main.cpp:103:125main.cpp:103:125: note: in instantiation of member function 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::end' requested here: note: in instantiation of member function 'ft::Map<char, int, classcomp, std::__1::allocator<ft::pair<const char, int> > >::end' requested here
+
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+                                                                                                                            ^
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+                                                                                                                            ^
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > **' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> **' for 2nd argument
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > **' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> **' for 2nd argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+./bidirectional_iterator.hpp:71:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> *'
+./bidirectional_iterator.hpp:71:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> *'
+            T *tmp = _node->findNextNode(_node);
+                                         ^~~~~
+            T *tmp = _node->findNextNode(_node);
+                                         ^~~~~
+main.cppmain.cpp:58:62::58:62: note: in instantiation of member function 'ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> >::operator++' requested here
+ note: in instantiation of member function 'ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> >::operator++' requested here
+    for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
+                                                             ^
+main.cpp:103:56: note: in instantiation of function template specialization 'compareMaps<std::__1::__map_iterator<std::__1::__tree_iterator<std::__1::__value_type<char, int>, std::__1::__tree_node<std::__1::__value_type<char, int>, void *> *, long> >, ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> > >' requested here
+    for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
+                                                             ^
+main.cpp:103:56: note: in instantiation of function template specialization 'compareMaps<std::__1::__map_iterator<std::__1::__tree_iterator<std::__1::__value_type<char, int>, std::__1::__tree_node<std::__1::__value_type<char, int>, void *> *, long> >, ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, classcomp> > >' requested here
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+                                                       ^
+./rbtree.hpp:55:40: note: passing argument to parameter 'n' here
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+                                                       ^
+./rbtree.hpp:55:40: note: passing argument to parameter 'n' here
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+In file included from main.cpp:7:
+./map.hpp:168:11: error: no matching constructor for initialization of 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> >')
+In file included from main.cpp:7:
+./map.hpp:168:11: error: no matching constructor for initialization of 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> >')
+                        return iterator(tree.findSamllest(this->tree.root), &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                        return iterator(tree.findSamllest(this->tree.root), &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+main.cpp:109:102main.cpp:109:102: note: in instantiation of member function 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::begin' requested here: note: in instantiation of member function 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::begin' requested here
+
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+                                                                                                     ^
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+                                                                                                     ^
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> *' for 1st argument./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > *' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> *' for 1st argument
+
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23./bidirectional_iterator.hpp:23:9:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:197:11: error: no matching constructor for initialization of 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> >')
+In file included from main.cpp:7:
+./map.hpp:197:11: error: no matching constructor for initialization of 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> >')
+                        return iterator(NULL, &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~
+                        return iterator(NULL, &tree.root);
+                               ^        ~~~~~~~~~~~~~~~~
+main.cpp:109main.cpp:109::119: note119: note: in instantiation of member function 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::end' requested here
+: in instantiation of member function 'ft::Map<char, int, bool (*)(char, char), std::__1::allocator<ft::pair<const char, int> > >::end' requested here
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+                                                                                                                      ^
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+                                                                                                                      ^
+./bidirectional_iterator.hpp:28:9: note: ./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > **' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> **' for 2nd argument
+candidate constructor not viable: no known conversion from 'node<ft::pair<const char, int> > **' to 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> **' for 2nd argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:./bidirectional_iterator.hpp:23:9: 23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator()
+        ^
+./bidirectional_iterator.hpp:71:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> *'
+            T *tmp = _node->findNextNode(_node);
+./bidirectional_iterator.hpp:71:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> *'
+            T *tmp = _node->findNextNode(_node);
+                                         ^~~~~
+                                         ^~~~~
+main.cpp:58:main.cpp:58:62: note: 62: note: in instantiation of member function 'ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> >::operator++' requested here
+in instantiation of member function 'ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> >::operator++' requested here
+    for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
+                                                             ^
+main.cpp:109:54: note: in instantiation of function template specialization 'compareMaps<std::__1::__map_iterator<std::__1::__tree_iterator<std::__1::__value_type<char, int>, std::__1::__tree_node<std::__1::__value_type<char, int>, void *> *, long> >, ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> > >' requested here
+    for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
+                                                             ^
+main.cpp:109:54: note: in instantiation of function template specialization 'compareMaps<std::__1::__map_iterator<std::__1::__tree_iterator<std::__1::__value_type<char, int>, std::__1::__tree_node<std::__1::__value_type<char, int>, void *> *, long> >, ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, bool (*)(char, char)> > >' requested here
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+                                                     ^
+./rbtree.hpp:55:40: note: passing argument to parameter 'n' here
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+                                                     ^
+./rbtree.hpp:55:40: note: passing argument to parameter 'n' here
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+In file included from main.cpp:7:
+In file included from ./map.hpp:2:
+In file included from ./rbtree.hpp:3:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iostream:38:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/ios:216:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__locale:15:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:505:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:176:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__string:57:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm:641In file included from main.cpp:7:
+In file included from ./map.hpp:2:
+In file included from ./rbtree.hpp:3:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iostream:38:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/ios:216:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__locale:15:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:505:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:176:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__string:57:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm:641:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:4526:9: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >'
+:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:4526:9: error: no matching constructor for initialization of 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >'
+    _Tp __t(_VSTD::move(__x));
+        ^   ~~~~~~~~~~~~~~~~
+main.cpp    _Tp __t(_VSTD::move(__x));
+        ^   ~~~~~~~~~~~~~~~~
+main.cpp:1711:9: note: in instantiation of function template specialization 'std::__1::swap<ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > > >' requested here
+:1711:9: note: in instantiation of function template specialization 'std::__1::swap<ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > > >' requested here
+        swap(foo, bar);
+        ^
+        swap(foo, bar);
+        ^
+./map.hpp:81:12: note: candidate constructor not viable: no known conversion from 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >' to 'const ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::key_compare' (aka 'const std::__1::less<char>') for 1st argument
+./map.hpp:81:12: note: candidate constructor not viable: no known conversion from 'ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >' to 'const ft::Map<char, int, std::__1::less<char>, std::__1::allocator<ft::pair<const char, int> > >::key_compare' (aka 'const std::__1::less<char>') for 1st argument
+                explicit Map(const key_compare &comp = key_compare(),
+                         ^
+./map.hpp:93:3: note:                 explicit Map(const key_compare &comp = key_compare(),
+                         ^
+./map.hpp:93:3: note: candidate constructor template not viable: requires at least 2 arguments, but 1 was provided
+candidate constructor template not viable: requires at least 2 arguments, but 1 was provided
+                Map(InputIterator first, InputIterator last,
+                ^
+                Map(InputIterator first, InputIterator last,
+                ^
+In file included from main.cpp:7:
+In file included from ./map.hpp:4:
+./bidirectional_iterator.hpp:71:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *'
+            T *tmp = _node->findNextNode(_node);
+                                         ^~~~~
+In file included from main.cpp:7:
+In file included from ./map.hpp:4:
+./bidirectional_iterator.hpp:71:42: error: cannot initialize a parameter of type 'node<ft::pair<const char, int> > *' with an lvalue of type 'ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > *'
+            T *tmp = _node->findNextNode(_node);
+                                         ^~~~~
+main.cpp:1713:78: note: in instantiation of member function 'ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >::operator++' requested here
+main.cpp:1713:78: note: in instantiation of member function 'ft::bidirectional_iterator<ft::node<ft::pair<const char, int>, std::__1::allocator<ft::pair<const char, int> >, std::__1::less<char> > >::operator++' requested here
+        for (ft::Map<char, int>::iterator it = foo.begin(); it != foo.end(); ++it)
+                                                                             ^
+./rbtree.hpp:        for (ft::Map<char, int>::iterator it = foo.begin(); it != foo.end(); ++it)
+                                                                             ^
+./rbtree.hpp:55:40: note: passing argument to parameter 'n' here
+55:40: note: passing argument to parameter 'n' here
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+        node<T> *findNextNode(node<T> *n)
+                                       ^
+In file included from main.cpp:7In file included from main.cpp:7:
+./map.hpp:125:42: error: no matching constructor for initialization of 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const int, basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > >')
+:
+./map.hpp:125:42: error: no matching constructor for initialization of 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::iterator' (aka 'bidirectional_iterator<node<ft::pair<const int, basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > >')
+                                return ft::make_pair<iterator, bool>(iterator(n, &tree.root), false);
+                                                                     ^        ~~~~~~~~~~~~~
+main.cpp:2091:14: note: in instantiation of member function 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::insert' requested here
+        ft_m.insert(ft::make_pair(i, "value"));
+             ^
+                                return ft::make_pair<iterator, bool>(iterator(n, &tree.root), false);
+                                                                     ^        ~~~~~~~~~~~~~
+main.cpp:2091:14: note: in instantiation of member function 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::insert' requested here
+        ft_m.insert(ft::make_pair(i, "value"));
+             ^
+./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::value_type> *' (aka 'node<pair<const int, std::__1::basic_string<char> > > *') to 'ft::node<ft::pair<const int, std::__1::basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > *' for 1st argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9:./bidirectional_iterator.hpp:28:9: note: candidate constructor not viable: no known conversion from 'node<ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::value_type> *' (aka 'node<pair<const int, std::__1::basic_string<char> > > *') to 'ft::node<ft::pair<const int, std::__1::basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > *' for 1st argument
+        bidirectional_iterator(T *node, T **root) : root(root)
+        ^
+./bidirectional_iterator.hpp:33:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+ note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+        bidirectional_iterator(const bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:23:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:192:11: error: no matching constructor for initialization of 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::const_iterator' (aka 'const_bidirectional_iterator<node<ft::pair<const int, basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > >')
+                        return const_iterator(this->tree.findSamllest(tree.root), tree.root);
+                               ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from main.cpp:7:
+./map.hpp:192:11: error: no matching constructor for initialization of 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::const_iterator' (aka 'const_bidirectional_iterator<node<ft::pair<const int, basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > >')
+                        return const_iterator(this->tree.findSamllest(tree.root), tree.root);
+                               ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./map.hpp:397:28: note: in instantiation of member function 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::begin' requested here
+./map.hpp:397:28: note: in instantiation of member function 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::begin' requested here
+                                const_iterator l = lhr.begin();
+                                                       ^
+                                const_iterator l = lhr.begin();
+                                                       ^
+main.cpp:2111main.cpp:2111:23: note:23: note: in instantiation of member function 'ft::operator==' requested here
+: in instantiation of member function 'ft::operator==' requested here
+        ft_res = ft_m == ft_m1;
+                      ^
+        ft_res = ft_m == ft_m1;
+                      ^
+./bidirectional_iterator.hpp:148:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const int, std::__1::basic_string<char> > > *' to 'ft::node<ft::pair<const int, std::__1::basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > *' for 1st argument
+        const_bidirectional_iterator(T *node, T *root)
+        ^
+./bidirectional_iterator.hpp:160:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+./bidirectional_iterator.hpp:148:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const int, std::__1::basic_string<char> > > *' to 'ft::node<ft::pair<const int, std::__1::basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > *' for 1st argument
+        const_bidirectional_iterator(T *node, T *root)
+        ^
+./bidirectional_iterator.hpp:160:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const const_bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:166:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
+        ^
+        const_bidirectional_iterator(const const_bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:166:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
+        ^
+./bidirectional_iterator.hpp:143:9: ./bidirectional_iterator.hpp:143:9: note: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+candidate constructor not viable: requires 0 arguments, but 2 were provided
+        const_bidirectional_iterator()
+        ^
+        const_bidirectional_iterator()
+        ^
+In file included from main.cpp:7:
+./map.hpp:202:11: error: no matching constructor for initialization of 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::const_iterator' (aka 'const_bidirectional_iterator<node<ft::pair<const int, basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > >')
+                        return const_iterator(NULL, tree.root);
+                               ^              ~~~~~~~~~~~~~~~
+./map.hppIn file included from main.cpp:7:
+./map.hpp:202:11: error: no matching constructor for initialization of 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::const_iterator' (aka 'const_bidirectional_iterator<node<ft::pair<const int, basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > >')
+                        return const_iterator(NULL, tree.root);
+                               ^              ~~~~~~~~~~~~~~~
+./map.hpp:401:19: note: in instantiation of member function 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::end' requested here
+:401:19: note: in instantiation of member function 'ft::Map<int, std::__1::basic_string<char>, std::__1::less<int>, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > > >::end' requested here
+                                        if (l == lhr.end() && r  == rhr.end())
+                                                     ^
+main.cpp:2111:                                        if (l == lhr.end() && r  == rhr.end())
+                                                     ^
+main.cpp:2111:23: note: in instantiation of member function 'ft::operator==' requested here
+23: note: in instantiation of member function 'ft::operator==' requested here
+        ft_res = ft_m == ft_m1;
+                      ^
+./bidirectional_iterator.hpp:148:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const int, std::__1::basic_string<char> > > *const' to 'ft::node<ft::pair<const int, std::__1::basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > *' for 2nd argument
+        ft_res = ft_m == ft_m1;
+                      ^
+./bidirectional_iterator.hpp:148:9: note: candidate constructor not viable: no known conversion from 'node<ft::pair<const int, std::__1::basic_string<char> > > *const' to 'ft::node<ft::pair<const int, std::__1::basic_string<char> >, std::__1::allocator<ft::pair<const int, std::__1::basic_string<char> > >, std::__1::less<int> > *' for 2nd argument
+        const_bidirectional_iterator(T *node, T *root)
+        ^
+./bidirectional_iterator.hpp:        const_bidirectional_iterator(T *node, T *root)
+        ^
+./bidirectional_iterator.hpp:160:9: 160:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const const_bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:166:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
+        ^
+./bidirectional_iterator.hpp:143:9        const_bidirectional_iterator(const const_bidirectional_iterator &n)
+        ^
+./bidirectional_iterator.hpp:166:9: note: candidate constructor not viable: requires single argument 'n', but 2 arguments were provided
+        const_bidirectional_iterator(const bidirectional_iterator<T> &n)
+        ^
+./bidirectional_iterator.hpp:143:9: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+        const_bidirectional_iterator()
+        ^
+        const_bidirectional_iterator()
+        ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+20 errors generated.
