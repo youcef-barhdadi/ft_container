@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rbtree.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/08 21:17:43 by ybarhdad          #+#    #+#             */
+/*   Updated: 2022/03/08 21:17:43 by ybarhdad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #pragma once
 #include <iostream>
@@ -42,10 +54,15 @@ namespace ft
             return node<const T>(this->value, this->left, this->right, this->parent, this->color , this->_comp, this->isRight, this->my_alloc);
         }
 
-                operator node<const T>()  
+        operator node<const T>()  
         {
             return node<const T>(this->value, this->left, this->right, this->parent, this->color , this->_comp, this->isRight, this->my_alloc);
         }
+
+        //        operator node<const T>()  
+        // {
+        //     return node<const T>(this->value, this->left, this->right, this->parent, this->color , this->_comp, this->isRight, this->my_alloc);
+        // }
 
 
         // operator node< T>()  

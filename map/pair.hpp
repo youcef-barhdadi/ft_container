@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pair.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybarhdad <ybarhdad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/08 21:17:45 by ybarhdad          #+#    #+#             */
+/*   Updated: 2022/03/08 21:17:45 by ybarhdad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #pragma once
 #include <iostream>
@@ -19,9 +31,11 @@ namespace ft{
 			second_type second;
 
 
-			pair()  : first(first_type())  { 
+			pair()  : first() , second()
+			{ 
 					
-				return ; }
+				return ;
+			}
 
 			template <class U, class V>
 			pair(const pair<U, V>& pr): first(pr.first), second(pr.second) {

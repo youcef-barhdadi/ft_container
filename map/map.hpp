@@ -41,10 +41,10 @@ namespace ft
 
 		typedef ft::bidirectional_iterator<value_type> iterator;
 
-		typedef ft::bidirectional_iterator<const value_type> const_iterator;
+		typedef ft::const_bidirectional_iterator<const value_type> const_iterator;
 
 
-		typedef ft::reverse_iterator<iterator> const_reverse_iterator;
+		typedef ft::const_reverse_iterator<const_iterator> const_reverse_iterator;
         
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
 
@@ -140,7 +140,7 @@ namespace ft
 		{
 			this->insert(val);
 			node<value_type> *n = tree.find(*position);
-			return iterator(n, tree.root);
+			return iterator(n, &tree.root);
 		}
 
 		template <class InputIterator>
@@ -189,7 +189,7 @@ namespace ft
 
 		const_iterator begin() const
 		{
-			return const_iterator(this->tree.findSamllest(this->tree.root), &tree.root);
+			return const_iterator((node<const value_type> *)this->tree.findSamllest(this->tree.root), (node <const value_type> *const *)&tree.root);
 		}
 
 		iterator end()
@@ -199,29 +199,21 @@ namespace ft
 
 		const_iterator end() const
 		{
-			return const_iterator(NULL, tree.root);
+			return const_iterator(NULL, (node <const value_type> *const *)tree.root);
 		}
 
 		Mapped_type &operator[](const key_type &k)
-		{
-
-			iterator iter = this->find(k);
-			if (iter == this->end())
-			{
-				this->insert(ft::make_pair(k, Mapped_type()));
-			}
-			iter = this->find(k);
-			return (*iter).second;
+		{		
+			return (this->insert(ft::make_pair(k, Mapped_type())).first->second);
 		}
 
 		iterator find(const key_type &k)
 		{
-			return iterator(this->tree.find(ft::pair<key_type, Mapped_type>(k, Mapped_type())), tree.root);
+			return iterator(this->tree.find(ft::pair<key_type, Mapped_type>(k, Mapped_type())), &tree.root);
 		}
 		const_iterator find(const key_type &k) const
 		{
-			
-			return const_iterator(this->tree.find(ft::pair<key_type, Mapped_type>(k, Mapped_type())), tree.root);
+			return const_iterator((node<const value_type> *)this->tree.find(ft::pair<key_type, Mapped_type>(k, Mapped_type())),  (node <const value_type> *const *)&tree.root);
 		}
 
 		void erase(iterator position)
@@ -236,10 +228,13 @@ namespace ft
 
 		void erase(iterator first, iterator last)
 		{
+			iterator iter = first;
 			while (first != last)
 			{
+				++iter;
 				tree.remove(*first);
-				++first;
+				first = iter;
+				// iter++;
 			}
 		}
 
@@ -447,7 +442,7 @@ namespace ft
 
 
 
-		ft::RBtree<value_type , Allocator , Compare > tree;
+		 ft::RBtree<value_type , Allocator , Compare > tree;
 
 	private:
 		allocator_type my_alloc;
