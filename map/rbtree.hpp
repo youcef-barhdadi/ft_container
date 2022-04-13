@@ -25,6 +25,7 @@ namespace ft
         Black = 2
     };
 
+    // int _cmp()
     template < class T, class Allocator = std::allocator<T> , class Compare = std::less<T> >
     class node
     {
@@ -35,20 +36,15 @@ namespace ft
         node *parent;
         T   value;
         Color color;
-
         Compare _comp;
 
         typedef T &reference;
         typedef const T &const_reference;
         typedef T *pointer;
-
         typedef Allocator allocator_type;
 
         allocator_type my_alloc;
-
         bool isRight;
-
-
         operator node<const T>()  const
         {
             return node<const T>(this->value, this->left, this->right, this->parent, this->color , this->_comp, this->isRight, this->my_alloc);
@@ -207,10 +203,10 @@ namespace ft
             return NULL;
         }
     };
-    // :()
     template <
         class T,
-        class Allocator = std::allocator<T> ,  class Compare = std::less<T> >
+        class Compare,
+        class Allocator = std::allocator<T> /* = std::less<T> */>
     class RBtree
     {
 
@@ -225,6 +221,7 @@ namespace ft
 
         RBtree()
         {
+            // Compare _cmp = Compare();
             this->root = NULL;
             this->last = NULL;
             this->_size = 0;
@@ -304,9 +301,6 @@ namespace ft
                 return NULL;
             if (n->value.first == val.first)
                 return n;
-            
-
-            // std::cout <<  "== " << n  << std::endl;
             if (_cmp(val.first , n->value.first))
                 return _find(n->left, val);
             return _find(n->right, val);
@@ -766,24 +760,18 @@ namespace ft
             tmp1 = tmp;
             if (root == NULL)
             {
-                // this->root = new node<T>(value);
                 this->root =  nodeALloc.allocate(1);
-                nodeALloc.construct(this->root, value);
-                // this->root = (node<T> *) my_alloc.allocate(sizeof(node<T>));
-                
+                nodeALloc.construct(this->root, value);                
                 root->color = Black;
                 return this->root;
             }
             while (tmp1 != NULL)
             {
                 tmp = tmp1;
-                tmp1 =  (_cmp( value.first , tmp1->value.first)) ? tmp1->left : tmp1->right;
+                tmp1 =  (_cmp(value.first , tmp1->value.first)) ? tmp1->left : tmp1->right;
             }
-            // _cmp÷
-            // if (   value < tmp->value)
             if (_cmp (value.first, tmp->value.first  ))
             {
-                // tmp->left = new node<T>(value);
                 tmp->left =  nodeALloc.allocate(1);
                 nodeALloc.construct(tmp->left, value);
                 tmp->left->parent = tmp;

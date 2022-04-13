@@ -442,7 +442,7 @@ namespace ft
 
 
 
-		 ft::RBtree<value_type , Allocator , Compare > tree;
+		 ft::RBtree<value_type ,key_compare, Allocator> tree;
 
 	private:
 		allocator_type my_alloc;
